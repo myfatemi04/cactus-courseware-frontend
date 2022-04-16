@@ -6,21 +6,25 @@ import MainPage from "./pages/MainPage";
 import UploadCoursePage from "./pages/UploadCoursePage";
 import "./styles/App.css";
 import { CourseContextProvider } from "./components/CourseContext";
+import Example from "./pages/Example";
 
 function App() {
   return (
     <BrowserRouter>
       <CourseContextProvider>
-      <PersistentDrawerLeft name={"Github Opencourseware"}></PersistentDrawerLeft>
-      <Routes>
-        <Route path="/" element={<MainPage />}></Route>
-        <Route
-          path="/m"
-          element={<Module data={exampleModule} path="" tree={exampleTree} />}
-        ></Route>
-        <Route path="/Search" element={<MainPage />}></Route>
-        <Route path="/Upload" element={<UploadCoursePage />} />
-      </Routes>
+        <PersistentDrawerLeft
+          name={"Github Opencourseware"}
+        ></PersistentDrawerLeft>
+        <Routes>
+          <Route path="/" element={<MainPage />}></Route>
+          <Route
+            path="/m"
+            element={<Module data={exampleModule} path="" tree={exampleTree} />}
+          ></Route>
+          <Route path="/Search" element={<MainPage />}></Route>
+          <Route path="/Upload" element={<UploadCoursePage />} />
+          <Route path="/courses/:courseId" element={<Example />} />
+        </Routes>
       </CourseContextProvider>
     </BrowserRouter>
   );
