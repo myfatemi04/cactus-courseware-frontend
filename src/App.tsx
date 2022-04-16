@@ -16,12 +16,12 @@ function App() {
           name={"Github Opencourseware"}
         ></PersistentDrawerLeft>
         <Routes>
-          <Route path="/" element={<MainPage />}></Route>
+          <Route path="/" element={<MainPage />} />
           <Route
             path="/m"
             element={<Module data={exampleModule} path="" tree={exampleTree} />}
-          ></Route>
-          <Route path="/Search" element={<MainPage />}></Route>
+          />
+          <Route path="/Search" element={<MainPage />} />
           <Route path="/Upload" element={<UploadCoursePage />} />
           <Route path="/courses/:courseId" element={<Example />} />
         </Routes>
