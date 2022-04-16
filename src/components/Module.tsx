@@ -1,6 +1,8 @@
 import React, { ReactNode } from "react";
 import ReactMarkdown from "react-markdown";
 import Question from "./Question";
+import Video from "./Video";
+
 import {
   Module as ModuleType,
   Question as QuestionType,
@@ -33,6 +35,15 @@ How many sides does a square have?
 Explanation:
 A square has 4 sides.
 ???
+
+Video: https://www.youtube.com/watch?v=rvVF5QWSYF4
+Video: https://www.youtube.com/watch?v=Y5dylh2aOiw
+Video: https://www.youtube.com/embed/Y5dylh2aOiw
+Here is a GIF: 
+![](http://www.reactiongifs.us/wp-content/uploads/2013/10/nuh_uh_conan_obrien.gif)
+
+arctic picture \
+![](logo192.png)
 
 End of section.
 
@@ -112,7 +123,18 @@ export function splitMarkdownIntoChunks(markdown: string): ReactNode[] {
         }
       }
     } else {
-      prevChunk += "\n" + line;
+      if (line.trim().toLowerCase().startsWith("video:")) {
+        let url = line.substring(7); // "video: " is 7 characters 
+        if (!url.includes("/embed/")){
+          console.log(url);
+          url = url.replace("watch?v=", "embed/")
+        }
+        chunks.push(<ReactMarkdown>{url}</ReactMarkdown>)
+        chunks.push(<Video link={url} />)
+      }
+      else {
+        prevChunk += "\n" + line;
+      }
     }
   }
 
