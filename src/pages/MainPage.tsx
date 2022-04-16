@@ -1,6 +1,6 @@
 import TextField from "@mui/material/TextField";
 import React, { useMemo, useState } from "react";
-import { Tile } from "../components/Tile";
+import { CourseTile } from "../components/CourseTile";
 import TileGrid from "../components/TileGrid";
 import { Course } from "../types";
 
@@ -20,7 +20,7 @@ export default function MainPage() {
   const tiles = useMemo(() => {
     return courses
       .filter((course) => course.title.toLowerCase().includes(searchQuery))
-      .map((course, index) => <Tile key={index}>{course.title}</Tile>);
+      .map((course, index) => <CourseTile key={index}>{course.title}</CourseTile>);
   }, [searchQuery]);
 
   return (

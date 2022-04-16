@@ -8,6 +8,6 @@ const tileItemStyle = {
   padding: "0.5rem",
 };
 
-export function Tile({ children }: { children: string }) {
+export function CourseTile({ children }: { children: string }) {
   return <div style={tileItemStyle}>{children}</div>;
 }
