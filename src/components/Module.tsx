@@ -129,7 +129,6 @@ export function splitMarkdownIntoChunks(markdown: string): ReactNode[] {
           console.log(url);
           url = url.replace("watch?v=", "embed/")
         }
-        chunks.push(<ReactMarkdown>{url}</ReactMarkdown>)
         chunks.push(<Video link={url} />)
       }
       else {
