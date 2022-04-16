@@ -71,10 +71,13 @@ const DrawerHeader = styled('div')(({ theme }) => ({
   justifyContent: 'flex-end',
 }));
 
-export default function PersistentDrawerLeft(name: string) {
+export default function PersistentDrawerLeft(props: {name: string}) {
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
-  const { courses, setCourses } = React.useContext(CourseContext);
+  let ctx;
+  const {courses} = ctx= React.useContext(CourseContext);
+  console.log("These are the courses: ")
+  console.log(courses, ctx)
 
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -99,7 +102,7 @@ export default function PersistentDrawerLeft(name: string) {
             <MenuIcon />
           </IconButton>
           <Typography variant="h6" noWrap component="div">
-            {name}
+            {props.name}
           </Typography>
         </Toolbar>
       </AppBar>

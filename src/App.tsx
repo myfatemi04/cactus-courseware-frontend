@@ -11,7 +11,7 @@ function App() {
   return (
     <BrowserRouter>
       <CourseContextProvider>
-      {PersistentDrawerLeft("Github Opencourseware")}
+      <PersistentDrawerLeft name={"Github Opencourseware"}></PersistentDrawerLeft>
       <Routes>
         <Route path="/" element={<MainPage />}></Route>
         <Route

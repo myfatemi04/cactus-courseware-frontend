@@ -1,7 +1,7 @@
 import { createContext, ReactNode, useState } from "react";
 
 export const CourseContext = createContext({
-  courses: new Array<string>(),
+  courses: new Array<string>("no courses here"),
   setCourses: (c: string[]) => {},
 });
 

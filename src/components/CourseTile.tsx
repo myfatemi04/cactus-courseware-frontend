@@ -27,6 +27,7 @@ export function CourseTile(props: propsType) {
   else {
     newCourses = [...courses]
   }
+  console.log(newCourses)
 
   return <div onClick={() => setCourses(newCourses)} style={tileItemStyle}> {props.course.title} </div>;
 }
