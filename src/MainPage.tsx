@@ -1,6 +1,8 @@
 import React, { useState, useCallback, KeyboardEventHandler } from "react";
 import { GithubFolderResponse } from "./types";
 import PersistentDrawerLeft from "./Drawer"
+import List from "./List"
+import TextField from "@mui/material/TextField";
 
 type FetchStatus = "idle" | "pending" | "success" | "error";
 
@@ -61,9 +63,6 @@ export default function MainPage() {
       ) : (
         "No data"
       )}
-      <p>
-        Edit <code>src/App.tsx</code> and save to reload.
-      </p>
       <a
         className="App-link"
         href="https://reactjs.org"
@@ -72,6 +71,16 @@ export default function MainPage() {
       >
         Learn React
       </a>
+      <h1>Search for a course</h1>
+      <div className="search">
+        <TextField
+          id="outlined-basic"
+          variant="outlined"
+          fullWidth
+          label="Search"
+        />
+      </div>
+      <List />
     </div>
   );
 }
