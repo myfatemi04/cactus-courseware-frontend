@@ -9,10 +9,12 @@ const courses: Course[] = [
   {
     title: "Introduction to Computer Science",
     markdown: "Learn the basics of computer science and programming.",
+    id: '123'
   } as Course,
   {
     title: "Introduction to Algorithms",
     markdown: "Learn the basics of algorithms and data structures.",
+    id: '768'
   } as Course,
 ];
 

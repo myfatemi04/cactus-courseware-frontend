@@ -1,5 +1,5 @@
+import { useNavigate } from 'react-router-dom';
 import React from "react";
-
 import { Course } from "../types";
 import { CourseContext } from "./CourseContext";
 
@@ -19,15 +19,22 @@ interface propsType {
 
 export function CourseTile(props: propsType) {
   const {courses, setCourses} = React.useContext(CourseContext)
-  let newCourses: string[] = [];
-  if (!courses.includes(props.course.title)) {
+  let newCourses: Course[] = [];
+  let navigate = useNavigate(); 
+  
+  let courseNames = newCourses.map(a => a.title);
+  if (!courseNames.includes(props.course.title)) {
     newCourses = [...courses]
-    newCourses.push(props.course.title)
+    newCourses.push(props.course)
   }
   else {
     newCourses = [...courses]
   }
   console.log(newCourses)
 
-  return <div onClick={() => setCourses(newCourses)} style={tileItemStyle}> {props.course.title} </div>;
+  function onclick() {
+    setCourses(newCourses)
+    navigate('/courses/' + props.course.id)
+  }
+  return <div onClick={() => onclick()} style={tileItemStyle}> {props.course.title} </div>;
 }
