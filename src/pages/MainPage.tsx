@@ -1,6 +1,5 @@
 import TextField from "@mui/material/TextField";
 import React, { KeyboardEventHandler, useCallback, useState } from "react";
-import PersistentDrawerLeft from "../components/Drawer"
 import List from "../components/List";
 import { GithubFolderResponse } from "../types";
 

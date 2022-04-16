@@ -1,9 +1,9 @@
 import React from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import "./styles/App.css";
-import MainPage from "./pages/MainPage";
 import PersistentDrawerLeft from "./components/Drawer";
 import Module, { exampleModule } from "./components/Module";
+import MainPage from "./pages/MainPage";
+import "./styles/App.css";
 
 function App() {
   return (

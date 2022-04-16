@@ -29,6 +29,10 @@ export default function Question({ question }: { question: QuestionType }) {
     setCorrect(grade());
   }
 
+  const hasValidAnswer =
+    (question.type === "single" && selectedAnswers.length === 1) ||
+    (question.type === "multiple" && selectedAnswers.length > 0);
+
   return (
     <div>
       <b>
@@ -42,8 +46,9 @@ export default function Question({ question }: { question: QuestionType }) {
         {question.answers.map((answer, index) => {
           const id = `question-${question.text}-answer-${index}`;
           return (
-            <div>
+            <div style={{ display: "flex", alignItems: "center" }}>
               <input
+                style={{ marginRight: "0.5rem" }}
                 type={question.type === "multiple" ? "checkbox" : "radio"}
                 name="answer"
                 id={id}
@@ -65,16 +70,20 @@ export default function Question({ question }: { question: QuestionType }) {
                   }
                 }}
               />
-              <label htmlFor={id}>{answer.text}</label>
+              <label
+                htmlFor={id}
+                style={{ userSelect: "none", WebkitUserSelect: "none" }}
+              >
+                {answer.text}
+              </label>
             </div>
           );
         })}
         <div>
           {correct === null ? (
-            ((question.type === "single" && selectedAnswers.length === 1) ||
-              (question.type === "multiple" && selectedAnswers.length > 0)) && (
-              <button onClick={confirm}>Confirm</button>
-            )
+            <button onClick={confirm} disabled={!hasValidAnswer}>
+              Confirm
+            </button>
           ) : correct === false ? (
             <>
               <br />❌ Incorrect.
