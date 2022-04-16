@@ -2,6 +2,9 @@ import React, { ReactNode } from "react";
 import ReactMarkdown from "react-markdown";
 import Question from "./Question";
 import Video from "./Video";
+import rehypeMathJax from 'rehype-mathjax'
+import rehypeHighlight from 'rehype-highlight'
+import remarkMath from 'remark-math'
 
 import {
   Module as ModuleType,
@@ -35,7 +38,10 @@ How many sides does a square have?
 Explanation:
 A square has 4 sides.
 ???
-
+\`\`\`
+list = []
+\`\`\`
+$ X^2 = y $
 Video: https://www.youtube.com/watch?v=rvVF5QWSYF4
 Video: https://www.youtube.com/watch?v=Y5dylh2aOiw
 Video: https://www.youtube.com/embed/Y5dylh2aOiw
@@ -50,6 +56,9 @@ End of section.
 `,
   modules: [],
 };
+
+export const rehypePlugins = [rehypeMathJax, rehypeHighlight];
+export const remarkPlugins = [remarkMath];
 
 export function splitMarkdownIntoChunks(markdown: string): ReactNode[] {
   const chunks: ReactNode[] = [];
@@ -80,7 +89,7 @@ export function splitMarkdownIntoChunks(markdown: string): ReactNode[] {
 
   function endBody() {
     inQuestion = true;
-    chunks.push(<ReactMarkdown>{prevChunk}</ReactMarkdown>);
+    chunks.push(<ReactMarkdown rehypePlugins={rehypePlugins} remarkPlugins={remarkPlugins}>{prevChunk}</ReactMarkdown>);
     prevChunk = "";
   }
 
