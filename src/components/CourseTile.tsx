@@ -1,3 +1,8 @@
+import React from "react";
+
+import { Course } from "../types";
+import { CourseContext } from "./CourseContext";
+
 const tileItemStyle = {
   width: "18rem",
   height: "16rem",
@@ -8,6 +13,20 @@ const tileItemStyle = {
   padding: "0.5rem",
 };
 
-export function CourseTile({ children }: { children: string }) {
-  return <div style={tileItemStyle}>{children}</div>;
+interface propsType {
+  course: Course
+}
+
+export function CourseTile(props: propsType) {
+  const {courses, setCourses} = React.useContext(CourseContext)
+  let newCourses: string[] = [];
+  if (!courses.includes(props.course.title)) {
+    newCourses = [...courses]
+    newCourses.push(props.course.title)
+  }
+  else {
+    newCourses = [...courses]
+  }
+
+  return <div onClick={() => setCourses(newCourses)} style={tileItemStyle}> {props.course.title} </div>;
 }

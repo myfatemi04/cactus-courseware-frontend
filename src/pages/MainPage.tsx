@@ -20,7 +20,7 @@ export default function MainPage() {
   const tiles = useMemo(() => {
     return courses
       .filter((course) => course.title.toLowerCase().includes(searchQuery))
-      .map((course, index) => <CourseTile key={index}>{course.title}</CourseTile>);
+      .map((course, index) => <CourseTile course={course} key={index}></CourseTile>);
   }, [searchQuery]);
 
   return (
