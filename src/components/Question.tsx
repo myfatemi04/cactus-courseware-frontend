@@ -1,3 +1,4 @@
+import { Button } from "@mui/material";
 import { useState } from "react";
 import ReactMarkdown from "react-markdown";
 import { Question as QuestionType } from "../types";
@@ -81,9 +82,13 @@ export default function Question({ question }: { question: QuestionType }) {
         })}
         <div>
           {correct === null ? (
-            <button onClick={confirm} disabled={!hasValidAnswer}>
+            <Button
+              onClick={confirm}
+              disabled={!hasValidAnswer}
+              variant="contained"
+            >
               Confirm
-            </button>
+            </Button>
           ) : correct === false ? (
             <>
               <br />❌ Incorrect.
