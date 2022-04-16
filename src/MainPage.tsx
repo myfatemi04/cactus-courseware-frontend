@@ -42,7 +42,6 @@ export default function MainPage() {
 
   return (
     <div className="App">
-      {PersistentDrawerLeft("Github Opencourseware")}
       <input
         type="text"
         className="big-input"
