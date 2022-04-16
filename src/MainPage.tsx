@@ -1,5 +1,6 @@
 import React, { useState, useCallback, KeyboardEventHandler } from "react";
 import { GithubFolderResponse } from "./types";
+import PersistentDrawerLeft from "./Drawer"
 
 type FetchStatus = "idle" | "pending" | "success" | "error";
 
@@ -40,6 +41,7 @@ export default function MainPage() {
   return (
     <div className="App">
       <h1>Github Courseware</h1>
+      {PersistentDrawerLeft()}
       <input
         type="text"
         className="big-input"
