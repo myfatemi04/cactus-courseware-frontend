@@ -1,4 +1,4 @@
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
 import React from "react";
 import { Course } from "../types";
 import { CourseContext } from "./CourseContext";
@@ -14,27 +14,31 @@ const tileItemStyle = {
 };
 
 interface propsType {
-  course: Course
+  course: Course;
 }
 
 export function CourseTile(props: propsType) {
-  const {courses, setCourses} = React.useContext(CourseContext)
+  const { courses, setCourses } = React.useContext(CourseContext);
   let newCourses: Course[] = [];
-  let navigate = useNavigate(); 
-  
-  let courseNames = newCourses.map(a => a.title);
+  let navigate = useNavigate();
+
+  let courseNames = newCourses.map((a) => a.title);
   if (!courseNames.includes(props.course.title)) {
-    newCourses = [...courses]
-    newCourses.push(props.course)
+    newCourses = [...courses];
+    newCourses.push(props.course);
+  } else {
+    newCourses = [...courses];
   }
-  else {
-    newCourses = [...courses]
-  }
-  console.log(newCourses)
+  console.log(newCourses);
 
   function onclick() {
-    setCourses(newCourses)
-    navigate('/courses/' + props.course.id)
+    setCourses(newCourses);
+    navigate("/courses/" + props.course.title);
   }
-  return <div onClick={() => onclick()} style={tileItemStyle}> {props.course.title} </div>;
+  return (
+    <div onClick={() => onclick()} style={tileItemStyle}>
+      {" "}
+      {props.course.title}{" "}
+    </div>
+  );
 }

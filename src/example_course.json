@@ -1,0 +1,30 @@
+{
+  "title": "Math 101",
+  "tags": ["math", "highschool", "algebra"],
+  "thumbnail": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a2/Nuvola_Math_and_Inf.svg/182px-Nuvola_Math_and_Inf.svg.png",
+  "authors": [
+    "Alvan Caleb Arulandu",
+    "Michael Fatemi",
+    "Cyril Sharma",
+    "Tarushii Goel"
+  ],
+  "markdown": "# Math 101\nExample course for HackTJ 9.0 project.",
+  "modules": [
+    {
+      "title": "unit.md",
+      "markdown": "# Unit 1\nUnit 1 is very hard cuz its the first unit!! Can you spell one?\n",
+      "modules": []
+    },
+    {
+      "title": "unit",
+      "markdown": "# Unit 2\nUnit 2 is very hard too cuz its uh 2.\n",
+      "modules": [
+        {
+          "title": "test.md",
+          "markdown": "heehyeyeyeyeyeyeyey\n\n# Unit 2.2!!!!!!\n\nno way\n",
+          "modules": []
+        }
+      ]
+    }
+  ]
+}

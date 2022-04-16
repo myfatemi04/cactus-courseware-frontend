@@ -1,6 +1,5 @@
 import TextField from "@mui/material/TextField";
 import React, { useMemo, useState } from "react";
-import { useParams } from "react-router-dom";
 import { CourseTile } from "../components/CourseTile";
 import TileGrid from "../components/TileGrid";
 import { Course } from "../types";
@@ -9,12 +8,12 @@ const courses: Course[] = [
   {
     title: "Introduction to Computer Science",
     markdown: "Learn the basics of computer science and programming.",
-    id: '123'
+    // id: '123'
   } as Course,
   {
     title: "Introduction to Algorithms",
     markdown: "Learn the basics of algorithms and data structures.",
-    id: '768'
+    // id: '768'
   } as Course,
 ];
 

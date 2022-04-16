@@ -19,7 +19,7 @@ export const exampleTree: TreeType = {
 };
 
 export const exampleModule: ModuleType = {
-  name: "Example Module",
+  title: "Example Module",
   markdown: `
 # Machine Learning Tutorial
 
@@ -124,14 +124,13 @@ export function splitMarkdownIntoChunks(markdown: string): ReactNode[] {
       }
     } else {
       if (line.trim().toLowerCase().startsWith("video:")) {
-        let url = line.substring(7); // "video: " is 7 characters 
-        if (!url.includes("/embed/")){
+        let url = line.substring(7); // "video: " is 7 characters
+        if (!url.includes("/embed/")) {
           console.log(url);
-          url = url.replace("watch?v=", "embed/")
+          url = url.replace("watch?v=", "embed/");
         }
-        chunks.push(<Video link={url} />)
-      }
-      else {
+        chunks.push(<Video link={url} />);
+      } else {
         prevChunk += "\n" + line;
       }
     }
@@ -146,18 +145,24 @@ export function splitMarkdownIntoChunks(markdown: string): ReactNode[] {
   return chunks;
 }
 
-export function Tree({ tree }: { tree: TreeType }) {
+export function Tree({
+  tree,
+  root = true,
+}: {
+  tree: TreeType;
+  root?: boolean;
+}) {
   return (
-    <>
+    <div>
       {tree.name}
-      <ul>
+      <div style={{ marginTop: 0, paddingLeft: "1rem" }}>
         {tree.children?.map((subtree) => (
-          <li key={subtree.name}>
-            <Tree tree={subtree} />
-          </li>
+          <div key={subtree.name}>
+            <Tree tree={subtree} root={false} />
+          </div>
         ))}
-      </ul>
-    </>
+      </div>
+    </div>
   );
 }
 
@@ -181,7 +186,7 @@ export default function Module({
       >
         <Tree tree={tree} />
       </div>
-      <h1>{data.name}</h1>
+      <h1>{data.title}</h1>
       <div
         style={{
           textAlign: "left",

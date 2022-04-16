@@ -1,5 +1,5 @@
 export interface Course {
-  id: string;
+  // id: string;
   title: string;
   markdown: string;
   tags: string[];
@@ -30,7 +30,7 @@ export interface Tree {
 export type TreePath = string[];
 
 export interface Module {
-  name: string;
+  title: string;
   markdown: string;
   modules: Module[];
 }
@@ -53,3 +53,22 @@ export interface GithubFolderItem {
 }
 
 export type GithubFolderResponse = GithubFolderItem[];
+
+export interface GithubFileResponse {
+  name: string;
+  path: string;
+  sha: string;
+  size: number;
+  url: string;
+  html_url: string;
+  git_url: string;
+  download_url: string;
+  type: string;
+  content: string;
+  encoding: string;
+  _links: {
+    self: string;
+    git: string;
+    html: string;
+  };
+}
