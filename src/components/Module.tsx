@@ -5,7 +5,7 @@ import {
   Module as ModuleType,
   Question as QuestionType,
   Tree as TreeType,
-} from "./types";
+} from "../types";
 
 export const exampleModule: ModuleType = {
   name: "Example Module",

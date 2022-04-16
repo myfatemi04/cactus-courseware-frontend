@@ -1,8 +1,8 @@
 import React from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import "./App.css";
-import MainPage from "./MainPage";
-import Module, { exampleModule } from "./Module";
+import "./styles/App.css";
+import MainPage from "./pages/MainPage";
+import Module, { exampleModule } from "./components/Module";
 
 function App() {
   return (

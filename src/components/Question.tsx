@@ -1,5 +1,5 @@
 import { useCallback, useState } from "react";
-import { Question as QuestionType } from "./types";
+import { Question as QuestionType } from "../types";
 
 export default function Question({ question }: { question: QuestionType }) {
   const [selectedAnswers, setSelectedAnswers] = useState<number[]>([]);

@@ -1,7 +1,7 @@
 import React, { useState, useCallback, KeyboardEventHandler } from "react";
-import { GithubFolderResponse } from "./types";
-import PersistentDrawerLeft from "./Drawer"
-import List from "./List"
+import { GithubFolderResponse } from "../types";
+import PersistentDrawerLeft from "../components/Drawer"
+import List from "../components/List"
 import TextField from "@mui/material/TextField";
 
 type FetchStatus = "idle" | "pending" | "success" | "error";
