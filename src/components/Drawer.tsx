@@ -20,6 +20,8 @@ import MailIcon from '@mui/icons-material/Mail';
 import { Link } from "react-router-dom"
 import { CourseContext } from './CourseContext';
 import Collapse from '@mui/material/Collapse';
+import ExpandLess from "@mui/icons-material/ExpandLess";
+import ExpandMore from "@mui/icons-material/ExpandMore";
 
 const drawerWidth = 240;
 
@@ -72,15 +74,17 @@ const DrawerHeader = styled('div')(({ theme }) => ({
   justifyContent: 'flex-end',
 }));
 
-export default function ExpandableListItem(props : {item: ListItem}){
+
+export function ExpandableListItem(){
   const [openCollapse, setOpenCollapse] = React.useState(false); 
   function handleOpenSettings(){
     setOpenCollapse(!openCollapse);
   }
   return(
+      <div>
         <ListItem button onClick={handleOpenSettings}>
           <ListItemIcon>
-            <Settings />
+            <InboxIcon />
           </ListItemIcon>
           <ListItemText primary="Settings" />
           {openCollapse ? <ExpandLess /> : <ExpandMore />}
@@ -89,11 +93,12 @@ export default function ExpandableListItem(props : {item: ListItem}){
             <List component="div" disablePadding>
               <ListItem>
                 <ListItemIcon>
-                  <Settings />
+                  <InboxIcon />
                 </ListItemIcon>
               </ListItem>
             </List>
         </Collapse> 
+      </div>
   )
 }
 
@@ -172,6 +177,7 @@ export default function PersistentDrawerLeft(props: {name: string}) {
               <ListItemText primary={course.title} />
             </ListItem>
           ))}
+          <ExpandableListItem></ExpandableListItem>
         </List>
       </Drawer>
       <Main open={open}>
