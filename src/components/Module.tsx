@@ -7,6 +7,15 @@ import {
   Tree as TreeType,
 } from "../types";
 
+export const exampleTree: TreeType = {
+  name: "Machine Learning Course",
+  children: [
+    {
+      name: "Introduction",
+    },
+  ],
+};
+
 export const exampleModule: ModuleType = {
   name: "Example Module",
   markdown: `

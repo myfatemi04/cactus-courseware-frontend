@@ -1,7 +1,11 @@
+export interface Course {}
+
 export interface AnswerChoice {
   correct: boolean;
   text: string;
 }
+
+export type FetchStatus = "idle" | "pending" | "success" | "error";
 
 export interface Question {
   text: string;
