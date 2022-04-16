@@ -18,6 +18,7 @@ import ListItemText from '@mui/material/ListItemText';
 import InboxIcon from '@mui/icons-material/MoveToInbox';
 import MailIcon from '@mui/icons-material/Mail';
 import { Link } from "react-router-dom"
+import { CourseContext } from './CourseContext';
 
 const drawerWidth = 240;
 
@@ -73,6 +74,7 @@ const DrawerHeader = styled('div')(({ theme }) => ({
 export default function PersistentDrawerLeft(name: string) {
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
+  const { courses, setCourses } = React.useContext(CourseContext);
 
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -131,6 +133,16 @@ export default function PersistentDrawerLeft(name: string) {
           ))}
         </List>
         <Divider />
+        <List>
+          {courses.map((text, index) => (
+            <ListItem button key={text} component={Link} to={"/" + text}>
+              <ListItemIcon>
+                {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
+              </ListItemIcon>
+              <ListItemText primary={text} />
+            </ListItem>
+          ))}
+        </List>
       </Drawer>
       <Main open={open}>
         <DrawerHeader />

@@ -4,10 +4,12 @@ import PersistentDrawerLeft from "./components/Drawer";
 import Module, { exampleModule } from "./components/Module";
 import MainPage from "./pages/MainPage";
 import "./styles/App.css";
+import { CourseContextProvider } from "./components/CourseContext";
 
 function App() {
   return (
     <BrowserRouter>
+      <CourseContextProvider>
       {PersistentDrawerLeft("Github Opencourseware")}
       <Routes>
         <Route path="/" element={<MainPage />}></Route>
@@ -31,6 +33,7 @@ function App() {
         <Route path="/Search" element={<MainPage />}></Route>
         <Route path="/Upload"></Route>
       </Routes>
+      </CourseContextProvider>
     </BrowserRouter>
   );
 }
