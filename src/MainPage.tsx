@@ -40,8 +40,7 @@ export default function MainPage() {
 
   return (
     <div className="App">
-      <h1>Github Courseware</h1>
-      {PersistentDrawerLeft()}
+      {PersistentDrawerLeft("Github Opencourseware")}
       <input
         type="text"
         className="big-input"

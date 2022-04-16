@@ -69,7 +69,7 @@ const DrawerHeader = styled('div')(({ theme }) => ({
   justifyContent: 'flex-end',
 }));
 
-export default function PersistentDrawerLeft() {
+export default function PersistentDrawerLeft(name: string) {
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
 
@@ -96,7 +96,7 @@ export default function PersistentDrawerLeft() {
             <MenuIcon />
           </IconButton>
           <Typography variant="h6" noWrap component="div">
-            Persistent drawer
+            {name}
           </Typography>
         </Toolbar>
       </AppBar>
