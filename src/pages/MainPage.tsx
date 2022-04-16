@@ -1,84 +1,26 @@
 import TextField from "@mui/material/TextField";
-import React, { KeyboardEventHandler, useCallback, useState } from "react";
-import List from "../components/List";
-import { GithubFolderResponse } from "../types";
+import React, { useState } from "react";
+import TileGrid from "../components/TileGrid";
 
-type FetchStatus = "idle" | "pending" | "success" | "error";
+const courses = {};
 
 export default function MainPage() {
-  const [data, setData] = useState<null | GithubFolderResponse>(null);
-  const [fetchStatus, setFetchStatus] = useState<FetchStatus>("idle");
-
-  const load = useCallback((repo: string) => {
-    if (!repo.includes("/")) {
-      return;
-    }
-    const [owner, name] = repo.split("/");
-    setFetchStatus("pending");
-    fetch(`https://api.github.com/repos/${owner}/${name}/contents/`)
-      .then((res) => res.json())
-      .then((data) => {
-        if (Array.isArray(data)) {
-          setData(data);
-          setFetchStatus("success");
-        } else {
-          console.log("Error: Received data", data);
-          setFetchStatus("error");
-        }
-      })
-      .catch(() => setFetchStatus("error"));
-  }, []);
-
-  const onKeyUp: KeyboardEventHandler<HTMLInputElement> = useCallback(
-    (e) => {
-      if (e.key === "Enter") {
-        // @ts-ignore
-        load(e.target.value);
-      }
-    },
-    [load]
-  );
+  const [searchQuery, setSearchQuery] = useState("");
 
   return (
     <div className="App">
-      <input
-        type="text"
-        className="big-input"
-        onKeyUp={onKeyUp}
-        style={{ maxWidth: "20rem" }}
-      />
-      {fetchStatus === "pending" ? (
-        <div>Loading...</div>
-      ) : fetchStatus === "error" ? (
-        <div>Error</div>
-      ) : null}
-      {data ? (
-        <>
-          {data.map((item) => {
-            return <div key={item.name}>{item.name}</div>;
-          })}
-        </>
-      ) : (
-        "No data"
-      )}
-      <a
-        className="App-link"
-        href="https://reactjs.org"
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        Learn React
-      </a>
-      <h1>Search for a course</h1>
-      <div className="search">
+      <h1>Learn Anything</h1>
+      <div style={{ width: "20rem", margin: "0.5rem 0" }}>
         <TextField
           id="outlined-basic"
           variant="outlined"
+          color="primary"
           fullWidth
           label="Search"
+          onChange={(e) => setSearchQuery(e.target.value)}
         />
       </div>
-      <List />
+      <TileGrid />
     </div>
   );
 }

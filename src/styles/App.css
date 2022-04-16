@@ -1,8 +1,8 @@
 .App {
   text-align: center;
-  background-color: #333333; /*8083c9;*/
+  /* background-color: #333333; 8083c9; */
   align-items: center;
-  color: white;
+  /* color: white; */
   display: flex;
   flex-direction: column;
   height: calc(100vh - 4rem);

@@ -21,7 +21,9 @@ export function ProgressContextProvider({ children }: { children: ReactNode }) {
 }
 
 export function ProgressBar() {
-  const { progress, setProgress } = useContext(ProgressContext);
+  const progressContext = useContext(ProgressContext);
+
+  const { progress, setProgress } = progressContext;
 
   return <>Progress: {progress}</>;
 }
