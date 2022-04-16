@@ -1,4 +1,12 @@
-export interface Course {}
+export interface Course {
+  id: string;
+  title: string;
+  markdown: string;
+  tags: string[];
+  modules: Module[];
+  thumbnail: string;
+  authors: string;
+}
 
 export interface AnswerChoice {
   correct: boolean;

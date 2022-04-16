@@ -1,11 +1,27 @@
 import TextField from "@mui/material/TextField";
-import React, { useState } from "react";
+import React, { useMemo, useState } from "react";
+import { Tile } from "../components/Tile";
 import TileGrid from "../components/TileGrid";
+import { Course } from "../types";
 
-const courses = {};
+const courses: Course[] = [
+  {
+    title: "Introduction to Computer Science",
+    markdown: "Learn the basics of computer science and programming.",
+  } as Course,
+  {
+    title: "Introduction to Algorithms",
+    markdown: "Learn the basics of algorithms and data structures.",
+  } as Course,
+];
 
 export default function MainPage() {
   const [searchQuery, setSearchQuery] = useState("");
+  const tiles = useMemo(() => {
+    return courses
+      .filter((course) => course.title.toLowerCase().includes(searchQuery))
+      .map((course, index) => <Tile key={index}>{course.title}</Tile>);
+  }, [searchQuery]);
 
   return (
     <div className="App">
@@ -20,7 +36,7 @@ export default function MainPage() {
           onChange={(e) => setSearchQuery(e.target.value)}
         />
       </div>
-      <TileGrid />
+      <TileGrid tiles={tiles} />
     </div>
   );
 }
