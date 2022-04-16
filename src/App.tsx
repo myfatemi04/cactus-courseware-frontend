@@ -5,10 +5,12 @@ import Module, { exampleModule, exampleTree } from "./components/Module";
 import MainPage from "./pages/MainPage";
 import UploadCoursePage from "./pages/UploadCoursePage";
 import "./styles/App.css";
+import { CourseContextProvider } from "./components/CourseContext";
 
 function App() {
   return (
     <BrowserRouter>
+      <CourseContextProvider>
       {PersistentDrawerLeft("Github Opencourseware")}
       <Routes>
         <Route path="/" element={<MainPage />}></Route>
@@ -19,6 +21,7 @@ function App() {
         <Route path="/Search" element={<MainPage />}></Route>
         <Route path="/Upload" element={<UploadCoursePage />} />
       </Routes>
+      </CourseContextProvider>
     </BrowserRouter>
   );
 }
