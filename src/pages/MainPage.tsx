@@ -1,8 +1,8 @@
-import React, { useState, useCallback, KeyboardEventHandler } from "react";
-import { GithubFolderResponse } from "../types";
-import PersistentDrawerLeft from "../components/Drawer"
-import List from "../components/List"
 import TextField from "@mui/material/TextField";
+import React, { KeyboardEventHandler, useCallback, useState } from "react";
+import PersistentDrawerLeft from "../components/Drawer"
+import List from "../components/List";
+import { GithubFolderResponse } from "../types";
 
 type FetchStatus = "idle" | "pending" | "success" | "error";
 
@@ -42,7 +42,6 @@ export default function MainPage() {
 
   return (
     <div className="App">
-      {PersistentDrawerLeft("Github Opencourseware")}
       <input
         type="text"
         className="big-input"

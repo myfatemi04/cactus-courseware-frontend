@@ -17,6 +17,7 @@ import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import InboxIcon from '@mui/icons-material/MoveToInbox';
 import MailIcon from '@mui/icons-material/Mail';
+import { Link } from "react-router-dom"
 
 const drawerWidth = 240;
 
@@ -121,7 +122,7 @@ export default function PersistentDrawerLeft(name: string) {
         <Divider />
         <List>
           {['Search', 'Upload'].map((text, index) => (
-            <ListItem button key={text}>
+            <ListItem button key={text} component={Link} to={"/" + text}>
               <ListItemIcon>
                 {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
               </ListItemIcon>

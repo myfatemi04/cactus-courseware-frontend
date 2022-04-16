@@ -15,13 +15,17 @@ export const exampleModule: ModuleType = {
 Get started with ML!
 
 ???
-Question: What is machine learning?
-[ ] Test
-[x] Test 2
-( ) Test 3
+Question:
+How many sides does a square have?
+( ) 1 
+( ) 2
+( ) 3
+(x) 4
+Explanation:
+A square has 4 sides.
 ???
 
-Done
+End of section.
 
 `,
   modules: [],
@@ -75,28 +79,28 @@ export function splitMarkdownIntoChunks(markdown: string): ReactNode[] {
         questionSection = "question";
       } else if (line.trim().toLowerCase() === "explanation:") {
         questionSection = "explanation";
-      }
-
-      if (questionSection === "question") {
-        if (line.startsWith("[")) {
-          question.type = "multiple";
-          let correct = line.charAt(1) === "x";
-          question.answers.push({
-            correct,
-            text: line.substring(3).trim(),
-          });
-        } else if (line.startsWith("(")) {
-          question.type = "single";
-          let correct = line.charAt(1) === "x";
-          question.answers.push({
-            correct,
-            text: line.substring(3).trim(),
-          });
-        } else {
-          question.text += "\n" + line;
+      } else {
+        if (questionSection === "question") {
+          if (line.startsWith("[")) {
+            question.type = "multiple";
+            let correct = line.charAt(1) === "x";
+            question.answers.push({
+              correct,
+              text: line.substring(3).trim(),
+            });
+          } else if (line.startsWith("(")) {
+            question.type = "single";
+            let correct = line.charAt(1) === "x";
+            question.answers.push({
+              correct,
+              text: line.substring(3).trim(),
+            });
+          } else {
+            question.text += "\n" + line;
+          }
+        } else if (questionSection === "explanation") {
+          question.explanation += "\n" + line;
         }
-      } else if (questionSection === "explanation") {
-        question.explanation += "\n" + line;
       }
     } else {
       prevChunk += "\n" + line;
@@ -158,7 +162,6 @@ export default function Module({
         }}
       >
         {splitMarkdownIntoChunks(exampleModule.markdown)}
-        {/* <ReactMarkdown>{data.markdown}</ReactMarkdown> */}
       </div>
     </div>
   );
