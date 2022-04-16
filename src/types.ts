@@ -1,3 +1,15 @@
+export interface AnswerChoice {
+  correct: boolean;
+  text: string;
+}
+
+export interface Question {
+  text: string;
+  type: "multiple" | "single";
+  answers: AnswerChoice[];
+  explanation: string;
+}
+
 export interface Tree {
   name: string;
   children?: Tree[];

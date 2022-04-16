@@ -1,6 +1,11 @@
-import React from "react";
+import React, { ReactNode } from "react";
 import ReactMarkdown from "react-markdown";
-import { Module as ModuleType, Tree as TreeType } from "./types";
+import Question from "./Question";
+import {
+  Module as ModuleType,
+  Question as QuestionType,
+  Tree as TreeType,
+} from "./types";
 
 export const exampleModule: ModuleType = {
   name: "Example Module",
@@ -8,9 +13,104 @@ export const exampleModule: ModuleType = {
 # Machine Learning Tutorial
 
 Get started with ML!
+
+???
+Question: What is machine learning?
+[ ] Test
+[x] Test 2
+( ) Test 3
+???
+
+Done
+
 `,
   modules: [],
 };
+
+export function splitMarkdownIntoChunks(markdown: string): ReactNode[] {
+  const chunks: ReactNode[] = [];
+
+  const lines = markdown.split("\n");
+  let prevChunk = "";
+  let inQuestion = false;
+
+  let question: QuestionType = {
+    text: "",
+    type: "multiple",
+    answers: [],
+    explanation: "",
+  };
+
+  let questionSection: "question" | "explanation" = "question";
+
+  function endQuestion() {
+    inQuestion = false;
+    chunks.push(<Question question={question} />);
+    question = {
+      text: "",
+      type: "multiple",
+      answers: [],
+      explanation: "",
+    };
+  }
+
+  function endBody() {
+    inQuestion = true;
+    chunks.push(<ReactMarkdown>{prevChunk}</ReactMarkdown>);
+    prevChunk = "";
+  }
+
+  for (const line of lines) {
+    if (line === "???") {
+      if (inQuestion) {
+        endQuestion();
+      } else {
+        endBody();
+      }
+      continue;
+    }
+
+    if (inQuestion) {
+      if (line.trim().toLowerCase() === "question:") {
+        questionSection = "question";
+      } else if (line.trim().toLowerCase() === "explanation:") {
+        questionSection = "explanation";
+      }
+
+      if (questionSection === "question") {
+        if (line.startsWith("[")) {
+          question.type = "multiple";
+          let correct = line.charAt(1) === "x";
+          question.answers.push({
+            correct,
+            text: line.substring(3).trim(),
+          });
+        } else if (line.startsWith("(")) {
+          question.type = "single";
+          let correct = line.charAt(1) === "x";
+          question.answers.push({
+            correct,
+            text: line.substring(3).trim(),
+          });
+        } else {
+          question.text += "\n" + line;
+        }
+      } else if (questionSection === "explanation") {
+        question.explanation += "\n" + line;
+      }
+    } else {
+      prevChunk += "\n" + line;
+    }
+  }
+
+  if (inQuestion) {
+    endQuestion();
+  } else {
+    endBody();
+  }
+
+  return chunks;
+}
 
 export function Tree({ tree }: { tree: TreeType }) {
   return (
@@ -18,7 +118,7 @@ export function Tree({ tree }: { tree: TreeType }) {
       {tree.name}
       <ul>
         {tree.children?.map((subtree) => (
-          <li>
+          <li key={subtree.name}>
             <Tree tree={subtree} />
           </li>
         ))}
@@ -57,7 +157,8 @@ export default function Module({
           border: "1px solid white",
         }}
       >
-        <ReactMarkdown>{data.markdown}</ReactMarkdown>
+        {splitMarkdownIntoChunks(exampleModule.markdown)}
+        {/* <ReactMarkdown>{data.markdown}</ReactMarkdown> */}
       </div>
     </div>
   );
