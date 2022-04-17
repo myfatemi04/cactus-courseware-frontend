@@ -2,7 +2,7 @@ import { Collapse, List, ListItem, ListItemText } from "@mui/material";
 import { ExpandLess, ExpandMore } from "@mui/icons-material";
 import React, { ReactNode, useContext, useEffect, useState } from "react";
 import Button from "@mui/material/Button";
-import { getPreviousPath, getNextPath } from "../pathutil";
+import { getPreviousPath, getNextPath } from "../lib/pathutil";
 import {
   Course,
   Module as ModuleType,

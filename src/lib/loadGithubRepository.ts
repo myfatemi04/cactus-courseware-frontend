@@ -3,7 +3,7 @@ import {
   Module as ModuleType,
   GithubFileResponse,
   GithubFolderResponse,
-} from "./types";
+} from "../types";
 
 export async function getGithubFolderContent(
   repo: string,

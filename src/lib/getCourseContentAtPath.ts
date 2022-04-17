@@ -1,4 +1,4 @@
-import { Course, Module } from "./types";
+import { Course, Module } from "../types";
 
 export default function getCourseContentAtPath(course: Course, path: number[]) {
   // @ts-ignore

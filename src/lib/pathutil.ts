@@ -1,4 +1,4 @@
-import { Module } from "./types";
+import { Module } from "../types";
 
 export function getNextPath(
   rootModule: Module,

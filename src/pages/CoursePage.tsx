@@ -3,8 +3,8 @@ import { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { CourseContext } from "../components/CourseContext";
 import Module, { ModuleTree } from "../components/Module";
-import getCourseContentAtPath from "../getCourseContentAtPath";
-import { parseCourseRepository } from "../loadGithubRepository";
+import getCourseContentAtPath from "../lib/getCourseContentAtPath";
+import { parseCourseRepository } from "../lib/loadGithubRepository";
 import { Course as CourseType } from "../types";
 
 export default function CoursePage() {
