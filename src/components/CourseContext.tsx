@@ -1,4 +1,10 @@
-import { createContext, ReactNode, useState } from "react";
+import {
+  createContext,
+  Dispatch,
+  ReactNode,
+  SetStateAction,
+  useState,
+} from "react";
 import { Course } from "../types";
 
 export type CourseContextType = {
@@ -6,7 +12,7 @@ export type CourseContextType = {
   setCourses: (courses: Course[]) => void;
   selectedCourse: string | null;
   path: number[];
-  setPath: (p: number[]) => void;
+  setPath: Dispatch<SetStateAction<number[]>>;
 };
 
 export const CourseContext = createContext<CourseContextType>({
@@ -14,7 +20,7 @@ export const CourseContext = createContext<CourseContextType>({
   setCourses: (c: Course[]) => {},
   selectedCourse: null,
   path: [],
-  setPath: (p: number[]) => {},
+  setPath: () => [],
 });
 
 export function CourseContextProvider({ children }: { children: ReactNode }) {

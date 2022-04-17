@@ -5,6 +5,7 @@ import { Course as CourseType } from "../types";
 import getCourseContentAtPath from "../getCourseContentAtPath";
 import { parseCourseRepository } from "../loadGithubRepository";
 import { CourseContext } from "../components/CourseContext";
+import { getNextPath } from "../pathutil";
 
 export default function CoursePage() {
   const [course, setCourse] = useState<CourseType | null>(null);
@@ -37,6 +38,15 @@ export default function CoursePage() {
         {/* Course title and route */}
         <h1>{course.title}</h1>
         <em>{course.authors.join(", ")}</em>
+        <button
+          onClick={() =>
+            setPath((path) => {
+              return getNextPath(course.rootModule, path) || path;
+            })
+          }
+        >
+          Next
+        </button>
       </div>
       <div style={{ height: 1, backgroundColor: "black", margin: "2rem 0" }} />
       <div

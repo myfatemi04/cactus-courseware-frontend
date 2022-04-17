@@ -3,7 +3,6 @@ import { useState } from "react";
 import ReactMarkdown from "react-markdown";
 import { Question as QuestionType } from "../types";
 import CustomMarkdown from "./CustomMarkdown";
-import { splitMarkdownIntoChunks } from "./Module";
 
 export default function Question({ question }: { question: QuestionType }) {
   const [selectedAnswers, setSelectedAnswers] = useState<number[]>([]);
@@ -49,14 +48,14 @@ export default function Question({ question }: { question: QuestionType }) {
         {question.answers.map((answer, index) => {
           const id = `question-${question.text}-answer-${index}`;
           return (
-            <div style={{ display: "flex", alignItems: "center" }}>
+            <div style={{ display: "flex", alignItems: "center" }} key={id}>
               <input
                 style={{ marginRight: "0.5rem" }}
                 type={question.type === "multiple" ? "checkbox" : "radio"}
                 name="answer"
                 id={id}
                 checked={selectedAnswers.includes(index)}
-                onClick={(e) => {
+                onChange={(e) => {
                   if (correct !== null) {
                     return;
                   }

@@ -98,6 +98,7 @@ function ExpandableListItem(props: {
   for (let item of props.childs) {
     sections.push(
       <ExpandableListItem
+        key={item.title}
         title={item["title"]}
         childs={item["children"]}
         depth={props.depth + 1}
@@ -121,12 +122,7 @@ function ExpandableListItem(props: {
         {openCollapse ? <ExpandLess /> : <ExpandMore />}
       </ListItem>
       <Collapse in={openCollapse} timeout="auto" unmountOnExit>
-        <List>
-          {sections.map((item) => item)}
-          {/*props.childs.forEach(function(item : Tree) {
-              <ExpandableListItem title={item['title']} childs={item['children']}></ExpandableListItem>
-            })*/}
-        </List>
+        <List>{sections}</List>
       </Collapse>
     </div>
   );
@@ -135,20 +131,18 @@ function ExpandableListItem(props: {
 export default function PersistentDrawerLeft(props: { name: string }) {
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
-  let ctx;
   let sections: ReactNode[] = [];
   for (let item of outline) {
     sections.push(
       <ExpandableListItem
-        title={item["title"]}
-        childs={item["children"]}
+        key={item.title}
+        title={item.title}
+        childs={item.children}
         depth={0}
       ></ExpandableListItem>
     );
   }
-  const { courses } = (ctx = React.useContext(CourseContext));
-  console.log("These are the courses: ");
-  console.log(courses, ctx);
+  const { courses } = React.useContext(CourseContext);
 
   const handleDrawerOpen = () => {
     setOpen(true);

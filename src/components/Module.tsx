@@ -4,7 +4,6 @@ import CustomMarkdown from "./CustomMarkdown";
 import Question from "./Question";
 import Video from "./Video";
 
-
 export const exampleModule: ModuleType = {
   title: "Example Module",
   markdown: `
@@ -59,7 +58,7 @@ export function splitMarkdownIntoChunks(markdown: string): ReactNode[] {
 
   function endQuestion() {
     inQuestion = false;
-    chunks.push(<Question question={question} />);
+    chunks.push(<Question key={chunks.length} question={question} />);
     question = {
       text: "",
       type: "multiple",
@@ -70,7 +69,9 @@ export function splitMarkdownIntoChunks(markdown: string): ReactNode[] {
 
   function endBody() {
     inQuestion = true;
-    chunks.push(<CustomMarkdown>{prevChunk}</CustomMarkdown>);
+    chunks.push(
+      <CustomMarkdown key={chunks.length}>{prevChunk}</CustomMarkdown>
+    );
     prevChunk = "";
   }
 
