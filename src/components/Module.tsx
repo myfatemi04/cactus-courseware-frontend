@@ -1,6 +1,6 @@
 import { Collapse, List, ListItem, ListItemText } from "@mui/material";
 import { ExpandLess, ExpandMore } from "@mui/icons-material";
-import React, { ReactNode, useContext } from "react";
+import React, { ReactNode, useContext, useEffect, useState } from "react";
 import { getPreviousPath, getNextPath } from "../pathutil";
 import {
   Course,
@@ -154,15 +154,20 @@ export function ModuleTree({
   onClick?: (path: number[]) => void;
 }) {
   const highlighted = Array.isArray(highlight) && highlight.length === 0;
-  const opened = Array.isArray(highlight);
+  const [opened, setOpened] = useState(false);
+
+  const hasHighlightedChild = Array.isArray(highlight) && highlight.length > 0;
+
+  useEffect(() => {
+    setOpened(hasHighlightedChild);
+  }, [hasHighlightedChild]);
+
   if (module.modules.length === 0) {
     return (
       <ListItem
         button
         onClick={() => {
-          if (onClick) {
-            onClick([]);
-          }
+          onClick?.([]);
         }}
         style={{
           backgroundColor: highlighted ? "#eee" : "",
@@ -177,7 +182,10 @@ export function ModuleTree({
     <div>
       <ListItem
         button
-        onClick={() => onClick?.([])}
+        onClick={() => {
+          onClick?.([]);
+          setOpened((opened) => !opened);
+        }}
         style={{
           backgroundColor: highlighted ? "#eee" : "",
           color: opened ? "#000" : "",
