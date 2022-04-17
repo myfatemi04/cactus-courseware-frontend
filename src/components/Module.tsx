@@ -1,4 +1,4 @@
-import { Collapse, List, ListItem, ListItemText } from "@mui/material";
+import { Collapse, Divider, List, ListItem, ListItemText } from "@mui/material";
 import { ExpandLess, ExpandMore } from "@mui/icons-material";
 import React, { ReactNode, useContext, useEffect, useState } from "react";
 import Button from "@mui/material/Button";
@@ -75,7 +75,7 @@ export function splitMarkdownIntoChunks(markdown: string): ReactNode[] {
       explanation: "",
     };
   }
-
+  
   function endBody() {
     inQuestion = true;
     chunks.push(
@@ -172,7 +172,7 @@ export function ModuleTree({
         onClick={() => {
           onClick?.([]);
         }}
-        sx={{ pl: 2 + depth * 3 }}
+        sx={{ pl: 2 + depth * 2 }}
         style={{
           backgroundColor: highlighted ? "#eee" : "",
           color: opened ? "#000" : "",
@@ -190,7 +190,7 @@ export function ModuleTree({
           onClick?.([]);
           setOpened((opened) => !opened);
         }}
-        sx={{ pl: 2 + depth * 3 }}
+        sx={{ pl: 2 + depth * 2 }}
         style={{
           backgroundColor: highlighted ? "#eee" : "",
           color: opened ? "#000" : "",
@@ -199,6 +199,7 @@ export function ModuleTree({
       <ListItemText primary={module.title} />
         {opened ? <ExpandLess /> : <ExpandMore />}
       </ListItem>
+      <Divider />
       <Collapse in={opened} timeout="auto" unmountOnExit>
         <List>
           {module.modules.map((submodule, index) => {
