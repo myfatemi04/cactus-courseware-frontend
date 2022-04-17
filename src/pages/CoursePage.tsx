@@ -6,21 +6,23 @@ import Module, { ModuleTree } from "../components/Module";
 import getCourseContentAtPath from "../lib/getCourseContentAtPath";
 import { parseCourseRepository } from "../lib/loadGithubRepository";
 import { Course as CourseType } from "../types";
+import { getCourse } from '../services/api';
 
 export default function CoursePage() {
   const [course, setCourse] = useState<CourseType | null>(null);
-  // const { user, repo } = useParams<{ user: string; repo: string }>();
+  const { id } = useParams<{ id : string }>();
 
   const { path, setPath } = useContext(CourseContext);
-
-  const name = "myfatemi04/Math-101" //`${user}/${repo}`;
-
   const content = course ? getCourseContentAtPath(course, path) : null;
 
-  useEffect(() => {
+   
+  //console.log(getCourse(id));
+  useEffect(() => { 
     // @ts-ignore
-    parseCourseRepository(name).then(setCourse);
-  }, [name]);
+    if (typeof id === 'string') {
+      getCourse(id).then(setCourse);
+    }
+  });
 
   if (!course) {
     return <>No course</>;
