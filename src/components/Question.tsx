@@ -93,7 +93,7 @@ export default function Question({ question }: { question: QuestionType }) {
           ) : correct === false ? (
             <>
               <br />❌ Incorrect.
-              <ReactMarkdown>{question.explanation}</ReactMarkdown>
+              <CustomMarkdown>{question.explanation}</CustomMarkdown>
             </>
           ) : (
             <>
