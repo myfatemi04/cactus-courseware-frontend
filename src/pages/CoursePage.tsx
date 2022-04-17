@@ -32,6 +32,7 @@ export default function CoursePage() {
         flexDirection: "column",
         textAlign: "left",
         margin: "2rem",
+        overflow: "auto",
       }}
     >
       <a
