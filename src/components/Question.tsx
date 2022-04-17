@@ -1,5 +1,5 @@
-import { Button } from "@mui/material";
-import { useState } from "react";
+import { Button, Checkbox, Radio } from "@mui/material";
+import { ChangeEvent, useState } from "react";
 import ReactMarkdown from "react-markdown";
 import { Question as QuestionType } from "../types";
 import CustomMarkdown from "./CustomMarkdown";
@@ -47,40 +47,49 @@ export default function Question({ question }: { question: QuestionType }) {
       <form style={{ display: "flex", flexDirection: "column" }}>
         {question.answers.map((answer, index) => {
           const id = `question-${question.text}-answer-${index}`;
+          const props = {
+            style: { marginRight: "0.5rem" },
+            name: "answer",
+            id,
+            checked: selectedAnswers.includes(index),
+            onChange: (e: ChangeEvent<HTMLInputElement>) => {
+              if (correct !== null) {
+                return;
+              }
+              if (question.type === "multiple") {
+                if (!selectedAnswers.includes(index)) {
+                  setSelectedAnswers([...selectedAnswers, index]);
+                } else {
+                  setSelectedAnswers(
+                    selectedAnswers.filter((i) => i !== index)
+                  );
+                }
+              } else {
+                setSelectedAnswers([index]);
+              }
+            },
+          };
           return (
             <div style={{ display: "flex", alignItems: "center" }} key={id}>
-              <input
-                style={{ marginRight: "0.5rem" }}
-                type={question.type === "multiple" ? "checkbox" : "radio"}
-                name="answer"
-                id={id}
-                checked={selectedAnswers.includes(index)}
-                onChange={(e) => {
-                  if (correct !== null) {
-                    return;
-                  }
-                  if (question.type === "multiple") {
-                    if (!selectedAnswers.includes(index)) {
-                      setSelectedAnswers([...selectedAnswers, index]);
-                    } else {
-                      setSelectedAnswers(
-                        selectedAnswers.filter((i) => i !== index)
-                      );
-                    }
-                  } else {
-                    setSelectedAnswers([index]);
-                  }
-                }}
-              />
+              {question.type === "multiple" ? (
+                <Checkbox {...props} />
+              ) : (
+                <Radio {...props} />
+              )}
               <label
                 htmlFor={id}
-                style={{ userSelect: "none", WebkitUserSelect: "none" }}
+                style={{
+                  cursor: "pointer",
+                  userSelect: "none",
+                  WebkitUserSelect: "none",
+                }}
               >
                 <CustomMarkdown>{answer.text}</CustomMarkdown>
               </label>
             </div>
           );
         })}
+        <br />
         <div>
           {correct === null ? (
             <Button
