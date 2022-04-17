@@ -7,7 +7,7 @@ import { Container } from "./Container";
 import CoursePage from "./pages/CoursePage";
 import MainPage from "./pages/MainPage";
 import UploadCoursePage from "./pages/UploadCoursePage";
-import "./styles/App.css";
+import "./styles/App.scss";
 
 function App() {
   return (
