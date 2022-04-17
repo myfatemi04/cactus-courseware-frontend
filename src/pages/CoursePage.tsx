@@ -1,9 +1,10 @@
-import { List } from "@mui/material";
+import { Button, List } from "@mui/material";
 import { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { CourseContext } from "../components/CourseContext";
 import Module, { ModuleTree } from "../components/Module";
 import getCourseContentAtPath from "../lib/getCourseContentAtPath";
+import { getPreviousPath, getNextPath } from "../lib/pathutil";
 import { getCourse } from "../services/api";
 import { Course as CourseType } from "../types";
 
@@ -24,6 +25,29 @@ export default function CoursePage() {
       getCourse(id).then(setCourse);
     }
   }, [id]);
+
+  const previousNextButtons = course && (
+    <div style={{ display: "flex", marginLeft: "2rem" }}>
+      <Button
+        onClick={() =>
+          setPath((path) => {
+            return getPreviousPath(course.rootModule, path) || path;
+          })
+        }
+      >
+        Previous
+      </Button>
+      <Button
+        onClick={() =>
+          setPath((path) => {
+            return getNextPath(course.rootModule, path) || path;
+          })
+        }
+      >
+        Next
+      </Button>
+    </div>
+  );
 
   return (
     <div
@@ -82,14 +106,9 @@ export default function CoursePage() {
                   );
                 })}
               </List>
-              {/* <ModuleTree
-            module={course.rootModule}
-            highlight={path}
-            onClick={setPath}
-            depth={0}
-          /> */}
             </div>
             <div style={{ width: "calc(100% * 6 / 7)", overflow: "auto" }}>
+              {previousNextButtons}
               {content ? (
                 <Module data={content} course={course} />
               ) : (
