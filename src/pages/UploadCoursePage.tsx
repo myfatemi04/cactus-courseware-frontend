@@ -1,8 +1,27 @@
-import { Button, TextField } from "@mui/material";
+import { Button, CircularProgress, TextField } from "@mui/material";
 import { upload } from "@testing-library/user-event/dist/upload";
 import { useState, useCallback, KeyboardEventHandler } from "react";
 import { publishCourse } from "../services/api";
 import { FetchStatus } from "../types";
+import CheckIcon from '@mui/icons-material/Check';
+import ClearIcon from '@mui/icons-material/Clear';
+
+const UploadFeedback = ({status}: { status: FetchStatus }) => {
+  let item = null; 
+  switch(status) {
+    case 'pending':
+      item = <CircularProgress color='warning' style={{margin: 'auto 1rem auto 0'}} size='2rem'/>
+      break;
+    case 'success':
+      item =  <CheckIcon style={{margin: 'auto 1rem auto 0', fontSize: '2rem'}} color='warning'/>
+      break;
+    case 'error':
+      item =  <ClearIcon style={{margin: 'auto 1rem auto 0', fontSize: '2rem'}} color='warning'/>
+      break;
+  }
+
+  return item;
+}
 
 export default function UploadCoursePage() {
   const [fetchStatus, setFetchStatus] = useState<FetchStatus>("idle");
@@ -13,13 +32,12 @@ export default function UploadCoursePage() {
     const processedUrl = !ghUrlInd ? urlInput : urlInput.substring(ghUrlInd+1);
     setUrlInput(processedUrl);
     
-    setFetchStatus('pending');
-    try {
-      const data = await publishCourse(processedUrl);
-      console.log(data)
+    setFetchStatus('pending')
+    const res = await publishCourse(processedUrl);
+    if(res.ok){
       setFetchStatus('success')
-    } catch {
-      setFetchStatus('error');
+    } else {
+      setFetchStatus('error')
     }
   }, [urlInput])
 
@@ -36,21 +54,21 @@ export default function UploadCoursePage() {
           id="outlined-basic"
           variant="outlined"
           color="primary"
-          fullWidth
           label="Search"
           placeholder="user-name/repo-name"
           value={urlInput}
           onKeyUp={onKeyUp}
           onChange={(e)=>setUrlInput(e.target.value)}
+          style={{width: '36rem', height: '100%', padding: 0}}
         />
 
         <Button 
           variant="contained"
           onClick={() => publish()}
           style={{marginLeft: '1rem'}}
-        >Publish</Button>
+        ><UploadFeedback status={fetchStatus}/> Publish</Button>
       </div>
-      {fetchStatus}
+      
     </div>
   );
 }
