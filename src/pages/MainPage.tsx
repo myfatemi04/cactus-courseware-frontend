@@ -30,10 +30,9 @@ export default function MainPage() {
         backgroundImage: "url(/Background_Image.png)",
         display: "flex",
         flexDirection: "column",
-        // alignItems: "center",
       }}
     >
-      <div style={{ margin: "0 1rem" }}>
+      <div style={{ margin: "0 1rem", overflow: "visible" }}>
         <h1 style={{ fontSize: "4rem", width: "100%", textAlign: "left" }}>
           Learn something new today.
         </h1>
