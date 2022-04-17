@@ -1,8 +1,8 @@
-import { Collapse, Divider, List, ListItem, ListItemText } from "@mui/material";
 import { ExpandLess, ExpandMore } from "@mui/icons-material";
-import React, { ReactNode, useContext, useEffect, useState } from "react";
+import { Collapse, Divider, List, ListItem, ListItemText } from "@mui/material";
 import Button from "@mui/material/Button";
-import { getPreviousPath, getNextPath } from "../lib/pathutil";
+import React, { ReactNode, useContext, useEffect, useState } from "react";
+import { getNextPath, getPreviousPath } from "../lib/pathutil";
 import {
   Course,
   Module as ModuleType,
@@ -10,6 +10,7 @@ import {
 } from "../types";
 import { CourseContext } from "./CourseContext";
 import CustomMarkdown from "./CustomMarkdown";
+import { JupyterNotebookEmbedded } from "./JupyterNotebook";
 import Question from "./Question";
 import Video from "./Video";
 
@@ -123,12 +124,16 @@ export function splitMarkdownIntoChunks(markdown: string): ReactNode[] {
         }
       }
     } else {
-      if (line.trim().toLowerCase().startsWith("video:")) {
+      const lineStart = line.trim().toLowerCase();
+      if (lineStart.startsWith("video:")) {
         let url = line.substring(7); // "video: " is 7 characters
         if (!url.includes("/embed/")) {
           url = url.replace("watch?v=", "embed/");
         }
         chunks.push(<Video link={url} />);
+      } else if (lineStart.startsWith("jupyter:")) {
+        const url = line.substring(9); // "jupyter: " is 9 characters
+        chunks.push(<JupyterNotebookEmbedded url={url} />);
       } else {
         prevChunk += "\n" + line;
       }
