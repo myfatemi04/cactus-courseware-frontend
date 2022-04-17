@@ -22,6 +22,8 @@ import { CourseContext } from "./CourseContext";
 import Collapse from "@mui/material/Collapse";
 import ExpandLess from "@mui/icons-material/ExpandLess";
 import ExpandMore from "@mui/icons-material/ExpandMore";
+import { Tree } from '../types'
+import { ReactNode } from 'react'
 
 const drawerWidth = 240;
 
@@ -74,40 +76,68 @@ const DrawerHeader = styled("div")(({ theme }) => ({
   justifyContent: "flex-end",
 }));
 
-export function ExpandableListItem() {
-  const [openCollapse, setOpenCollapse] = React.useState(false);
-  function handleOpenSettings() {
+
+// computer science course 
+// list of sections
+const outline : Tree[] = [{"title" : "Computer sci",
+              "children": [{"title": "DP", "children" : []}, 
+                            {"title": "algos", "children" : [ {"title" : "hi", "children" : [] }]}] }]
+
+console.log(outline);
+/*
+function getKeys(outline : Tree){
+  var arr = [];
+  outline.forEach(function(key) {
+    arr.push(key['title']);
+  });
+  return arr;
+}
+
+function getItem(outline : Tree){
+
+}
+*/
+function ExpandableListItem(props : {title : string, childs : Tree[], depth : number}){
+  const [openCollapse, setOpenCollapse] = React.useState(false); 
+  let sections : ReactNode[] = [];
+  for (let item of props.childs){
+    sections.push(<ExpandableListItem title={item['title']} childs={item['children']} depth={props.depth+1}></ExpandableListItem>)
+  }
+  function handleOpenSettings(){
     setOpenCollapse(!openCollapse);
   }
-  return (
-    <div>
-      <ListItem button onClick={handleOpenSettings}>
-        <ListItemIcon>
-          <InboxIcon />
-        </ListItemIcon>
-        <ListItemText primary="Settings" />
-        {openCollapse ? <ExpandLess /> : <ExpandMore />}
-      </ListItem>
-      <Collapse in={openCollapse} timeout="auto" unmountOnExit>
-        <List component="div" disablePadding>
-          <ListItem>
-            <ListItemIcon>
-              <InboxIcon />
-            </ListItemIcon>
-          </ListItem>
-        </List>
-      </Collapse>
-    </div>
-  );
+  return(
+      <div>
+        <ListItem button onClick={handleOpenSettings} sx={{ pl : props.depth*2 }}>
+          <ListItemIcon>
+            <InboxIcon />
+          </ListItemIcon>
+          <ListItemText primary={props.title} />
+          {openCollapse ? <ExpandLess /> : <ExpandMore />}
+        </ListItem>
+        <Collapse in={openCollapse} timeout="auto" unmountOnExit>
+            <List>
+            {sections.map((item) => item)}
+            {/*props.childs.forEach(function(item : Tree) {
+              <ExpandableListItem title={item['title']} childs={item['children']}></ExpandableListItem>
+            })*/}
+            </List>
+        </Collapse> 
+      </div>
+  )
 }
 
 export default function PersistentDrawerLeft(props: { name: string }) {
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
   let ctx;
-  const { courses } = (ctx = React.useContext(CourseContext));
-  console.log("These are the courses: ");
-  console.log(courses, ctx);
+  let sections : ReactNode[] = []
+  for (let item of outline){
+    sections.push(<ExpandableListItem title={item['title']} childs={item['children']} depth={0}></ExpandableListItem>)
+  }
+  const {courses} = ctx= React.useContext(CourseContext);
+  console.log("These are the courses: ")
+  console.log(courses, ctx)
 
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -171,6 +201,7 @@ export default function PersistentDrawerLeft(props: { name: string }) {
         </List>
         <Divider />
         <List>
+          {sections.map((item) => item)}
           {courses.map((course, index) => (
             <ListItem
               button
@@ -184,7 +215,6 @@ export default function PersistentDrawerLeft(props: { name: string }) {
               <ListItemText primary={course.title} />
             </ListItem>
           ))}
-          <ExpandableListItem></ExpandableListItem>
         </List>
       </Drawer>
       <Main open={open}>

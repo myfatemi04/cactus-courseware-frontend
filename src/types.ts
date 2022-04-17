@@ -22,6 +22,13 @@ export interface Question {
   explanation: string;
 }
 
+export interface Tree {
+  title: string;
+  children: Tree[];
+}
+
+export type TreePath = string[];
+
 export interface Module {
   title: string;
   markdown: string;
