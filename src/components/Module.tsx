@@ -293,7 +293,7 @@ export default function Module({
         border: "1px solid white",
       }}
     >
-      {previousNextButtons}
+      {/* {previousNextButtons} */}
 
       {data.type === "markdown" ? (
         data.content ? (
