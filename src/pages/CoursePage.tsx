@@ -1,4 +1,4 @@
-import { Divider, List } from "@mui/material";
+import { List } from "@mui/material";
 import { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { CourseContext } from "../components/CourseContext";
@@ -40,12 +40,17 @@ export default function CoursePage() {
     >
       <div>
         {/* Course title and route */}
-        <h1>{course.title}</h1>
+        <h1 style={{ fontSize: "3rem" }}>{course.title}</h1>
         <em>{course.authors.join(", ")}</em>
       </div>
-      <br />
-      <Divider />
-      <br />
+      <div
+        style={{
+          height: "2px",
+          width: "100%",
+          backgroundColor: "black",
+          margin: "1rem 0",
+        }}
+      />
       <div
         style={{
           width: "100%",
@@ -53,22 +58,22 @@ export default function CoursePage() {
         }}
       >
         <div style={{ width: "calc(100% / 7)" }}>
-        <List style={{ paddingTop: 0, paddingBottom: 0 }}>
-          {course.rootModule.children.map((submodule, index) => {
-            return (
-              <div key={submodule.title}>
-                <ModuleTree
-                  module={submodule}
-                  highlight={path[0] === index ? path.slice(1):null}
-                  onClick={(path) => {
-                    setPath([index, ...path]);
-                  }}
-                  depth={0}
-                />
-              </div>
-            );
-          })}
-        </List>
+          <List style={{ paddingTop: 0, paddingBottom: 0 }}>
+            {course.rootModule.children.map((submodule, index) => {
+              return (
+                <div key={submodule.title}>
+                  <ModuleTree
+                    module={submodule}
+                    highlight={path[0] === index ? path.slice(1) : null}
+                    onClick={(path) => {
+                      setPath([index, ...path]);
+                    }}
+                    depth={0}
+                  />
+                </div>
+              );
+            })}
+          </List>
           {/* <ModuleTree
             module={course.rootModule}
             highlight={path}
