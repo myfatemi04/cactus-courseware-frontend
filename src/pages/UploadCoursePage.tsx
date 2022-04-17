@@ -55,7 +55,11 @@ export default function UploadCoursePage() {
   );
 
   return (
-    <div style={{ margin: "auto 3rem" }}>
+    <div>
+      <h1 className=" text-white">Upload a GitHub Repo</h1>
+      <p className="text-white">See our example repository for a easy-to-use, detailed <b>specification</b></p>
+      
+      <div style={{ margin: "auto 3rem" }}>
       <div style={{ display: "flex" }}>
         <TextField
           id="outlined-basic"
@@ -79,5 +83,7 @@ export default function UploadCoursePage() {
       </div>
       
     </div>
+    </div>
+    
   );
 }
