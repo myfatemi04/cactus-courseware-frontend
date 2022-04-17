@@ -2,6 +2,7 @@ import React, { useEffect, useMemo, useState } from "react";
 import { CourseTile } from "../components/CourseTile";
 import { getCourses } from "../services/api";
 import { Course } from "../types";
+import bgImg from "../assets/bg.png";
 
 export default function MainPage() {
   const [searchQuery, setSearchQuery] = useState("");
@@ -28,7 +29,7 @@ export default function MainPage() {
         height: "100vh",
         color: "white",
         backgroundSize: "cover",
-        backgroundImage: "url(/Background_Image.png)",
+        backgroundImage: `url(${bgImg})`,
         display: "flex",
         flexDirection: "column",
       }}

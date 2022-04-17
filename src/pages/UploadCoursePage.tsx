@@ -1,4 +1,4 @@
-import { Button, CircularProgress, TextField } from "@mui/material";
+import { CircularProgress } from "@mui/material";
 import { useState, useCallback, KeyboardEventHandler } from "react";
 import { publishCourse } from "../services/api";
 import { FetchStatus } from "../types";
@@ -84,7 +84,7 @@ export default function UploadCoursePage() {
               background: 'transparent'
             }}
           />
-          <button style={{width: '3rem', height: '3rem'}} onClick={() => publish()}><Toggle status={fetchStatus}/></button>
+          <button style={{width: '3rem', height: '3rem', cursor: 'pointer'}} onClick={() => publish()}><Toggle status={fetchStatus}/></button>
           {
             errorMsg.length > 0 ? 
             <p style={{position: 'absolute', bottom: 0, color: '#BA5A31'}}>{errorMsg}</p> 
