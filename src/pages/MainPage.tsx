@@ -15,25 +15,40 @@ export default function MainPage() {
 
   const tiles = useMemo(() => {
     return courses
-      .filter((course) => course.title.toLowerCase().includes(searchQuery))
+      .filter((course) =>
+        course.title.toLowerCase().includes(searchQuery.toLowerCase())
+      )
       .map((course, index) => (
         <CourseTile course={course} key={index}></CourseTile>
       ));
   }, [courses, searchQuery]);
 
   return (
-    <div className="App">
-      <h1>Learn Anything</h1>
-      <div style={{ width: "20rem", margin: "0.5rem 0" }}>
-        <TextField
-          id="outlined-basic"
-          variant="outlined"
-          color="primary"
-          fullWidth
-          label="Search"
-          onChange={(e) => setSearchQuery(e.target.value)}
-        />
-      </div>
+    <div
+      style={{
+        padding: "2rem 4rem",
+        height: "100vh",
+        color: "white",
+        backgroundImage: "url(/Background_Image.png)",
+      }}
+    >
+      <h1 style={{ fontSize: "4rem" }}>Learn something new today.</h1>
+      <h3>I want to learn...</h3>
+      <input
+        type="text"
+        onChange={(e) => setSearchQuery(e.target.value)}
+        style={{
+          fontSize: "3rem",
+          fontWeight: "lighter",
+          width: "100%",
+          color: "white",
+          backgroundColor: "transparent",
+          borderLeft: "none",
+          borderRight: "none",
+          borderTop: "none",
+          borderBottom: "1px solid white",
+        }}
+      />
       <TileGrid tiles={tiles} />
     </div>
   );

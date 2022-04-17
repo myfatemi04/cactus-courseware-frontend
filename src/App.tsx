@@ -14,7 +14,7 @@ function App() {
     <BrowserRouter>
       <CourseContextProvider>
         <DrawerContextProvider>
-          <PersistentDrawerLeft name={"Cacti Courseware"} />
+          {/* <PersistentDrawerLeft name={"Cacti Courseware"} /> */}
           <Container>
             <Routes>
               <Route path="/" element={<MainPage />} />
