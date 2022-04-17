@@ -170,28 +170,42 @@ export function Tree({
   highlight: number[] | null;
   onClick?: (path: number[]) => void;
 }) {
+  const highlighted = Array.isArray(highlight) && highlight.length === 0;
   return (
     <div>
-      <button onClick={() => onClick?.([])}>{tree.name}</button>
-      <div style={{ marginTop: 0, paddingLeft: "1rem" }}>
-        {tree.children?.map((subtree, index) => (
-          <div key={subtree.name}>
-            <Tree
-              tree={subtree}
-              highlight={
-                highlight
-                  ? highlight[0] === index
-                    ? highlight.slice(1)
-                    : []
-                  : null
-              }
-              onClick={(path) => {
-                onClick?.([index, ...path]);
-              }}
-            />
-          </div>
-        ))}
-      </div>
+      <button
+        onClick={() => onClick?.([])}
+        style={{
+          border: "none",
+          backgroundColor: "transparent",
+          cursor: "pointer",
+          textDecoration: "underline",
+          fontWeight: highlighted ? "bold" : "normal",
+        }}
+      >
+        {tree.name}
+      </button>{" "}
+      {Array.isArray(highlight) && (
+        <div style={{ marginTop: 0, paddingLeft: "0.75rem" }}>
+          {tree.children?.map((subtree, index) => {
+            return (
+              <div key={subtree.name}>
+                <Tree
+                  tree={subtree}
+                  highlight={
+                    highlight && highlight[0] === index
+                      ? highlight.slice(1)
+                      : null
+                  }
+                  onClick={(path) => {
+                    onClick?.([index, ...path]);
+                  }}
+                />
+              </div>
+            );
+          })}
+        </div>
+      )}
     </div>
   );
 }
