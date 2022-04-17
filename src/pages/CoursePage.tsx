@@ -1,11 +1,10 @@
 import { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import { CourseContext } from "../components/CourseContext";
 import Module, { Tree as ModuleTree } from "../components/Module";
-import { Course as CourseType } from "../types";
 import getCourseContentAtPath from "../getCourseContentAtPath";
 import { parseCourseRepository } from "../loadGithubRepository";
-import { CourseContext } from "../components/CourseContext";
-import { getNextPath, getPreviousPath } from "../pathutil";
+import { Course as CourseType } from "../types";
 
 export default function CoursePage() {
   const [course, setCourse] = useState<CourseType | null>(null);
@@ -38,24 +37,6 @@ export default function CoursePage() {
         {/* Course title and route */}
         <h1>{course.title}</h1>
         <em>{course.authors.join(", ")}</em>
-        <button
-          onClick={() =>
-            setPath((path) => {
-              return getPreviousPath(course.rootModule, path) || path;
-            })
-          }
-        >
-          Previous
-        </button>
-        <button
-          onClick={() =>
-            setPath((path) => {
-              return getNextPath(course.rootModule, path) || path;
-            })
-          }
-        >
-          Next
-        </button>
       </div>
       <div style={{ height: 1, backgroundColor: "black", margin: "2rem 0" }} />
       <div
@@ -72,7 +53,11 @@ export default function CoursePage() {
           />
         </div>
         <div style={{ flex: 6 }}>
-          {content ? <Module data={content} path="" /> : "Select a module"}
+          {content ? (
+            <Module data={content} course={course} />
+          ) : (
+            "Select a module"
+          )}
         </div>
       </div>
     </div>
