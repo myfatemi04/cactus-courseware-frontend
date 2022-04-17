@@ -25,7 +25,7 @@ export default function MainPage() {
   return (
     <div
       style={{
-        padding: "2rem 4rem",
+        padding: "4rem 4rem",
         height: "100vh",
         color: "white",
         backgroundSize: "cover",
