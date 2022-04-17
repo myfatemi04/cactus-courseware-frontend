@@ -271,7 +271,24 @@ export default function Module({
       }}
     >
       {data.type === "markdown" ? (
-        splitMarkdownIntoChunks(data.content)
+        data.content ? (
+          splitMarkdownIntoChunks(data.content)
+        ) : (
+          <>
+            <h2>The authors put no description here.</h2>
+            You can explore any of the following subunits:
+            <br />
+            {data.children.map((submodule, index) => {
+              return (
+                <div key={submodule.title}>
+                  <button onClick={() => setPath((path) => [...path, index])}>
+                    {submodule.title}
+                  </button>
+                </div>
+              );
+            })}
+          </>
+        )
       ) : parsed ? (
         <JupyterNotebook notebook={parsed} />
       ) : (
