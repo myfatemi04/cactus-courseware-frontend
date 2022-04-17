@@ -15,6 +15,8 @@ import IconButton from "@mui/material/IconButton";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import ListItemIcon from "@mui/material/ListItemIcon";
+import CloudUploadIcon from '@mui/icons-material/CloudUpload';
+import SearchIcon from '@mui/icons-material/Search';
 import ListItemText from "@mui/material/ListItemText";
 import { styled, useTheme } from "@mui/material/styles";
 import Toolbar from "@mui/material/Toolbar";
@@ -112,11 +114,8 @@ function ExpandableListItem(props: {
       <ListItem
         button
         onClick={handleOpenSettings}
-        sx={{ pl: props.depth * 2 }}
+        sx={{ pl: props.depth * 2 +2}}
       >
-        <ListItemIcon>
-          <InboxIcon />
-        </ListItemIcon>
         <ListItemText primary={props.title} />
         {openCollapse ? <ExpandLess /> : <ExpandMore />}
       </ListItem>
@@ -204,7 +203,7 @@ export default function PersistentDrawerLeft(props: { name: string }) {
           {["Search", "Upload"].map((text, index) => (
             <ListItem button key={text} component={Link} to={"/" + text}>
               <ListItemIcon>
-                {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
+                {index % 2 === 0 ? <SearchIcon /> : <CloudUploadIcon />}
               </ListItemIcon>
               <ListItemText primary={text} />
             </ListItem>
@@ -213,19 +212,6 @@ export default function PersistentDrawerLeft(props: { name: string }) {
         <Divider />
         <List>
           {sections.map((item) => item)}
-          {courses.map((course, index) => (
-            <ListItem
-              button
-              key={course.title}
-              component={Link}
-              to={"/courses/" + course.title}
-            >
-              <ListItemIcon>
-                {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-              </ListItemIcon>
-              <ListItemText primary={course.title} />
-            </ListItem>
-          ))}
         </List>
       </Drawer>
       <Main open={open}>
