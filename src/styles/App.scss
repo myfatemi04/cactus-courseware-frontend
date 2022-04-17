@@ -9,6 +9,18 @@
   padding: 2rem;
 }
 
+body::-webkit-scrollbar {
+  width: 12px; /* width of the entire scrollbar */
+}
+body::-webkit-scrollbar-track {
+  background: rgb(48, 33, 6); /* color of the tracking area */
+}
+body::-webkit-scrollbar-thumb {
+  background-color: rgb(187, 187, 191); /* color of the scroll thumb */
+  border-radius: 20px; /* roundness of the scroll thumb */
+  border: 3px solid rgb(174, 173, 169); /* creates padding around scroll thumb */
+}
+
 body {
   /* background: linear-gradient(to top, #f6d365, #fda085); */
 }

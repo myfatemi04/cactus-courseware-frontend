@@ -1,7 +1,5 @@
-import TextField from "@mui/material/TextField";
 import React, { useEffect, useMemo, useState } from "react";
 import { CourseTile } from "../components/CourseTile";
-import TileGrid from "../components/TileGrid";
 import { getCourses } from "../services/api";
 import { Course } from "../types";
 
@@ -32,10 +30,9 @@ export default function MainPage() {
         backgroundImage: "url(/Background_Image.png)",
         display: "flex",
         flexDirection: "column",
-        // alignItems: "center",
       }}
     >
-      <div style={{ margin: "0 1rem" }}>
+      <div style={{ margin: "0 1rem", overflow: "visible" }}>
         <h1 style={{ fontSize: "4rem", width: "100%", textAlign: "left" }}>
           Learn something new today.
         </h1>
@@ -63,7 +60,16 @@ export default function MainPage() {
           Have a course to share?
         </a>
       </div>
-      <TileGrid tiles={tiles} />
+      <div
+        style={{
+          textAlign: "left",
+          maxHeight: "100%",
+          overflowY: "auto",
+        }}
+      >
+        {tiles}
+        {tiles}
+      </div>
     </div>
   );
 }

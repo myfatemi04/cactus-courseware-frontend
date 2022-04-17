@@ -1,8 +1,6 @@
 import { ExpandLess, ExpandMore } from "@mui/icons-material";
 import { Collapse, Divider, List, ListItem, ListItemText } from "@mui/material";
-import Button from "@mui/material/Button";
 import React, { ReactNode, useContext, useEffect, useState } from "react";
-import { getNextPath, getPreviousPath } from "../lib/pathutil";
 import {
   Course,
   Module as ModuleType,
@@ -261,29 +259,6 @@ export default function Module({
     parsed = null;
   }
 
-  const previousNextButtons = (
-    <>
-      <Button
-        onClick={() =>
-          setPath((path) => {
-            return getPreviousPath(course.rootModule, path) || path;
-          })
-        }
-      >
-        Previous
-      </Button>
-      <Button
-        onClick={() =>
-          setPath((path) => {
-            return getNextPath(course.rootModule, path) || path;
-          })
-        }
-      >
-        Next
-      </Button>
-    </>
-  );
-
   return (
     <div
       style={{
@@ -291,6 +266,8 @@ export default function Module({
         margin: "0 2rem",
         padding: "0.5rem",
         border: "1px solid white",
+        height: "60vh",
+        overflow: "auto",
       }}
     >
       {/* {previousNextButtons} */}
@@ -319,8 +296,6 @@ export default function Module({
       ) : (
         "Failed to parse"
       )}
-
-      {previousNextButtons}
     </div>
   );
 }
