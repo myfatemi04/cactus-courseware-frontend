@@ -1,4 +1,4 @@
-import { Divider } from "@mui/material";
+import { Divider, List } from "@mui/material";
 import { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { CourseContext } from "../components/CourseContext";
@@ -53,12 +53,28 @@ export default function CoursePage() {
         }}
       >
         <div style={{ width: "calc(100% / 7)" }}>
-          <ModuleTree
+        <List style={{ paddingTop: 0, paddingBottom: 0 }}>
+          {course.rootModule.children.map((submodule, index) => {
+            return (
+              <div key={submodule.title}>
+                <ModuleTree
+                  module={submodule}
+                  highlight={path[0] === index ? path.slice(1):null}
+                  onClick={(path) => {
+                    setPath([index, ...path]);
+                  }}
+                  depth={0}
+                />
+              </div>
+            );
+          })}
+        </List>
+          {/* <ModuleTree
             module={course.rootModule}
             highlight={path}
             onClick={setPath}
             depth={0}
-          />
+          /> */}
         </div>
         <div style={{ width: "calc(100% * 6 / 7)", overflow: "auto" }}>
           {content ? (
