@@ -27,16 +27,17 @@ export default function MainPage() {
         padding: "2rem 4rem",
         height: "100vh",
         color: "white",
+        backgroundSize: 'cover',
         backgroundImage: "url(/Background_Image.png)",
         display: "flex",
         flexDirection: "column",
       }}
     >
       <div style={{ margin: "0 1rem", overflow: "visible" }}>
-        <h1 style={{ fontSize: "4rem", width: "100%", textAlign: "left" }}>
-          Learn something new today.
+        <h1 style={{ fontSize: "4rem", fontWeight: 700, color: '#F5EED6', width: "100%", textAlign: "left" }}>
+          Learn something. <a href="/upload" style={{ color: '#DBA933' }}>Create</a> something.
         </h1>
-        <h3 style={{ width: "100%", textAlign: "left" }}>I want to learn...</h3>
+        <h3 style={{marginTop: '1rem', fontSize: '1.875rem', fontWeight: 700, color: '#F5EED6'}}>I want to learn...</h3>
         <input
           type="text"
           onChange={(e) => setSearchQuery(e.target.value)}
@@ -53,15 +54,10 @@ export default function MainPage() {
           }}
         />
         <br />
-        <a
-          href="/upload"
-          style={{ marginTop: "0.5rem", display: "inline-block" }}
-        >
-          Have a course to share?
-        </a>
       </div>
       <div
         style={{
+          marginTop: '2rem',
           textAlign: "left",
           maxHeight: "100%",
           overflowY: "auto",

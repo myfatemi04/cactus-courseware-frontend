@@ -60,20 +60,36 @@ export default function UploadCoursePage() {
   );
 
   return (
-    <div className="relative h-screen" style={{backgroundImage: `url(${bgImg})`}}>
-      <div className="absolute left-8 bottom-8">
-        <h1 className="mb-4 text-white text-7xl font-bold">Upload a GitHub Repo</h1>
-        <p className="mb-8 text-white text-3xl font-light">See our example repository for a easy-to-use, detailed <b className="font-bold">specification</b></p>
+    <div style={{position: 'relative', height: '100vh', backgroundSize: 'cover', backgroundImage: `url(${bgImg})`}}>
+      <div style={{position: 'absolute', left: '2rem', bottom: '2rem'}}>
+        <h1 style={{marginBottom: '1rem', color: '#F5EED6', fontSize: '4.5rem', fontWeight: 700}} >Upload a GitHub Repo</h1>
+        <p style={{marginBottom: '2rem', color: '#F5EED6', fontSize: '1.875rem', fontWeight: 300}}>
+          See our example repository for a easy-to-use, detailed <b style={{fontWeight: 700}}>specification</b>
+        </p>
         
-        <div className="relative w-full h-full">
+        <div>
           <input
             type="text"
             onChange={(e) => setUrlInput(e.target.value)}
             onKeyUp={onKeyUp}
-            className="mb-8 text-white text-6xl font-light border-white border-b-2 bg-transparent"
+            style={{
+              marginBottom: '2rem',
+              color: '#F5EED6',
+              fontSize: '3.75rem',
+              fontWeight: 'lighter',
+              borderBottom: '2px solid #F5EED6',
+              borderLeft: "none",
+              borderRight: "none",
+              borderTop: "none",
+              background: 'transparent'
+            }}
           />
-          <button className="w-12 h-12 " onClick={() => publish()}><Toggle status={fetchStatus}/></button>
-          {errorMsg.length > 0 ? <p className="absolute bottom-0 text-coral">{errorMsg}</p> : null}
+          <button style={{width: '3rem', height: '3rem'}} onClick={() => publish()}><Toggle status={fetchStatus}/></button>
+          {
+            errorMsg.length > 0 ? 
+            <p style={{position: 'absolute', bottom: 0, color: '#BA5A31'}}>{errorMsg}</p> 
+            : null
+          }
         </div>
 
       </div>
