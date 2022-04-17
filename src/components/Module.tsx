@@ -1,3 +1,5 @@
+import { Collapse, List, ListItem, ListItemText } from "@mui/material";
+import { ExpandLess, ExpandMore } from "@mui/icons-material";
 import React, { ReactNode, useContext } from "react";
 import { getPreviousPath, getNextPath } from "../pathutil";
 import {
@@ -142,7 +144,7 @@ export function splitMarkdownIntoChunks(markdown: string): ReactNode[] {
   return chunks;
 }
 
-export function Tree({
+export function ModuleTree({
   module,
   highlight = null,
   onClick,
@@ -152,26 +154,44 @@ export function Tree({
   onClick?: (path: number[]) => void;
 }) {
   const highlighted = Array.isArray(highlight) && highlight.length === 0;
-  return (
-    <div>
-      <button
-        onClick={() => onClick?.([])}
+  const opened = Array.isArray(highlight);
+  if (module.modules.length === 0) {
+    return (
+      <ListItem
+        button
+        onClick={() => {
+          if (onClick) {
+            onClick([]);
+          }
+        }}
         style={{
-          border: "none",
-          backgroundColor: "transparent",
-          cursor: "pointer",
-          textDecoration: "underline",
-          fontWeight: highlighted ? "bold" : "normal",
+          backgroundColor: highlighted ? "#eee" : "",
+          color: opened ? "#000" : "",
         }}
       >
-        {module.title}
-      </button>{" "}
-      {Array.isArray(highlight) && (
-        <div style={{ marginTop: 0, paddingLeft: "0.75rem" }}>
+        <ListItemText primary={module.title} />
+      </ListItem>
+    );
+  }
+  return (
+    <div>
+      <ListItem
+        button
+        onClick={() => onClick?.([])}
+        style={{
+          backgroundColor: highlighted ? "#eee" : "",
+          color: opened ? "#000" : "",
+        }}
+      >
+        <ListItemText primary={module.title} />
+        {opened ? <ExpandLess /> : <ExpandMore />}
+      </ListItem>
+      <Collapse in={opened} timeout="auto" unmountOnExit>
+        <List>
           {module.modules.map((submodule, index) => {
             return (
               <div key={submodule.title}>
-                <Tree
+                <ModuleTree
                   module={submodule}
                   highlight={
                     highlight && highlight[0] === index
@@ -185,8 +205,20 @@ export function Tree({
               </div>
             );
           })}
-        </div>
-      )}
+        </List>
+      </Collapse>
+      {/* <button
+        onClick={() => onClick?.([])}
+        style={{
+          border: "none",
+          backgroundColor: "transparent",
+          cursor: "pointer",
+          textDecoration: "underline",
+          fontWeight: highlighted ? "bold" : "normal",
+        }}
+      >
+        {module.title}
+      </button> */}
     </div>
   );
 }

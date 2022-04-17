@@ -1,7 +1,7 @@
 import { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { CourseContext } from "../components/CourseContext";
-import Module, { Tree as ModuleTree } from "../components/Module";
+import Module, { ModuleTree } from "../components/Module";
 import getCourseContentAtPath from "../getCourseContentAtPath";
 import { parseCourseRepository } from "../loadGithubRepository";
 import { Course as CourseType } from "../types";
