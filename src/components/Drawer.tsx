@@ -89,6 +89,14 @@ export default function PersistentDrawerLeft(props: { name: string }) {
     setOpen(false);
   };
 
+  // const courseId = (() => {
+  //   const [, root, courseId] = window.location.pathname.split("/");
+  //   if (root === "courses") {
+  //     return courseId;
+  //   }
+  //   return null;
+  // })();
+
   return (
     <Box sx={{ display: "flex" }}>
       <CssBaseline />
@@ -155,8 +163,13 @@ export default function PersistentDrawerLeft(props: { name: string }) {
         <Divider />
         <List>
           {courses.map((course) => (
-            <ListItem button key={course.id} component={Link} to={"/courses/" + course.id}>
-              <ListItemText primary={course.title} />
+            <ListItem
+              button
+              key={course.id}
+              component={Link}
+              to={"/courses/" + course.id}
+            >
+              <Typography variant="h6">{course.title}</Typography>
             </ListItem>
           ))}
         </List>
