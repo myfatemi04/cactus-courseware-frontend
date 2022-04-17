@@ -71,7 +71,7 @@ export async function parseUnitFile(
 ): Promise<Omit<ModuleType, "id">> {
   // Parses a file, such as "01_Strings.md"
   const fileName = path.slice(path.lastIndexOf("/") + 1);
-  const unitNumber = fileName.slice(0, fileName.indexOf("_"));
+  // const unitNumber = fileName.slice(0, fileName.indexOf("_"));
   const unitName = fileName
     .slice(fileName.indexOf("_") + 1)
     .replace(/_/g, " ")
@@ -97,7 +97,7 @@ export async function parseUnitDirectory(
 
   const folder = await getGithubFolderContent(repo, path);
   const folderName = path.slice(path.lastIndexOf("/") + 1);
-  const unitNumber = folderName.slice(0, folderName.indexOf("_"));
+  // const unitNumber = folderName.slice(0, folderName.indexOf("_"));
   const unitName = folderName
     .slice(folderName.indexOf("_") + 1)
     .replace(/_/g, " ");
