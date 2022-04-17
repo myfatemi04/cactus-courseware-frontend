@@ -97,18 +97,18 @@ function getItem(outline : Tree){
 
 }
 */
-function ExpandableListItem(props : {title : string, childs : Tree[]}){
+function ExpandableListItem(props : {title : string, childs : Tree[], depth : number}){
   const [openCollapse, setOpenCollapse] = React.useState(false); 
   let sections : ReactNode[] = [];
   for (let item of props.childs){
-    sections.push(<ExpandableListItem title={item['title']} childs={item['children']}></ExpandableListItem>)
+    sections.push(<ExpandableListItem title={item['title']} childs={item['children']} depth={props.depth+1}></ExpandableListItem>)
   }
   function handleOpenSettings(){
     setOpenCollapse(!openCollapse);
   }
   return(
       <div>
-        <ListItem button onClick={handleOpenSettings}>
+        <ListItem button onClick={handleOpenSettings} sx={{ pl : props.depth*2 }}>
           <ListItemIcon>
             <InboxIcon />
           </ListItemIcon>
@@ -133,7 +133,7 @@ export default function PersistentDrawerLeft(props: { name: string }) {
   let ctx;
   let sections : ReactNode[] = []
   for (let item of outline){
-    sections.push(<ExpandableListItem title={item['title']} childs={item['children']}></ExpandableListItem>)
+    sections.push(<ExpandableListItem title={item['title']} childs={item['children']} depth={0}></ExpandableListItem>)
   }
   const {courses} = ctx= React.useContext(CourseContext);
   console.log("These are the courses: ")
