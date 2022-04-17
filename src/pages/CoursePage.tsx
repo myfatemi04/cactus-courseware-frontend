@@ -41,7 +41,7 @@ export default function CoursePage() {
       <div style={{ height: 1, backgroundColor: "black", margin: "2rem 0" }} />
       <div
         style={{
-          width: "100vw",
+          width: "100%",
           display: "flex",
         }}
       >

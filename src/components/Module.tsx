@@ -1,7 +1,7 @@
 import { Collapse, List, ListItem, ListItemText } from "@mui/material";
 import { ExpandLess, ExpandMore } from "@mui/icons-material";
 import React, { ReactNode, useContext, useEffect, useState } from "react";
-import Button from '@mui/material/Button';
+import Button from "@mui/material/Button";
 import { getPreviousPath, getNextPath } from "../pathutil";
 import {
   Course,
@@ -245,7 +245,6 @@ export default function Module({
     <div
       style={{
         textAlign: "left",
-        minWidth: "40rem",
         margin: "0 2rem",
         padding: "0.5rem",
         border: "1px solid white",
