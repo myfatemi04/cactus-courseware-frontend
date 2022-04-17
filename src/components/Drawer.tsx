@@ -18,6 +18,7 @@ import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import * as React from "react";
 import { Link } from "react-router-dom";
+import { DrawerContext } from "./DrawerContext";
 // import { CourseContext } from "./CourseContext";
 
 const drawerWidth = 240;
@@ -73,27 +74,30 @@ const DrawerHeader = styled("div")(({ theme }) => ({
 
 export default function PersistentDrawerLeft(props: { name: string }) {
   const theme = useTheme();
-  const [open, setOpen] = React.useState(false);
+  const { open, setOpen } = React.useContext(DrawerContext);
+  const [drawerOpen, setDrawerOpen] = React.useState(false);
 
   const handleDrawerOpen = () => {
+    setDrawerOpen(true);
     setOpen(true);
   };
 
   const handleDrawerClose = () => {
-    setOpen(false);
+    setDrawerOpen(false);
+    setOpen(false)
   };
 
   return (
     <Box sx={{ display: "flex" }}>
       <CssBaseline />
-      <AppBar position="fixed" open={open}>
+      <AppBar position="fixed" open={drawerOpen}>
         <Toolbar>
           <IconButton
             color="inherit"
             aria-label="open drawer"
             onClick={handleDrawerOpen}
             edge="start"
-            sx={{ mr: 2, ...(open && { display: "none" }) }}
+            sx={{ mr: 2, ...(drawerOpen && { display: "none" }) }}
           >
             <MenuIcon />
           </IconButton>
@@ -120,7 +124,7 @@ export default function PersistentDrawerLeft(props: { name: string }) {
         }}
         variant="persistent"
         anchor="left"
-        open={open}
+        open={drawerOpen}
       >
         <DrawerHeader>
           <IconButton onClick={handleDrawerClose}>
@@ -143,7 +147,7 @@ export default function PersistentDrawerLeft(props: { name: string }) {
           ))}
         </List>
       </Drawer>
-      <Main open={open}>
+      <Main open={drawerOpen}>
         <DrawerHeader />
       </Main>
     </Box>

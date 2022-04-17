@@ -14,7 +14,7 @@ import {
     setOpen: (open: boolean) => {},
   });
   
-  export function CourseContextProvider({ children }: { children: ReactNode }) {
+  export function DrawerContextProvider({ children }: { children: ReactNode }) {
     const [open, setOpen] = useState(false);
   
     return (
