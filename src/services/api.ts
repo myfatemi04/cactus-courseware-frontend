@@ -1,6 +1,6 @@
 import { Course } from "../types";
 
-const API_BASE = process.env.REACT_APP_API_URL;
+const API_BASE = "https://cacti-courseware.herokuapp.com"; //process.env.REACT_APP_API_URL;
 
 export async function publishCourse(repoURL: string) {
   return await fetch(`${API_BASE}/course`, {
