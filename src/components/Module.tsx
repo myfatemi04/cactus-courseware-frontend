@@ -126,7 +126,6 @@ export function splitMarkdownIntoChunks(markdown: string): ReactNode[] {
       if (line.trim().toLowerCase().startsWith("video:")) {
         let url = line.substring(7); // "video: " is 7 characters
         if (!url.includes("/embed/")) {
-          // console.log(url);
           url = url.replace("watch?v=", "embed/");
         }
         chunks.push(<Video link={url} />);

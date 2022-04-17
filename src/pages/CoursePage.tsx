@@ -14,7 +14,6 @@ export default function CoursePage() {
   const { path, setPath } = useContext(CourseContext);
   const content = course ? getCourseContentAtPath(course, path) : null;
 
-  //console.log(getCourse(id));
   useEffect(() => {
     // @ts-ignore
     if (typeof id === "string") {
@@ -25,8 +24,6 @@ export default function CoursePage() {
   if (!course) {
     return <>No course</>;
   }
-
-  console.log(course);
 
   return (
     <div

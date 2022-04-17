@@ -1,6 +1,5 @@
 import { Button, TextField } from "@mui/material";
-import { upload } from "@testing-library/user-event/dist/upload";
-import { useState, useCallback, KeyboardEventHandler } from "react";
+import { KeyboardEventHandler, useCallback, useState } from "react";
 import { publishCourse } from "../services/api";
 import { FetchStatus } from "../types";
 
@@ -9,29 +8,34 @@ export default function UploadCoursePage() {
   const [urlInput, setUrlInput] = useState<string>("");
 
   const publish = useCallback(async () => {
-    const ghUrlInd = urlInput.indexOf('https://github.com/');
-    const processedUrl = !ghUrlInd ? urlInput : urlInput.substring(ghUrlInd+1);
+    const ghUrlInd = urlInput.indexOf("https://github.com/");
+    const processedUrl = !ghUrlInd
+      ? urlInput
+      : urlInput.substring(ghUrlInd + 1);
     setUrlInput(processedUrl);
-    
-    setFetchStatus('pending');
+
+    setFetchStatus("pending");
     try {
       const data = await publishCourse(processedUrl);
-      console.log(data)
-      setFetchStatus('success')
+      console.log(data);
+      setFetchStatus("success");
     } catch {
-      setFetchStatus('error');
+      setFetchStatus("error");
     }
-  }, [urlInput])
+  }, [urlInput]);
 
-  const onKeyUp: KeyboardEventHandler<HTMLInputElement> = useCallback((e) => {
-    if (e.key === "Enter") {
-      publish();
-    }
-  }, [publish]);
+  const onKeyUp: KeyboardEventHandler<HTMLInputElement> = useCallback(
+    (e) => {
+      if (e.key === "Enter") {
+        publish();
+      }
+    },
+    [publish]
+  );
 
   return (
-    <div style={{margin: 'auto 3rem'}}>
-      <div style={{display: 'flex'}}>
+    <div style={{ margin: "auto 3rem" }}>
+      <div style={{ display: "flex" }}>
         <TextField
           id="outlined-basic"
           variant="outlined"
@@ -41,14 +45,16 @@ export default function UploadCoursePage() {
           placeholder="user-name/repo-name"
           value={urlInput}
           onKeyUp={onKeyUp}
-          onChange={(e)=>setUrlInput(e.target.value)}
+          onChange={(e) => setUrlInput(e.target.value)}
         />
 
-        <Button 
+        <Button
           variant="contained"
           onClick={() => publish()}
-          style={{marginLeft: '1rem'}}
-        >Publish</Button>
+          style={{ marginLeft: "1rem" }}
+        >
+          Publish
+        </Button>
       </div>
       {fetchStatus}
     </div>
