@@ -18,8 +18,8 @@ function App() {
           <Container>
             <Routes>
               <Route path="/" element={<MainPage />} />
-              <Route path="/Search" element={<MainPage />} />
-              <Route path="/Upload" element={<UploadCoursePage />} />
+              <Route path="/search" element={<MainPage />} />
+              <Route path="/upload" element={<UploadCoursePage />} />
               <Route path="/courses/:id" element={<CoursePage />} />
               <Route path="/courses/:id/:path" element={<CoursePage />} />
             </Routes>
