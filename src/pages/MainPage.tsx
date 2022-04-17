@@ -58,7 +58,7 @@ export default function MainPage() {
       </div>
       <div
         style={{
-          marginTop: '2rem',
+          marginTop: '6rem',
           textAlign: "left",
           maxHeight: "100%",
           overflowY: "auto",

@@ -42,6 +42,7 @@ export default function UploadCoursePage() {
     setFetchStatus('pending')
     const res = await publishCourse(processedUrl);
     const body = await res.json();
+    const timer = await setTimeout(() => {}, 500);
     if(res.ok){
       setFetchStatus('success')
     } else {

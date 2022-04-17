@@ -25,7 +25,7 @@ export function CourseTile({ course }: { course: Course }) {
         cursor: "pointer",
         width: "calc((100% - 6rem) / 3 )",
         height: "18rem",
-        margin: "1rem",
+        margin: "0 1rem 1rem 1rem",
         display: "inline-block",
         position: "relative",
         borderRadius: "0.5rem",
