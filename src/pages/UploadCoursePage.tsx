@@ -25,6 +25,7 @@ const UploadFeedback = ({status}: { status: FetchStatus }) => {
 export default function UploadCoursePage() {
   const [fetchStatus, setFetchStatus] = useState<FetchStatus>("idle");
   const [urlInput, setUrlInput] = useState<string>("");
+  const [errorMsg, setErrorMsg] = useState<string>("");
 
   const publish = useCallback(async () => {
     const ghUrlInd = urlInput.indexOf("https://github.com/");
@@ -35,9 +36,11 @@ export default function UploadCoursePage() {
     
     setFetchStatus('pending')
     const res = await publishCourse(processedUrl);
+    const body = await res.json();
     if(res.ok){
       setFetchStatus('success')
     } else {
+      if(body.error === 'Course already uploaded') setErrorMsg('This course has already been added.')
       setFetchStatus('error')
     }
   }, [urlInput]);
@@ -63,13 +66,15 @@ export default function UploadCoursePage() {
           value={urlInput}
           onKeyUp={onKeyUp}
           onChange={(e)=>setUrlInput(e.target.value)}
+          error={errorMsg !== ''}
+          helperText={errorMsg !== '' ? errorMsg : null}
           style={{width: '36rem', height: '100%', padding: 0}}
         />
 
         <Button
           variant="contained"
           onClick={() => publish()}
-          style={{marginLeft: '1rem'}}
+          style={{marginLeft: '1rem', 'height': '3.5rem'}}
         ><UploadFeedback status={fetchStatus}/> Publish</Button>
       </div>
       
