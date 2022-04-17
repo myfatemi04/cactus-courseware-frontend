@@ -9,6 +9,15 @@
   padding: 2rem;
 }
 
+.plain-link {
+  color: inherit;
+  text-decoration: none;
+}
+
+.plain-link:visited {
+  color: inherit;
+}
+
 .big-input {
   border-radius: 0.5rem;
   font-size: 1.5rem;

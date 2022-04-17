@@ -1,6 +1,5 @@
 import { Button, Checkbox, Radio } from "@mui/material";
 import { ChangeEvent, useState } from "react";
-import ReactMarkdown from "react-markdown";
 import { Question as QuestionType } from "../types";
 import CustomMarkdown from "./CustomMarkdown";
 
