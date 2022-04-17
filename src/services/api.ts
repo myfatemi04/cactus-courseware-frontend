@@ -12,13 +12,12 @@ export async function publishCourse(repo: string) {
   });
 }
 
-export async function getCourse(id : string) {
+export async function getCourse(id: string) {
   const res = await fetch(API_BASE + "/course/" + id);
   const json = await res.json();
 
-  return json;
+  return json.course;
 }
-
 
 export async function getCourses(): Promise<Course[]> {
   const res = await fetch(API_BASE + "/course");

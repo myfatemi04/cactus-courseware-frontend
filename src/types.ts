@@ -32,7 +32,7 @@ export type TreePath = string[];
 export interface Module {
   title: string;
   markdown: string;
-  modules: Module[];
+  children: Module[];
 }
 
 export interface GithubFolderItem {

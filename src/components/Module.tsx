@@ -46,7 +46,7 @@ arctic picture \
 End of section.
 
 `,
-  modules: [],
+  children: [],
 };
 
 export function splitMarkdownIntoChunks(markdown: string): ReactNode[] {
@@ -165,7 +165,7 @@ export function ModuleTree({
     setOpened(hasHighlightedChild);
   }, [hasHighlightedChild]);
 
-  if (module.modules.length === 0) {
+  if (module.children.length === 0) {
     return (
       <ListItem
         button
@@ -194,8 +194,8 @@ export function ModuleTree({
         style={{
           backgroundColor: highlighted ? "#eee" : "",
           color: opened ? "#000" : "",
-          paddingTop: 0, 
-          paddingBottom: -1, 
+          paddingTop: 0,
+          paddingBottom: -1,
         }}
       >
         <ListItemText primary={module.title} />
@@ -204,7 +204,7 @@ export function ModuleTree({
       <Divider />
       <Collapse in={opened} timeout="auto" unmountOnExit>
         <List style={{ paddingTop: 0, paddingBottom: 0 }}>
-          {module.modules.map((submodule, index) => {
+          {module.children.map((submodule, index) => {
             return (
               <div key={submodule.title}>
                 <ModuleTree
