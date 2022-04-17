@@ -7,6 +7,8 @@ import getCourseContentAtPath from "../lib/getCourseContentAtPath";
 import { getPreviousPath, getNextPath } from "../lib/pathutil";
 import { getCourse } from "../services/api";
 import { Course as CourseType } from "../types";
+import bgImg from '../assets/bg.png'
+import logoImg from '../assets/logo.png';
 
 export default function CoursePage() {
   const [course, setCourse] = useState<CourseType | null>(null);
@@ -56,19 +58,22 @@ export default function CoursePage() {
   return (
     <div
       style={{
+        position: 'relative',
         display: "flex",
         flexDirection: "column",
         textAlign: "left",
-        margin: "2rem",
+        padding: "2rem",
         overflow: "auto",
       }}
     >
+      <img src={bgImg} alt='bg' style={{width: '100%', height: '100%', position: 'absolute', top: 0, left: 0, opacity: '15%', zIndex: -1}}/>
+      
       <a
-        style={{ fontSize: "4rem", cursor: "pointer" }}
+        style={{ fontSize: "4rem", cursor: "pointer", width: 'fit-content' }}
         className="plain-link"
         href="/"
       >
-        Cactus Courseware
+        <img src={logoImg} alt='cactus' style={{width: '3rem', height: '3rem'}}/>
       </a>
       {!course ? (
         <span>Loading...</span>

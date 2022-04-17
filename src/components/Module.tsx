@@ -265,7 +265,6 @@ export default function Module({
         textAlign: "left",
         margin: "0 2rem",
         padding: "0.5rem",
-        border: "1px solid white",
         height: "60vh",
         overflow: "auto",
       }}
