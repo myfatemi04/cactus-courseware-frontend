@@ -4,26 +4,29 @@ import { useParams } from "react-router-dom";
 import { CourseContext } from "../components/CourseContext";
 import Module, { ModuleTree } from "../components/Module";
 import getCourseContentAtPath from "../lib/getCourseContentAtPath";
-import { parseCourseRepository } from "../lib/loadGithubRepository";
+import { getCourse } from "../services/api";
 import { Course as CourseType } from "../types";
 
 export default function CoursePage() {
   const [course, setCourse] = useState<CourseType | null>(null);
-  const { user, repo } = useParams<{ user: string; repo: string }>();
+  const { id } = useParams<{ id: string }>();
 
   const { path, setPath } = useContext(CourseContext);
-
-  const name = `${user}/${repo}`;
-
   const content = course ? getCourseContentAtPath(course, path) : null;
 
+  //console.log(getCourse(id));
   useEffect(() => {
-    parseCourseRepository(name).then(setCourse);
-  }, [name]);
+    // @ts-ignore
+    if (typeof id === "string") {
+      getCourse(id).then(setCourse);
+    }
+  }, [id]);
 
   if (!course) {
     return <>No course</>;
   }
+
+  console.log(course);
 
   return (
     <div

@@ -81,7 +81,7 @@ export async function parseUnitFile(
   return {
     title: unitName,
     markdown: content,
-    modules: [],
+    children: [],
   };
 }
 
@@ -92,7 +92,7 @@ export async function parseUnitDirectory(
   const module: Omit<ModuleType, "id"> = {
     title: "",
     markdown: "",
-    modules: [],
+    children: [],
   };
 
   const folder = await getGithubFolderContent(repo, path);
@@ -108,14 +108,14 @@ export async function parseUnitDirectory(
   for (const file of folder.sort((a, b) => a.name.localeCompare(b.name))) {
     if (file.type === "dir") {
       // Unit Directories
-      module.modules.push(await parseUnitDirectory(repo, file.path));
+      module.children.push(await parseUnitDirectory(repo, file.path));
     } else if (file.type === "file") {
       // Unit Files
       if (file.name === "index.md") {
         module.markdown = await getGithubFileText(repo, file.path);
       } else {
         if (/\d+_/.test(file.name)) {
-          module.modules.push(await parseUnitFile(repo, file.path));
+          module.children.push(await parseUnitFile(repo, file.path));
         }
       }
     }

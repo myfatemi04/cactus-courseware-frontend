@@ -1,31 +1,25 @@
 import TextField from "@mui/material/TextField";
-import React, { useMemo, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { CourseTile } from "../components/CourseTile";
 import TileGrid from "../components/TileGrid";
+import { getCourses } from "../services/api";
 import { Course } from "../types";
-
-const courses: Course[] = [
-  {
-    title: "myfatemi04/Math-101",
-    markdown: "Learn the basics of computer science and programming.",
-    // id: '123'
-  } as Course,
-  {
-    title: "Introduction to Algorithms",
-    markdown: "Learn the basics of algorithms and data structures.",
-    // id: '768'
-  } as Course,
-];
 
 export default function MainPage() {
   const [searchQuery, setSearchQuery] = useState("");
+  const [courses, setCourses] = useState<Course[]>([]);
+
+  useEffect(() => {
+    getCourses().then((courses) => setCourses(courses));
+  }, []);
+
   const tiles = useMemo(() => {
     return courses
       .filter((course) => course.title.toLowerCase().includes(searchQuery))
       .map((course, index) => (
         <CourseTile course={course} key={index}></CourseTile>
       ));
-  }, [searchQuery]);
+  }, [courses, searchQuery]);
 
   return (
     <div className="App">

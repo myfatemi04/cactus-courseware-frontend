@@ -1,5 +1,5 @@
 export interface Course {
-  // id: string;
+  id: string;
   title: string;
   markdown: string;
   tags: string[];
@@ -32,7 +32,7 @@ export type TreePath = string[];
 export interface Module {
   title: string;
   markdown: string;
-  modules: Module[];
+  children: Module[];
 }
 
 export interface GithubFolderItem {

@@ -11,14 +11,12 @@ function App() {
   return (
     <BrowserRouter>
       <CourseContextProvider>
-        <PersistentDrawerLeft
-          name={"Github Opencourseware"}
-        ></PersistentDrawerLeft>
+        <PersistentDrawerLeft name={"Github Opencourseware"} />
         <Routes>
           <Route path="/" element={<MainPage />} />
           <Route path="/Search" element={<MainPage />} />
           <Route path="/Upload" element={<UploadCoursePage />} />
-          <Route path="/courses/:user/:repo" element={<CoursePage />} />
+          <Route path="/courses/:id" element={<CoursePage />} />
         </Routes>
       </CourseContextProvider>
     </BrowserRouter>

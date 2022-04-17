@@ -1,4 +1,4 @@
-import { Collapse, List, ListItem, ListItemText } from "@mui/material";
+import { Collapse, Divider, List, ListItem, ListItemText } from "@mui/material";
 import { ExpandLess, ExpandMore } from "@mui/icons-material";
 import React, { ReactNode, useContext, useEffect, useState } from "react";
 import Button from "@mui/material/Button";
@@ -46,7 +46,7 @@ arctic picture \
 End of section.
 
 `,
-  modules: [],
+  children: [],
 };
 
 export function splitMarkdownIntoChunks(markdown: string): ReactNode[] {
@@ -165,14 +165,14 @@ export function ModuleTree({
     setOpened(hasHighlightedChild);
   }, [hasHighlightedChild]);
 
-  if (module.modules.length === 0) {
+  if (module.children.length === 0) {
     return (
       <ListItem
         button
         onClick={() => {
           onClick?.([]);
         }}
-        sx={{ pl: 2 + depth * 3 }}
+        sx={{ pl: 2 + depth * 2 }}
         style={{
           backgroundColor: highlighted ? "#eee" : "",
           color: opened ? "#000" : "",
@@ -190,18 +190,21 @@ export function ModuleTree({
           onClick?.([]);
           setOpened((opened) => !opened);
         }}
-        sx={{ pl: 2 + depth * 3 }}
+        sx={{ pl: 2 + depth * 2 }}
         style={{
           backgroundColor: highlighted ? "#eee" : "",
           color: opened ? "#000" : "",
+          paddingTop: 0,
+          paddingBottom: -1,
         }}
       >
-      <ListItemText primary={module.title} />
+        <ListItemText primary={module.title} />
         {opened ? <ExpandLess /> : <ExpandMore />}
       </ListItem>
+      <Divider />
       <Collapse in={opened} timeout="auto" unmountOnExit>
-        <List>
-          {module.modules.map((submodule, index) => {
+        <List style={{ paddingTop: 0, paddingBottom: 0 }}>
+          {module.children.map((submodule, index) => {
             return (
               <div key={submodule.title}>
                 <ModuleTree

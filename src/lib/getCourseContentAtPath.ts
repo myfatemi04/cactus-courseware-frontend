@@ -6,6 +6,6 @@ export default function getCourseContentAtPath(course: Course, path: number[]) {
     if (module === null) {
       return null;
     }
-    return module.modules[pathPart];
+    return module.children[pathPart];
   }, course.rootModule) as Module;
 }
