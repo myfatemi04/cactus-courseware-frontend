@@ -1,5 +1,11 @@
-import React, { ReactNode } from "react";
-import { Module as ModuleType, Question as QuestionType } from "../types";
+import React, { ReactNode, useContext } from "react";
+import { getPreviousPath, getNextPath } from "../pathutil";
+import {
+  Course,
+  Module as ModuleType,
+  Question as QuestionType,
+} from "../types";
+import { CourseContext } from "./CourseContext";
 import CustomMarkdown from "./CustomMarkdown";
 import Question from "./Question";
 import Video from "./Video";
@@ -186,12 +192,14 @@ export function Tree({
 }
 
 export default function Module({
+  course,
   data,
-  path,
 }: {
+  course: Course;
   data: ModuleType;
-  path: string;
 }) {
+  const { setPath } = useContext(CourseContext);
+
   return (
     <div
       style={{
@@ -203,6 +211,25 @@ export default function Module({
       }}
     >
       {splitMarkdownIntoChunks(data.markdown)}
+
+      <button
+        onClick={() =>
+          setPath((path) => {
+            return getPreviousPath(course.rootModule, path) || path;
+          })
+        }
+      >
+        Previous
+      </button>
+      <button
+        onClick={() =>
+          setPath((path) => {
+            return getNextPath(course.rootModule, path) || path;
+          })
+        }
+      >
+        Next
+      </button>
     </div>
   );
 }

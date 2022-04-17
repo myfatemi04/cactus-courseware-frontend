@@ -1,10 +1,10 @@
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
+import CloudUploadIcon from "@mui/icons-material/CloudUpload";
 import ExpandLess from "@mui/icons-material/ExpandLess";
 import ExpandMore from "@mui/icons-material/ExpandMore";
-import MailIcon from "@mui/icons-material/Mail";
 import MenuIcon from "@mui/icons-material/Menu";
-import InboxIcon from "@mui/icons-material/MoveToInbox";
+import SearchIcon from "@mui/icons-material/Search";
 import MuiAppBar, { AppBarProps as MuiAppBarProps } from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Collapse from "@mui/material/Collapse";
@@ -15,8 +15,6 @@ import IconButton from "@mui/material/IconButton";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import ListItemIcon from "@mui/material/ListItemIcon";
-import CloudUploadIcon from '@mui/icons-material/CloudUpload';
-import SearchIcon from '@mui/icons-material/Search';
 import ListItemText from "@mui/material/ListItemText";
 import { styled, useTheme } from "@mui/material/styles";
 import Toolbar from "@mui/material/Toolbar";
@@ -25,7 +23,7 @@ import * as React from "react";
 import { ReactNode } from "react";
 import { Link } from "react-router-dom";
 import { Tree } from "../types";
-import { CourseContext } from "./CourseContext";
+// import { CourseContext } from "./CourseContext";
 
 const drawerWidth = 240;
 
@@ -115,7 +113,7 @@ function ExpandableListItem(props: {
       <ListItem
         button
         onClick={handleOpenSettings}
-        sx={{ pl: props.depth * 2 +2}}
+        sx={{ pl: props.depth * 2 + 2 }}
       >
         <ListItemText primary={props.title} />
         {openCollapse ? <ExpandLess /> : <ExpandMore />}
@@ -141,7 +139,7 @@ export default function PersistentDrawerLeft(props: { name: string }) {
       ></ExpandableListItem>
     );
   }
-  const { courses } = React.useContext(CourseContext);
+  // const { courses } = React.useContext(CourseContext);
 
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -204,9 +202,7 @@ export default function PersistentDrawerLeft(props: { name: string }) {
           ))}
         </List>
         <Divider />
-        <List>
-          {sections.map((item) => item)}
-        </List>
+        <List>{sections.map((item) => item)}</List>
       </Drawer>
       <Main open={open}>
         <DrawerHeader />
