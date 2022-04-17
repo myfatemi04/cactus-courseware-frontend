@@ -72,7 +72,10 @@ export async function parseUnitFile(
   // Parses a file, such as "01_Strings.md"
   const fileName = path.slice(path.lastIndexOf("/") + 1);
   const unitNumber = fileName.slice(0, fileName.indexOf("_"));
-  const unitName = fileName.slice(fileName.indexOf("_") + 1).replace(/_/g, " ");
+  const unitName = fileName
+    .slice(fileName.indexOf("_") + 1)
+    .replace(/_/g, " ")
+    .replace(/\.md$/, "");
   const content = await getGithubFileText(repo, path);
 
   return {

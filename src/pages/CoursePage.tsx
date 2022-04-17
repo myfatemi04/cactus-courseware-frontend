@@ -9,16 +9,16 @@ import { parseCourseRepository } from "../loadGithubRepository";
 function TopRoute() {}
 
 export default function CoursePage() {
-  // const [course, setCourse] = useState<CourseType | null>(null);
+  const [course, setCourse] = useState<CourseType | null>(null);
   const { user, repo } = useParams<{ user: string; repo: string }>();
   const [path, setPath] = useState<number[]>([]);
   const name = `${user}/${repo}`;
 
   const content = course ? getCourseContentAtPath(course, path) : null;
 
-  // useEffect(() => {
-  //   parseCourseRepository(name).then(setCourse);
-  // }, [name]);
+  useEffect(() => {
+    parseCourseRepository(name).then(setCourse);
+  }, [name]);
 
   if (!course) {
     return <>No course</>;
