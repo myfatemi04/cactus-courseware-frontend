@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { Tree } from "../components/Module";
+import Module, { Tree } from "../components/Module";
 import moduleToTree from "../courseToTree";
 import { Course as CourseType } from "../types";
 import course from "../example_course.json";
@@ -19,33 +19,42 @@ export default function CoursePage() {
   //   parseCourseRepository(name).then(setCourse);
   // }, [name]);
 
-  return course ? (
+  if (!course) {
+    return <>No course</>;
+  }
+
+  return (
     <div
       style={{
-        width: "100vw",
         display: "flex",
         flexDirection: "column",
-        alignItems: "center",
+        textAlign: "left",
+        margin: "2rem",
       }}
     >
-      <div
-        style={{
-          display: "flex",
-          flexDirection: "column",
-          width: "40rem",
-        }}
-      >
+      <div>
+        {/* Course title and route */}
         <h1>{course.title}</h1>
         <em>{course.authors.join(", ")}</em>
-        <br />
-        <Tree
-          tree={moduleToTree(course.rootModule)}
-          highlight={path}
-          onClick={setPath}
-        />
+      </div>
+      <div style={{ height: 1, backgroundColor: "black", margin: "2rem 0" }} />
+      <div
+        style={{
+          width: "100vw",
+          display: "flex",
+        }}
+      >
+        <div style={{ flex: 1 }}>
+          <Tree
+            tree={moduleToTree(course.rootModule)}
+            highlight={path}
+            onClick={setPath}
+          />
+        </div>
+        <div style={{ flex: 6 }}>
+          {content ? <Module data={content} path="" /> : "Select a module"}
+        </div>
       </div>
     </div>
-  ) : (
-    <>No course</>
   );
 }

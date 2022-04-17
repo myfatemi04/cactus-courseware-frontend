@@ -142,7 +142,7 @@ export function splitMarkdownIntoChunks(markdown: string): ReactNode[] {
       if (line.trim().toLowerCase().startsWith("video:")) {
         let url = line.substring(7); // "video: " is 7 characters
         if (!url.includes("/embed/")) {
-          console.log(url);
+          // console.log(url);
           url = url.replace("watch?v=", "embed/");
         }
         chunks.push(<Video link={url} />);
@@ -163,12 +163,10 @@ export function splitMarkdownIntoChunks(markdown: string): ReactNode[] {
 
 export function Tree({
   tree,
-  root = true,
   highlight = null,
   onClick,
 }: {
   tree: TreeType;
-  root?: boolean;
   highlight: number[] | null;
   onClick?: (path: number[]) => void;
 }) {
@@ -180,7 +178,6 @@ export function Tree({
           <div key={subtree.name}>
             <Tree
               tree={subtree}
-              root={false}
               highlight={
                 highlight
                   ? highlight[0] === index
@@ -201,36 +198,22 @@ export function Tree({
 
 export default function Module({
   data,
-  tree,
   path,
 }: {
   data: ModuleType;
-  tree: TreeType;
   path: string;
 }) {
   return (
-    <div className="App">
-      <div
-        style={{
-          textAlign: "left",
-          border: "1px solid white",
-          padding: "0.5rem",
-        }}
-      >
-        <Tree tree={tree} highlight={[]} />
-      </div>
-      <h1>{data.title}</h1>
-      <div
-        style={{
-          textAlign: "left",
-          minWidth: "40rem",
-          margin: "2rem",
-          padding: "0.5rem",
-          border: "1px solid white",
-        }}
-      >
-        {splitMarkdownIntoChunks(exampleModule.markdown)}
-      </div>
+    <div
+      style={{
+        textAlign: "left",
+        minWidth: "40rem",
+        margin: "2rem",
+        padding: "0.5rem",
+        border: "1px solid white",
+      }}
+    >
+      {splitMarkdownIntoChunks(data.markdown)}
     </div>
   );
 }

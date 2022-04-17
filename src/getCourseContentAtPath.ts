@@ -1,4 +1,4 @@
-import { Course } from "./types";
+import { Course, Module } from "./types";
 
 export default function getCourseContentAtPath(course: Course, path: number[]) {
   // @ts-ignore
@@ -7,5 +7,5 @@ export default function getCourseContentAtPath(course: Course, path: number[]) {
       return null;
     }
     return module.modules[pathPart];
-  }, course.rootModule);
+  }, course.rootModule) as Module;
 }
