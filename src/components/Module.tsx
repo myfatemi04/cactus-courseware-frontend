@@ -302,7 +302,7 @@ export default function Module({
         <JupyterNotebook notebook={parsed} />
       ) : (
         <>
-          <h2>Failed to parse.</h2>
+          {/* <h2>Failed to parse.</h2> */}
           {noContent}
         </>
       )}
