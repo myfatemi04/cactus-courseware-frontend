@@ -9,8 +9,12 @@
    id="svg9479"
    inkscape:version="1.1.2 (b8e25be833, 2022-02-05)"
    sodipodi:docname="cactus-empty.svg"
+   inkscape:export-filename="C:\Users\tishi\Documents\CS\hacktj2022-frontend\src\assets\cactus-empty.png"
+   inkscape:export-xdpi="200"
+   inkscape:export-ydpi="200"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
    xmlns="http://www.w3.org/2000/svg"
    xmlns:svg="http://www.w3.org/2000/svg">
   <sodipodi:namedview
@@ -33,14 +37,39 @@
      inkscape:window-maximized="1"
      inkscape:current-layer="layer1" />
   <defs
-     id="defs9476" />
+     id="defs9476">
+    <linearGradient
+       inkscape:collect="always"
+       id="linearGradient10223">
+      <stop
+         style="stop-color:#ffffff;stop-opacity:1;"
+         offset="0"
+         id="stop10219" />
+      <stop
+         style="stop-color:#ffffff;stop-opacity:0;"
+         offset="1"
+         id="stop10221" />
+    </linearGradient>
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient10223"
+       id="linearGradient10225"
+       x1="115.78129"
+       y1="112.29394"
+       x2="159.89967"
+       y2="112.29394"
+       gradientUnits="userSpaceOnUse" />
+  </defs>
   <g
      inkscape:label="Layer 1"
      inkscape:groupmode="layer"
      id="layer1">
     <path
        id="rect7556"
-       style="fill:#ffffff;stroke:#000000;stroke-width:0.205638;stroke-linecap:square;fill-opacity:1"
-       d="m 135.52369,69.563471 c -2.28011,0 -4.11603,1.8354 -4.11603,4.11551 v 49.680689 h -4.93251 V 97.598451 c 0,-3.83902 -2.26749,-6.92929 -5.08393,-6.92929 -2.81644,0 -5.08393,3.09027 -5.08393,6.92929 v 29.022519 c 0,0.12102 0.002,0.24124 0.007,0.3607 -0.0192,0.16193 -0.03,0.32625 -0.03,0.49351 v 1.98334 c 0,2.2801 1.83541,4.11551 4.11552,4.11551 h 11.00812 v 17.33435 c 0,2.28011 1.83592,4.11602 4.11603,4.11602 h 3.16312 c 2.28011,0 4.11602,-1.83591 4.11602,-4.11602 v -48.47405 h 6.40271 v 25.76122 c 0,3.83902 2.26749,6.92929 5.08393,6.92929 2.81644,0 5.08393,-3.09027 5.08393,-6.92929 V 99.173031 c 0,-0.12102 -0.002,-0.24124 -0.007,-0.3607 0.0192,-0.16193 0.03,-0.32625 0.03,-0.49351 v -1.98334 c 0,-2.2801 -1.8354,-4.11551 -4.11551,-4.11551 h -12.47833 v -18.54099 c 0,-2.28011 -1.83591,-4.11551 -4.11602,-4.11551 z" />
+       style="fill:url(#linearGradient10225);stroke:#000000;stroke-width:1.006;stroke-linecap:square;fill-opacity:1;stroke-miterlimit:4;stroke-dasharray:none"
+       d="m 135.52369,69.563471 c -2.28011,0 -4.11603,1.8354 -4.11603,4.11551 v 49.680689 h -4.93251 V 97.598451 c 0,-3.83902 -2.26749,-6.92929 -5.08393,-6.92929 -2.81644,0 -5.08393,3.09027 -5.08393,6.92929 v 29.022519 c 0,0.12102 0.002,0.24124 0.007,0.3607 -0.0192,0.16193 -0.03,0.32625 -0.03,0.49351 v 1.98334 c 0,2.2801 1.83541,4.11551 4.11552,4.11551 h 11.00812 v 17.33435 c 0,2.28011 1.83592,4.11602 4.11603,4.11602 h 3.16312 c 2.28011,0 4.11602,-1.83591 4.11602,-4.11602 v -48.47405 h 6.40271 v 25.76122 c 0,3.83902 2.26749,6.92929 5.08393,6.92929 2.81644,0 5.08393,-3.09027 5.08393,-6.92929 V 99.173031 c 0,-0.12102 -0.002,-0.24124 -0.007,-0.3607 0.0192,-0.16193 0.03,-0.32625 0.03,-0.49351 v -1.98334 c 0,-2.2801 -1.8354,-4.11551 -4.11551,-4.11551 h -12.47833 v -18.54099 c 0,-2.28011 -1.83591,-4.11551 -4.11602,-4.11551 z"
+       inkscape:export-filename="C:\Users\tishi\Documents\CS\hacktj2022-frontend\src\assets\rect7556.png"
+       inkscape:export-xdpi="200"
+       inkscape:export-ydpi="200" />
   </g>
 </svg>
