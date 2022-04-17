@@ -13,8 +13,7 @@ export default function CoursePage() {
 
   const { path, setPath } = useContext(CourseContext);
 
-  // const name = `${user}/${repo}`;
-  const name = `myfatemi04/Math-101`;
+  const name = "myfatemi04/Math-101" //`${user}/${repo}`;
 
   const content = course ? getCourseContentAtPath(course, path) : null;
 
