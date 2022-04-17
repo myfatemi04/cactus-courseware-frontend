@@ -50,6 +50,7 @@ export default function CoursePage() {
             module={course.rootModule}
             highlight={path}
             onClick={setPath}
+            depth={0}
           />
         </div>
         <div style={{ flex: 6 }}>

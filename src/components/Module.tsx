@@ -149,10 +149,12 @@ export function ModuleTree({
   module,
   highlight = null,
   onClick,
+  depth,
 }: {
   module: ModuleType;
   highlight: number[] | null;
   onClick?: (path: number[]) => void;
+  depth: number;
 }) {
   const highlighted = Array.isArray(highlight) && highlight.length === 0;
   const [opened, setOpened] = useState(false);
@@ -187,6 +189,7 @@ export function ModuleTree({
           onClick?.([]);
           setOpened((opened) => !opened);
         }}
+        sx={{ pl: depth * 3 }}
         style={{
           backgroundColor: highlighted ? "#eee" : "",
           color: opened ? "#000" : "",
@@ -210,6 +213,7 @@ export function ModuleTree({
                   onClick={(path) => {
                     onClick?.([index, ...path]);
                   }}
+                  depth={depth + 1}
                 />
               </div>
             );
