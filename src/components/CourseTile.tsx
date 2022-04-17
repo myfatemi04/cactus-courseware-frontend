@@ -34,6 +34,9 @@ export function CourseTile({ course }: { course: Course }) {
         backgroundImage: `url(${course.thumbnail})`,
         position: "relative",
         overflow: "hidden",
+        backgroundColor: "white",
+        backgroundSize: "contain",
+        backgroundPosition: "center",
       }}
     >
       <div
