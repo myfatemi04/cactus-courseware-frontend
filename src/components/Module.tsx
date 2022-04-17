@@ -1,12 +1,8 @@
 import React, { ReactNode } from "react";
-import ReactMarkdown from "react-markdown";
+import { Module as ModuleType, Question as QuestionType } from "../types";
+import CustomMarkdown from "./CustomMarkdown";
 import Question from "./Question";
 import Video from "./Video";
-import rehypeMathJax from "rehype-mathjax";
-import rehypeHighlight from "rehype-highlight";
-import remarkMath from "remark-math";
-
-import { Module as ModuleType, Question as QuestionType } from "../types";
 
 export const exampleModule: ModuleType = {
   title: "Example Module",
@@ -44,9 +40,6 @@ End of section.
   modules: [],
 };
 
-export const rehypePlugins = [rehypeMathJax, rehypeHighlight];
-export const remarkPlugins = [remarkMath];
-
 export function splitMarkdownIntoChunks(markdown: string): ReactNode[] {
   const chunks: ReactNode[] = [];
 
@@ -76,14 +69,7 @@ export function splitMarkdownIntoChunks(markdown: string): ReactNode[] {
 
   function endBody() {
     inQuestion = true;
-    chunks.push(
-      <ReactMarkdown
-        rehypePlugins={rehypePlugins}
-        remarkPlugins={remarkPlugins}
-      >
-        {prevChunk}
-      </ReactMarkdown>
-    );
+    chunks.push(<CustomMarkdown>{prevChunk}</CustomMarkdown>);
     prevChunk = "";
   }
 

@@ -2,6 +2,8 @@ import { Button } from "@mui/material";
 import { useState } from "react";
 import ReactMarkdown from "react-markdown";
 import { Question as QuestionType } from "../types";
+import CustomMarkdown from "./CustomMarkdown";
+import { splitMarkdownIntoChunks } from "./Module";
 
 export default function Question({ question }: { question: QuestionType }) {
   const [selectedAnswers, setSelectedAnswers] = useState<number[]>([]);
@@ -42,7 +44,7 @@ export default function Question({ question }: { question: QuestionType }) {
           : "Select the correct answer."}
       </b>
       <br />
-      <span>{question.text}</span>
+      <CustomMarkdown>{question.text}</CustomMarkdown>
       <form style={{ display: "flex", flexDirection: "column" }}>
         {question.answers.map((answer, index) => {
           const id = `question-${question.text}-answer-${index}`;
@@ -75,7 +77,7 @@ export default function Question({ question }: { question: QuestionType }) {
                 htmlFor={id}
                 style={{ userSelect: "none", WebkitUserSelect: "none" }}
               >
-                {answer.text}
+                <CustomMarkdown>{answer.text}</CustomMarkdown>
               </label>
             </div>
           );
