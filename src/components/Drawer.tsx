@@ -1,13 +1,10 @@
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 import CloudUploadIcon from "@mui/icons-material/CloudUpload";
-import ExpandLess from "@mui/icons-material/ExpandLess";
-import ExpandMore from "@mui/icons-material/ExpandMore";
 import MenuIcon from "@mui/icons-material/Menu";
 import SearchIcon from "@mui/icons-material/Search";
 import MuiAppBar, { AppBarProps as MuiAppBarProps } from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
-import Collapse from "@mui/material/Collapse";
 import CssBaseline from "@mui/material/CssBaseline";
 import Divider from "@mui/material/Divider";
 import Drawer from "@mui/material/Drawer";
@@ -20,9 +17,7 @@ import { styled, useTheme } from "@mui/material/styles";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import * as React from "react";
-import { ReactNode } from "react";
 import { Link } from "react-router-dom";
-import { Tree } from "../types";
 // import { CourseContext } from "./CourseContext";
 
 const drawerWidth = 240;
@@ -76,43 +71,6 @@ const DrawerHeader = styled("div")(({ theme }) => ({
   justifyContent: "flex-end",
 }));
 
-function ExpandableListItem(props: {
-  title: string;
-  childs: Tree[];
-  depth: number;
-}) {
-  const [openCollapse, setOpenCollapse] = React.useState(false);
-  let sections: ReactNode[] = [];
-  for (let item of props.childs) {
-    sections.push(
-      <ExpandableListItem
-        key={item.title}
-        title={item["title"]}
-        childs={item["children"]}
-        depth={props.depth + 1}
-      ></ExpandableListItem>
-    );
-  }
-  function handleOpenSettings() {
-    setOpenCollapse(!openCollapse);
-  }
-  return (
-    <div>
-      <ListItem
-        button
-        onClick={handleOpenSettings}
-        sx={{ pl: props.depth * 2 + 2 }}
-      >
-        <ListItemText primary={props.title} />
-        {openCollapse ? <ExpandLess /> : <ExpandMore />}
-      </ListItem>
-      <Collapse in={openCollapse} timeout="auto" unmountOnExit>
-        <List>{sections}</List>
-      </Collapse>
-    </div>
-  );
-}
-
 export default function PersistentDrawerLeft(props: { name: string }) {
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
@@ -139,9 +97,16 @@ export default function PersistentDrawerLeft(props: { name: string }) {
           >
             <MenuIcon />
           </IconButton>
-          <Typography variant="h6" noWrap component="div">
-            {props.name}
-          </Typography>
+          <a href="/" className="plain-link">
+            <Typography
+              variant="h6"
+              noWrap
+              component="div"
+              style={{ cursor: "pointer" }}
+            >
+              {props.name}
+            </Typography>
+          </a>
         </Toolbar>
       </AppBar>
       <Drawer
