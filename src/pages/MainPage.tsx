@@ -30,25 +30,39 @@ export default function MainPage() {
         height: "100vh",
         color: "white",
         backgroundImage: "url(/Background_Image.png)",
+        display: "flex",
+        flexDirection: "column",
+        // alignItems: "center",
       }}
     >
-      <h1 style={{ fontSize: "4rem" }}>Learn something new today.</h1>
-      <h3>I want to learn...</h3>
-      <input
-        type="text"
-        onChange={(e) => setSearchQuery(e.target.value)}
-        style={{
-          fontSize: "3rem",
-          fontWeight: "lighter",
-          width: "100%",
-          color: "white",
-          backgroundColor: "transparent",
-          borderLeft: "none",
-          borderRight: "none",
-          borderTop: "none",
-          borderBottom: "1px solid white",
-        }}
-      />
+      <div style={{ margin: "0 1rem" }}>
+        <h1 style={{ fontSize: "4rem", width: "100%", textAlign: "left" }}>
+          Learn something new today.
+        </h1>
+        <h3 style={{ width: "100%", textAlign: "left" }}>I want to learn...</h3>
+        <input
+          type="text"
+          onChange={(e) => setSearchQuery(e.target.value)}
+          style={{
+            fontSize: "3rem",
+            fontWeight: "lighter",
+            width: "100%",
+            color: "white",
+            backgroundColor: "transparent",
+            borderLeft: "none",
+            borderRight: "none",
+            borderTop: "none",
+            borderBottom: "1px solid white",
+          }}
+        />
+        <br />
+        <a
+          href="/upload"
+          style={{ marginTop: "0.5rem", display: "inline-block" }}
+        >
+          Have a course to share?
+        </a>
+      </div>
       <TileGrid tiles={tiles} />
     </div>
   );

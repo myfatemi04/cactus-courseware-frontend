@@ -23,20 +23,28 @@ export function CourseTile({ course }: { course: Course }) {
       onClick={onClick}
       style={{
         cursor: "pointer",
-        width: "18rem",
-        height: "16rem",
-        border: "2px solid #ccc",
+        width: "24rem",
+        height: "18rem",
         margin: "1rem",
         display: "inline-block",
-        borderRadius: "0.5rem",
-        backgroundImage: `url(${course.thumbnail})`,
         position: "relative",
+        borderRadius: "0.5rem",
         overflow: "hidden",
-        backgroundColor: "white",
-        backgroundSize: "contain",
-        backgroundPosition: "center",
       }}
     >
+      <div
+        style={{
+          cursor: "pointer",
+          width: "24rem",
+          height: "14rem",
+          display: "inline-block",
+          backgroundImage: `url(${course.thumbnail})`,
+          position: "relative",
+          backgroundColor: "white",
+          backgroundSize: "contain",
+          backgroundPosition: "center",
+        }}
+      />
       <div
         style={{
           position: "absolute",
@@ -44,11 +52,18 @@ export function CourseTile({ course }: { course: Course }) {
           left: "0",
           right: "0",
           width: "100%",
-          backgroundColor: "rgba(255, 255, 255, 1)",
-          padding: "1rem",
+          backgroundColor: "rgba(255, 255, 255, 0.25)",
+          borderTop: "1px solid rgba(0, 0, 0, 0.1)",
+          padding: "1rem 0.5rem",
         }}
       >
-        <Typography variant="h6" textTransform="uppercase" fontWeight="bold">
+        <Typography
+          variant="h5"
+          textTransform="uppercase"
+          fontWeight="bold"
+          color="white"
+          textAlign="center"
+        >
           {course.title}
         </Typography>
       </div>

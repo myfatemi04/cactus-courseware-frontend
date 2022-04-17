@@ -5,8 +5,6 @@ export default function TileGrid({ tiles }: { tiles: ReactNode[] }) {
     <div
       style={{
         textAlign: "left",
-        width: "60rem",
-        padding: "0 -2rem",
       }}
     >
       {tiles}

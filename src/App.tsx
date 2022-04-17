@@ -1,7 +1,6 @@
 import React from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { CourseContextProvider } from "./components/CourseContext";
-import PersistentDrawerLeft from "./components/Drawer";
 import { DrawerContextProvider } from "./components/DrawerContext";
 import { Container } from "./Container";
 import CoursePage from "./pages/CoursePage";
