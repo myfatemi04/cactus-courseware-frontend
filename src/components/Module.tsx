@@ -194,8 +194,6 @@ export function ModuleTree({
         style={{
           backgroundColor: highlighted ? "#eee" : "",
           color: opened ? "#000" : "",
-          paddingTop: 0,
-          paddingBottom: -1,
         }}
       >
         <ListItemText primary={module.title} />
