@@ -4,6 +4,7 @@ import { publishCourse } from "../services/api";
 import { FetchStatus } from "../types";
 import CheckIcon from '@mui/icons-material/Check';
 import ClearIcon from '@mui/icons-material/Clear';
+import bgImg from '../assets/bg.png';
 
 const UploadFeedback = ({status}: { status: FetchStatus }) => {
   let item = null; 
@@ -55,9 +56,9 @@ export default function UploadCoursePage() {
   );
 
   return (
-    <div>
-      <h1 className=" text-white">Upload a GitHub Repo</h1>
-      <p className="text-white">See our example repository for a easy-to-use, detailed <b>specification</b></p>
+    <div className=" h-screen" style={{backgroundImage: `url(${bgImg})`}}>
+      <h1 className=" text-white text-7xl font-bold">Upload a GitHub Repo</h1>
+      <p className="text-white text-3xl font-light">See our example repository for a easy-to-use, detailed <b className="font-bold">specification</b></p>
       
       <div style={{ margin: "auto 3rem" }}>
       <div style={{ display: "flex" }}>
