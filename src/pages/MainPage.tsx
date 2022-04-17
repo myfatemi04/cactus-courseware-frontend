@@ -2,7 +2,7 @@ import React, { useEffect, useMemo, useState } from "react";
 import { CourseTile } from "../components/CourseTile";
 import { getCourses } from "../services/api";
 import { Course } from "../types";
-import bgImg from '../assets/bg.png';
+import bgImg from "../assets/bg.png";
 
 export default function MainPage() {
   const [searchQuery, setSearchQuery] = useState("");
@@ -28,17 +28,38 @@ export default function MainPage() {
         padding: "2rem 4rem",
         height: "100vh",
         color: "white",
-        backgroundSize: 'cover',
+        backgroundSize: "cover",
         backgroundImage: `url(${bgImg})`,
         display: "flex",
         flexDirection: "column",
       }}
     >
       <div style={{ margin: "0 1rem", overflow: "visible" }}>
-        <h1 style={{ fontSize: "4rem", fontWeight: 700, color: '#F5EED6', width: "100%", textAlign: "left" }}>
-          Learn something. <a href="/upload" style={{ color: '#DBA933' }}>Create</a> something.
+        <h1
+          style={{
+            fontSize: "4rem",
+            fontWeight: 700,
+            color: "#F5EED6",
+            width: "100%",
+            textAlign: "left",
+          }}
+        >
+          Learn something.{" "}
+          <a href="/upload" style={{ color: "#DBA933" }}>
+            Create
+          </a>{" "}
+          something.
         </h1>
-        <h3 style={{marginTop: '1rem', fontSize: '1.875rem', fontWeight: 700, color: '#F5EED6'}}>I want to learn...</h3>
+        <h3
+          style={{
+            marginTop: "1rem",
+            fontSize: "1.875rem",
+            fontWeight: 700,
+            color: "#F5EED6",
+          }}
+        >
+          I want to learn...
+        </h3>
         <input
           type="text"
           onChange={(e) => setSearchQuery(e.target.value)}
@@ -64,7 +85,6 @@ export default function MainPage() {
           overflowY: "auto",
         }}
       >
-        {tiles}
         {tiles}
       </div>
     </div>
