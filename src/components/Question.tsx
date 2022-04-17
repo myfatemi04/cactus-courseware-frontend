@@ -35,7 +35,7 @@ export default function Question({ question }: { question: QuestionType }) {
     (question.type === "multiple" && selectedAnswers.length > 0);
 
   return (
-    <div>
+    <div style={{ padding: "1rem 0" }}>
       <b>
         {question.type === "multiple"
           ? "Select all answers that apply."
@@ -100,14 +100,13 @@ export default function Question({ question }: { question: QuestionType }) {
             </Button>
           ) : correct === false ? (
             <>
-              <br />❌ Incorrect.
+              <span style={{ margin: "1rem 0" }}>❌ Incorrect.</span>
+              <br />
+              <br />
               <CustomMarkdown>{question.explanation}</CustomMarkdown>
             </>
           ) : (
-            <>
-              <br />
-              <span>🎉 Correct.</span>
-            </>
+            <span>🎉 Correct.</span>
           )}
         </div>
       </form>
