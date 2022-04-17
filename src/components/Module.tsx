@@ -2,9 +2,9 @@ import React, { ReactNode } from "react";
 import ReactMarkdown from "react-markdown";
 import Question from "./Question";
 import Video from "./Video";
-import rehypeMathJax from 'rehype-mathjax'
-import rehypeHighlight from 'rehype-highlight'
-import remarkMath from 'remark-math'
+import rehypeMathJax from "rehype-mathjax";
+import rehypeHighlight from "rehype-highlight";
+import remarkMath from "remark-math";
 
 import {
   Module as ModuleType,
@@ -89,7 +89,14 @@ export function splitMarkdownIntoChunks(markdown: string): ReactNode[] {
 
   function endBody() {
     inQuestion = true;
-    chunks.push(<ReactMarkdown rehypePlugins={rehypePlugins} remarkPlugins={remarkPlugins}>{prevChunk}</ReactMarkdown>);
+    chunks.push(
+      <ReactMarkdown
+        rehypePlugins={rehypePlugins}
+        remarkPlugins={remarkPlugins}
+      >
+        {prevChunk}
+      </ReactMarkdown>
+    );
     prevChunk = "";
   }
 
@@ -157,17 +164,34 @@ export function splitMarkdownIntoChunks(markdown: string): ReactNode[] {
 export function Tree({
   tree,
   root = true,
+  highlight = null,
+  onClick,
 }: {
   tree: TreeType;
   root?: boolean;
+  highlight: number[] | null;
+  onClick?: (path: number[]) => void;
 }) {
   return (
     <div>
-      {tree.name}
+      <button onClick={() => onClick?.([])}>{tree.name}</button>
       <div style={{ marginTop: 0, paddingLeft: "1rem" }}>
-        {tree.children?.map((subtree) => (
+        {tree.children?.map((subtree, index) => (
           <div key={subtree.name}>
-            <Tree tree={subtree} root={false} />
+            <Tree
+              tree={subtree}
+              root={false}
+              highlight={
+                highlight
+                  ? highlight[0] === index
+                    ? highlight.slice(1)
+                    : []
+                  : null
+              }
+              onClick={(path) => {
+                onClick?.([index, ...path]);
+              }}
+            />
           </div>
         ))}
       </div>
@@ -193,7 +217,7 @@ export default function Module({
           padding: "0.5rem",
         }}
       >
-        <Tree tree={tree} />
+        <Tree tree={tree} highlight={[]} />
       </div>
       <h1>{data.title}</h1>
       <div

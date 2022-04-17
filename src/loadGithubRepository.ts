@@ -39,7 +39,7 @@ export async function getGithubFileText(
 
 export async function parseCourseMetadata(
   repo: string
-): Promise<Omit<CourseType, "modules" | "id">> {
+): Promise<Omit<CourseType, "rootModule" | "id">> {
   let text: string;
   try {
     text = await getGithubFileText(repo, "ocw.json");
@@ -52,7 +52,7 @@ export async function parseCourseMetadata(
     title: string;
     tags: string[];
     thumbnail: string;
-    authors: string;
+    authors: string[];
   };
   const markdown = await getGithubFileText(repo, "README.md");
 
@@ -125,9 +125,10 @@ export async function parseCourseRepository(
   repo: string
 ): Promise<Omit<CourseType, "id">> {
   const metadata = await parseCourseMetadata(repo);
+  const root = await parseUnitDirectory(repo, "content");
   const course: Omit<CourseType, "id"> = {
     ...metadata,
-    modules: (await parseUnitDirectory(repo, "content")).modules,
+    rootModule: root,
   };
 
   return course;

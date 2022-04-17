@@ -3,9 +3,9 @@ export interface Course {
   title: string;
   markdown: string;
   tags: string[];
-  modules: Module[];
+  rootModule: Module;
   thumbnail: string;
-  authors: string;
+  authors: string[];
 }
 
 export interface AnswerChoice {

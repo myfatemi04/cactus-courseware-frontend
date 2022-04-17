@@ -6,7 +6,7 @@ import { Course } from "../types";
 
 const courses: Course[] = [
   {
-    title: "Introduction to Computer Science",
+    title: "myfatemi04/Math-101",
     markdown: "Learn the basics of computer science and programming.",
     // id: '123'
   } as Course,

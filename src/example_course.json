@@ -9,22 +9,36 @@
     "Tarushii Goel"
   ],
   "markdown": "# Math 101\nExample course for HackTJ 9.0 project.",
-  "modules": [
-    {
-      "title": "unit.md",
-      "markdown": "# Unit 1\nUnit 1 is very hard cuz its the first unit!! Can you spell one?\n",
-      "modules": []
-    },
-    {
-      "title": "unit",
-      "markdown": "# Unit 2\nUnit 2 is very hard too cuz its uh 2.\n",
-      "modules": [
-        {
-          "title": "test.md",
-          "markdown": "heehyeyeyeyeyeyeyey\n\n# Unit 2.2!!!!!!\n\nno way\n",
-          "modules": []
-        }
-      ]
-    }
-  ]
+  "rootModule": {
+    "title": "content",
+    "markdown": "# Welcome to Math 101\nMath101 is a very difficult course. It involves\n- thinking\n- pinking\n- sinking\n- and rinking\n\n## Notes\nYou might even need to use some Python!\n```python\ndef fib(n):\n  if n == 0 or n == 1: return n\n  return fib(n-1)+fib(n-2)\n```\nCan't wait to get started? Try solving this question:\n???\nQuestion: If $x^2+1=2$, what is $x$?\n[x] +1\n[ ] $\\sqrt(2)$\n[x] -1\n[ ] 2\n\nExplanation:\n$x=\\sqrt{2-1}=\\sqrt{1}=\\pm 1$. So the answer is A and C!\n???\n\nWe hope you have fun!\n\n",
+    "modules": [
+      {
+        "title": "Unit 1",
+        "markdown": "# Unit 1\nUnit 1 is very hard cuz its the first unit!! Can you spell one?\n",
+        "modules": []
+      },
+      {
+        "title": "Unit 2",
+        "markdown": "# Unit 2\nUnit 2 is very hard too cuz its uh 2.\n",
+        "modules": [
+          {
+            "title": "Unit 2.1",
+            "markdown": "heehyeyeyeyeyeyeyey\n\n# Unit 2.1!!!!!!\n\nno way\n",
+            "modules": []
+          },
+          {
+            "title": "Unit 2.2",
+            "markdown": "heehyeyeyeyeyeyeyey\n\n# Unit 2.1!!!!!!\n\nno way\n",
+            "modules": []
+          },
+          {
+            "title": "Unit 2.3",
+            "markdown": "heehyeyeyeyeyeyeyey\n\n# Unit 2.1!!!!!!\n\nno way\n",
+            "modules": []
+          }
+        ]
+      }
+    ]
+  }
 }

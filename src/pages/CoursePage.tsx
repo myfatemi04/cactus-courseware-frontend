@@ -1,15 +1,22 @@
+import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { Tree } from "../components/Module";
 import moduleToTree from "../courseToTree";
+import { Course as CourseType } from "../types";
 import course from "../example_course.json";
+import getCourseContentAtPath from "../getCourseContentAtPath";
+import { parseCourseRepository } from "../loadGithubRepository";
 
 export default function CoursePage() {
   // const [course, setCourse] = useState<CourseType | null>(null);
   const { user, repo } = useParams<{ user: string; repo: string }>();
+  const [path, setPath] = useState<number[]>([]);
   const name = `${user}/${repo}`;
 
+  const content = course ? getCourseContentAtPath(course, path) : null;
+
   // useEffect(() => {
-  //   // parseCourseRepository(name).then(setCourse);
+  //   parseCourseRepository(name).then(setCourse);
   // }, [name]);
 
   return course ? (
@@ -32,10 +39,9 @@ export default function CoursePage() {
         <em>{course.authors.join(", ")}</em>
         <br />
         <Tree
-          tree={{
-            name: "Course Breakdown",
-            children: course.modules.map(moduleToTree),
-          }}
+          tree={moduleToTree(course.rootModule)}
+          highlight={path}
+          onClick={setPath}
         />
       </div>
     </div>

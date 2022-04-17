@@ -1,14 +1,11 @@
 import { Course } from "./types";
 
-export default function getCourseContentAtPath(
-  courseContent: Course,
-  path: number[]
-) {
+export default function getCourseContentAtPath(course: Course, path: number[]) {
   // @ts-ignore
-  return path.reduce((courseContent, pathPart) => {
-    if (courseContent === null) {
+  return path.reduce((module, pathPart) => {
+    if (module === null) {
       return null;
     }
-    return courseContent.modules[pathPart];
-  }, courseContent);
+    return module.modules[pathPart];
+  }, course.rootModule);
 }
