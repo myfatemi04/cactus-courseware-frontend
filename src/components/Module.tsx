@@ -1,6 +1,7 @@
 import { Collapse, List, ListItem, ListItemText } from "@mui/material";
 import { ExpandLess, ExpandMore } from "@mui/icons-material";
 import React, { ReactNode, useContext, useEffect, useState } from "react";
+import Button from '@mui/material/Button';
 import { getPreviousPath, getNextPath } from "../pathutil";
 import {
   Course,
@@ -252,7 +253,7 @@ export default function Module({
     >
       {splitMarkdownIntoChunks(data.markdown)}
 
-      <button
+      <Button
         onClick={() =>
           setPath((path) => {
             return getPreviousPath(course.rootModule, path) || path;
@@ -260,8 +261,8 @@ export default function Module({
         }
       >
         Previous
-      </button>
-      <button
+      </Button>
+      <Button
         onClick={() =>
           setPath((path) => {
             return getNextPath(course.rootModule, path) || path;
@@ -269,7 +270,7 @@ export default function Module({
         }
       >
         Next
-      </button>
+      </Button>
     </div>
   );
 }
