@@ -18,6 +18,7 @@ export default function CoursePage() {
   const content = course ? getCourseContentAtPath(course, path) : null;
 
   useEffect(() => {
+    // @ts-ignore
     parseCourseRepository(name).then(setCourse);
   }, [name]);
 
