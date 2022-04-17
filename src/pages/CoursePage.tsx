@@ -1,3 +1,4 @@
+import { Divider } from "@mui/material";
 import { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { CourseContext } from "../components/CourseContext";
@@ -38,10 +39,12 @@ export default function CoursePage() {
         <h1>{course.title}</h1>
         <em>{course.authors.join(", ")}</em>
       </div>
-      <div style={{ height: 1, backgroundColor: "black", margin: "2rem 0" }} />
+      <br />
+      <Divider />
+      <br />
       <div
         style={{
-          width: "100vw",
+          width: "100%",
           display: "flex",
         }}
       >

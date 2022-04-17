@@ -76,18 +76,6 @@ const DrawerHeader = styled("div")(({ theme }) => ({
   justifyContent: "flex-end",
 }));
 
-// computer science course
-// list of sections
-const outline: Tree[] = [
-  {
-    title: "Computer sci",
-    children: [
-      { title: "DP", children: [] },
-      { title: "algos", children: [{ title: "hi", children: [] }] },
-    ],
-  },
-];
-
 function ExpandableListItem(props: {
   title: string;
   childs: Tree[];
@@ -128,18 +116,6 @@ function ExpandableListItem(props: {
 export default function PersistentDrawerLeft(props: { name: string }) {
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
-  let sections: ReactNode[] = [];
-  for (let item of outline) {
-    sections.push(
-      <ExpandableListItem
-        key={item.title}
-        title={item.title}
-        childs={item.children}
-        depth={0}
-      ></ExpandableListItem>
-    );
-  }
-  // const { courses } = React.useContext(CourseContext);
 
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -201,8 +177,6 @@ export default function PersistentDrawerLeft(props: { name: string }) {
             </ListItem>
           ))}
         </List>
-        <Divider />
-        <List>{sections.map((item) => item)}</List>
       </Drawer>
       <Main open={open}>
         <DrawerHeader />
