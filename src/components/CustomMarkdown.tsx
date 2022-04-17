@@ -1,11 +1,12 @@
 import ReactMarkdown from "react-markdown";
 import rehypeMathJax from "rehype-mathjax";
 import remarkMath from "remark-math";
+import remarkGfm from 'remark-gfm';
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import { twilight as theme } from "react-syntax-highlighter/dist/cjs/styles/prism";
 
 export const rehypePlugins = [rehypeMathJax];
-export const remarkPlugins = [remarkMath];
+export const remarkPlugins = [remarkMath, remarkGfm];
 
 export default function CustomMarkdown({ children }: { children: string }) {
   return (
