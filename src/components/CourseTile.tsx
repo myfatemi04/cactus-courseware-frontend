@@ -1,8 +1,8 @@
-import { useNavigate } from "react-router-dom";
+import { Typography } from "@mui/material";
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import { Course } from "../types";
 import { CourseContext } from "./CourseContext";
-import { Typography } from "@mui/material";
 
 export function CourseTile({ course }: { course: Course }) {
   const { courses, setCourses } = React.useContext(CourseContext);
@@ -23,7 +23,7 @@ export function CourseTile({ course }: { course: Course }) {
       onClick={onClick}
       style={{
         cursor: "pointer",
-        width: "24rem",
+        width: "calc((100% - 6rem) / 3 )",
         height: "18rem",
         margin: "1rem",
         display: "inline-block",
@@ -35,11 +35,12 @@ export function CourseTile({ course }: { course: Course }) {
       <div
         style={{
           cursor: "pointer",
-          width: "24rem",
+          position: "absolute",
+          left: 0,
+          right: 0,
           height: "14rem",
           display: "inline-block",
           backgroundImage: `url(${course.thumbnail})`,
-          position: "relative",
           backgroundColor: "white",
           backgroundSize: "contain",
           backgroundPosition: "center",

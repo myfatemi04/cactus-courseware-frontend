@@ -1,4 +1,4 @@
-import { List, Typography } from "@mui/material";
+import { List } from "@mui/material";
 import { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { CourseContext } from "../components/CourseContext";
