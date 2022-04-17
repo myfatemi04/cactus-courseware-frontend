@@ -68,7 +68,7 @@ export default function CoursePage() {
         className="plain-link"
         href="/"
       >
-        Cacti Courseware
+        Cactus Courseware
       </a>
       {!course ? (
         <span>Loading...</span>
