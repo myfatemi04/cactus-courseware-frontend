@@ -172,6 +172,7 @@ export function ModuleTree({
         onClick={() => {
           onClick?.([]);
         }}
+        sx={{ pl: 2 + depth * 3 }}
         style={{
           backgroundColor: highlighted ? "#eee" : "",
           color: opened ? "#000" : "",
@@ -189,13 +190,13 @@ export function ModuleTree({
           onClick?.([]);
           setOpened((opened) => !opened);
         }}
-        sx={{ pl: depth * 3 }}
+        sx={{ pl: 2 + depth * 3 }}
         style={{
           backgroundColor: highlighted ? "#eee" : "",
           color: opened ? "#000" : "",
         }}
       >
-        <ListItemText primary={module.title} />
+      <ListItemText primary={module.title} />
         {opened ? <ExpandLess /> : <ExpandMore />}
       </ListItem>
       <Collapse in={opened} timeout="auto" unmountOnExit>
