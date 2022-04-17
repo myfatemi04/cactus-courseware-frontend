@@ -8,6 +8,7 @@ import remarkMath from "remark-math";
 
 import { Module as ModuleType, Question as QuestionType } from "../types";
 
+
 export const exampleModule: ModuleType = {
   title: "Example Module",
   markdown: `
