@@ -259,6 +259,26 @@ export default function Module({
     parsed = null;
   }
 
+  const noContent = (
+    <>
+      {data.children.length > 0 && (
+        <>
+          You can explore any of the following subunits:
+          <br />
+          {data.children.map((submodule, index) => {
+            return (
+              <div key={submodule.title}>
+                <button onClick={() => setPath((path) => [...path, index])}>
+                  {submodule.title}
+                </button>
+              </div>
+            );
+          })}
+        </>
+      )}
+    </>
+  );
+
   return (
     <div
       style={{
@@ -270,31 +290,22 @@ export default function Module({
         overflow: "auto",
       }}
     >
-      {/* {previousNextButtons} */}
-
       {data.type === "markdown" ? (
         data.content ? (
           splitMarkdownIntoChunks(data.content)
         ) : (
           <>
             <h2>The authors put no description here.</h2>
-            You can explore any of the following subunits:
-            <br />
-            {data.children.map((submodule, index) => {
-              return (
-                <div key={submodule.title}>
-                  <button onClick={() => setPath((path) => [...path, index])}>
-                    {submodule.title}
-                  </button>
-                </div>
-              );
-            })}
+            {noContent}
           </>
         )
       ) : parsed ? (
         <JupyterNotebook notebook={parsed} />
       ) : (
-        "Failed to parse"
+        <>
+          <h2>Failed to parse.</h2>
+          {noContent}
+        </>
       )}
     </div>
   );
