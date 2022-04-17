@@ -126,7 +126,6 @@ export function splitMarkdownIntoChunks(markdown: string): ReactNode[] {
       if (line.trim().toLowerCase().startsWith("video:")) {
         let url = line.substring(7); // "video: " is 7 characters
         if (!url.includes("/embed/")) {
-          // console.log(url);
           url = url.replace("watch?v=", "embed/");
         }
         chunks.push(<Video link={url} />);
@@ -194,8 +193,6 @@ export function ModuleTree({
         style={{
           backgroundColor: highlighted ? "#eee" : "",
           color: opened ? "#000" : "",
-          paddingTop: 0,
-          paddingBottom: -1,
         }}
       >
         <ListItemText primary={module.title} />

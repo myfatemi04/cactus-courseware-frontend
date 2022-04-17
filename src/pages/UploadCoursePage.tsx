@@ -1,5 +1,4 @@
 import { Button, CircularProgress, TextField } from "@mui/material";
-import { upload } from "@testing-library/user-event/dist/upload";
 import { useState, useCallback, KeyboardEventHandler } from "react";
 import { publishCourse } from "../services/api";
 import { FetchStatus } from "../types";
@@ -28,8 +27,10 @@ export default function UploadCoursePage() {
   const [urlInput, setUrlInput] = useState<string>("");
 
   const publish = useCallback(async () => {
-    const ghUrlInd = urlInput.indexOf('https://github.com/');
-    const processedUrl = !ghUrlInd ? urlInput : urlInput.substring(ghUrlInd+1);
+    const ghUrlInd = urlInput.indexOf("https://github.com/");
+    const processedUrl = !ghUrlInd
+      ? urlInput
+      : urlInput.substring(ghUrlInd + 1);
     setUrlInput(processedUrl);
     
     setFetchStatus('pending')
@@ -39,17 +40,20 @@ export default function UploadCoursePage() {
     } else {
       setFetchStatus('error')
     }
-  }, [urlInput])
+  }, [urlInput]);
 
-  const onKeyUp: KeyboardEventHandler<HTMLInputElement> = useCallback((e) => {
-    if (e.key === "Enter") {
-      publish();
-    }
-  }, [publish]);
+  const onKeyUp: KeyboardEventHandler<HTMLInputElement> = useCallback(
+    (e) => {
+      if (e.key === "Enter") {
+        publish();
+      }
+    },
+    [publish]
+  );
 
   return (
-    <div style={{margin: 'auto 3rem'}}>
-      <div style={{display: 'flex'}}>
+    <div style={{ margin: "auto 3rem" }}>
+      <div style={{ display: "flex" }}>
         <TextField
           id="outlined-basic"
           variant="outlined"
@@ -62,7 +66,7 @@ export default function UploadCoursePage() {
           style={{width: '36rem', height: '100%', padding: 0}}
         />
 
-        <Button 
+        <Button
           variant="contained"
           onClick={() => publish()}
           style={{marginLeft: '1rem'}}
