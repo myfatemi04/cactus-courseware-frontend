@@ -261,6 +261,29 @@ export default function Module({
     parsed = null;
   }
 
+  const previousNextButtons = (
+    <>
+      <Button
+        onClick={() =>
+          setPath((path) => {
+            return getPreviousPath(course.rootModule, path) || path;
+          })
+        }
+      >
+        Previous
+      </Button>
+      <Button
+        onClick={() =>
+          setPath((path) => {
+            return getNextPath(course.rootModule, path) || path;
+          })
+        }
+      >
+        Next
+      </Button>
+    </>
+  );
+
   return (
     <div
       style={{
@@ -270,6 +293,8 @@ export default function Module({
         border: "1px solid white",
       }}
     >
+      {previousNextButtons}
+
       {data.type === "markdown" ? (
         data.content ? (
           splitMarkdownIntoChunks(data.content)
@@ -295,24 +320,7 @@ export default function Module({
         "Failed to parse"
       )}
 
-      <Button
-        onClick={() =>
-          setPath((path) => {
-            return getPreviousPath(course.rootModule, path) || path;
-          })
-        }
-      >
-        Previous
-      </Button>
-      <Button
-        onClick={() =>
-          setPath((path) => {
-            return getNextPath(course.rootModule, path) || path;
-          })
-        }
-      >
-        Next
-      </Button>
+      {previousNextButtons}
     </div>
   );
 }

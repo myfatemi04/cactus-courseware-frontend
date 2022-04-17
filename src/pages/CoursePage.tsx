@@ -48,7 +48,7 @@ export default function CoursePage() {
           display: "flex",
         }}
       >
-        <div style={{ flex: 1 }}>
+        <div style={{ width: "calc(100% / 7)" }}>
           <ModuleTree
             module={course.rootModule}
             highlight={path}
@@ -56,7 +56,7 @@ export default function CoursePage() {
             depth={0}
           />
         </div>
-        <div style={{ flex: 6 }}>
+        <div style={{ width: "calc(100% * 6 / 7)", overflow: "auto" }}>
           {content ? (
             <Module data={content} course={course} />
           ) : (
