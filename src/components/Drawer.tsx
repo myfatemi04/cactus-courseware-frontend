@@ -18,6 +18,7 @@ import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import * as React from "react";
 import { Link } from "react-router-dom";
+import { CourseContext } from "./CourseContext";
 import { DrawerContext } from "./DrawerContext";
 // import { CourseContext } from "./CourseContext";
 
@@ -74,6 +75,7 @@ const DrawerHeader = styled("div")(({ theme }) => ({
 
 export default function PersistentDrawerLeft(props: { name: string }) {
   const theme = useTheme();
+  const { courses, setCourses } = React.useContext(CourseContext);
   const { open, setOpen } = React.useContext(DrawerContext);
   const [drawerOpen, setDrawerOpen] = React.useState(false);
 
@@ -147,6 +149,14 @@ export default function PersistentDrawerLeft(props: { name: string }) {
                 {index % 2 === 0 ? <SearchIcon /> : <CloudUploadIcon />}
               </ListItemIcon>
               <ListItemText primary={text} />
+            </ListItem>
+          ))}
+        </List>
+        <Divider />
+        <List>
+          {courses.map((course) => (
+            <ListItem button key={course.id} component={Link} to={"/courses/" + course.id}>
+              <ListItemText primary={course.title} />
             </ListItem>
           ))}
         </List>

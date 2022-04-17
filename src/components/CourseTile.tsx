@@ -6,14 +6,12 @@ import { Typography } from "@mui/material";
 
 export function CourseTile({ course }: { course: Course }) {
   const { courses, setCourses } = React.useContext(CourseContext);
-  let newCourses: Course[] = [];
+  let newCourses = courses;
   let navigate = useNavigate();
 
   let courseNames = newCourses.map((a) => a.title);
   if (!courseNames.includes(course.title)) {
     newCourses = [...courses, course];
-  } else {
-    newCourses = [...courses];
   }
 
   function onClick() {
