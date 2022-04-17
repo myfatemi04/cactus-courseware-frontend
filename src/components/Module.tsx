@@ -6,20 +6,7 @@ import rehypeMathJax from "rehype-mathjax";
 import rehypeHighlight from "rehype-highlight";
 import remarkMath from "remark-math";
 
-import {
-  Module as ModuleType,
-  Question as QuestionType,
-  Tree as TreeType,
-} from "../types";
-
-export const exampleTree: TreeType = {
-  name: "Machine Learning Course",
-  children: [
-    {
-      name: "Introduction",
-    },
-  ],
-};
+import { Module as ModuleType, Question as QuestionType } from "../types";
 
 export const exampleModule: ModuleType = {
   title: "Example Module",
@@ -162,11 +149,11 @@ export function splitMarkdownIntoChunks(markdown: string): ReactNode[] {
 }
 
 export function Tree({
-  tree,
+  module,
   highlight = null,
   onClick,
 }: {
-  tree: TreeType;
+  module: ModuleType;
   highlight: number[] | null;
   onClick?: (path: number[]) => void;
 }) {
@@ -183,15 +170,15 @@ export function Tree({
           fontWeight: highlighted ? "bold" : "normal",
         }}
       >
-        {tree.name}
+        {module.title}
       </button>{" "}
       {Array.isArray(highlight) && (
         <div style={{ marginTop: 0, paddingLeft: "0.75rem" }}>
-          {tree.children?.map((subtree, index) => {
+          {module.modules.map((submodule, index) => {
             return (
-              <div key={subtree.name}>
+              <div key={submodule.title}>
                 <Tree
-                  tree={subtree}
+                  module={submodule}
                   highlight={
                     highlight && highlight[0] === index
                       ? highlight.slice(1)

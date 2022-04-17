@@ -1,11 +1,12 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import Module, { Tree } from "../components/Module";
-import moduleToTree from "../courseToTree";
+import Module, { Tree as ModuleTree } from "../components/Module";
 import { Course as CourseType } from "../types";
 import course from "../example_course.json";
 import getCourseContentAtPath from "../getCourseContentAtPath";
 import { parseCourseRepository } from "../loadGithubRepository";
+
+function TopRoute() {}
 
 export default function CoursePage() {
   // const [course, setCourse] = useState<CourseType | null>(null);
@@ -45,8 +46,8 @@ export default function CoursePage() {
         }}
       >
         <div style={{ flex: 1 }}>
-          <Tree
-            tree={moduleToTree(course.rootModule)}
+          <ModuleTree
+            module={course.rootModule}
             highlight={path}
             onClick={setPath}
           />
