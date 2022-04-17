@@ -16,7 +16,11 @@ export default function CoursePage() {
   const content = course ? getCourseContentAtPath(course, path) : null;
 
   useEffect(() => {
-    setPath((urlPath || "").split("-").map(Number));
+    if (urlPath) {
+      setPath(urlPath.split("-").map(Number));
+    } else {
+      setPath([]);
+    }
   }, [setPath, urlPath]);
 
   useEffect(() => {
