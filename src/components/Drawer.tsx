@@ -84,13 +84,17 @@ export default function PersistentDrawerLeft(props: { name: string }) {
 
   const handleDrawerClose = () => {
     setDrawerOpen(false);
-    setOpen(false)
+    setOpen(false);
   };
 
   return (
     <Box sx={{ display: "flex" }}>
       <CssBaseline />
-      <AppBar position="fixed" open={drawerOpen}>
+      <AppBar
+        position="fixed"
+        open={drawerOpen}
+        style={{ backgroundColor: "#5B3758" }}
+      >
         <Toolbar>
           <IconButton
             color="inherit"

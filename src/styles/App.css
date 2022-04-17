@@ -9,6 +9,10 @@
   padding: 2rem;
 }
 
+body {
+  /* background: linear-gradient(to top, #f6d365, #fda085); */
+}
+
 .plain-link {
   color: inherit;
   text-decoration: none;
