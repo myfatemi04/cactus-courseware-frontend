@@ -1,29 +1,29 @@
-import * as React from "react";
-import { styled, useTheme } from "@mui/material/styles";
-import Box from "@mui/material/Box";
-import Drawer from "@mui/material/Drawer";
-import CssBaseline from "@mui/material/CssBaseline";
-import MuiAppBar, { AppBarProps as MuiAppBarProps } from "@mui/material/AppBar";
-import Toolbar from "@mui/material/Toolbar";
-import List from "@mui/material/List";
-import Typography from "@mui/material/Typography";
-import Divider from "@mui/material/Divider";
-import IconButton from "@mui/material/IconButton";
-import MenuIcon from "@mui/icons-material/Menu";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
+import ExpandLess from "@mui/icons-material/ExpandLess";
+import ExpandMore from "@mui/icons-material/ExpandMore";
+import MailIcon from "@mui/icons-material/Mail";
+import MenuIcon from "@mui/icons-material/Menu";
+import InboxIcon from "@mui/icons-material/MoveToInbox";
+import MuiAppBar, { AppBarProps as MuiAppBarProps } from "@mui/material/AppBar";
+import Box from "@mui/material/Box";
+import Collapse from "@mui/material/Collapse";
+import CssBaseline from "@mui/material/CssBaseline";
+import Divider from "@mui/material/Divider";
+import Drawer from "@mui/material/Drawer";
+import IconButton from "@mui/material/IconButton";
+import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
-import InboxIcon from "@mui/icons-material/MoveToInbox";
-import MailIcon from "@mui/icons-material/Mail";
+import { styled, useTheme } from "@mui/material/styles";
+import Toolbar from "@mui/material/Toolbar";
+import Typography from "@mui/material/Typography";
+import * as React from "react";
+import { ReactNode } from "react";
 import { Link } from "react-router-dom";
+import { Tree } from "../types";
 import { CourseContext } from "./CourseContext";
-import Collapse from "@mui/material/Collapse";
-import ExpandLess from "@mui/icons-material/ExpandLess";
-import ExpandMore from "@mui/icons-material/ExpandMore";
-import { Tree } from '../types'
-import { ReactNode } from 'react'
 
 const drawerWidth = 240;
 
@@ -76,68 +76,79 @@ const DrawerHeader = styled("div")(({ theme }) => ({
   justifyContent: "flex-end",
 }));
 
-
-// computer science course 
+// computer science course
 // list of sections
-const outline : Tree[] = [{"title" : "Computer sci",
-              "children": [{"title": "DP", "children" : []}, 
-                            {"title": "algos", "children" : [ {"title" : "hi", "children" : [] }]}] }]
+const outline: Tree[] = [
+  {
+    title: "Computer sci",
+    children: [
+      { title: "DP", children: [] },
+      { title: "algos", children: [{ title: "hi", children: [] }] },
+    ],
+  },
+];
 
-console.log(outline);
-/*
-function getKeys(outline : Tree){
-  var arr = [];
-  outline.forEach(function(key) {
-    arr.push(key['title']);
-  });
-  return arr;
-}
-
-function getItem(outline : Tree){
-
-}
-*/
-function ExpandableListItem(props : {title : string, childs : Tree[], depth : number}){
-  const [openCollapse, setOpenCollapse] = React.useState(false); 
-  let sections : ReactNode[] = [];
-  for (let item of props.childs){
-    sections.push(<ExpandableListItem title={item['title']} childs={item['children']} depth={props.depth+1}></ExpandableListItem>)
+function ExpandableListItem(props: {
+  title: string;
+  childs: Tree[];
+  depth: number;
+}) {
+  const [openCollapse, setOpenCollapse] = React.useState(false);
+  let sections: ReactNode[] = [];
+  for (let item of props.childs) {
+    sections.push(
+      <ExpandableListItem
+        title={item["title"]}
+        childs={item["children"]}
+        depth={props.depth + 1}
+      ></ExpandableListItem>
+    );
   }
-  function handleOpenSettings(){
+  function handleOpenSettings() {
     setOpenCollapse(!openCollapse);
   }
-  return(
-      <div>
-        <ListItem button onClick={handleOpenSettings} sx={{ pl : props.depth*2 }}>
-          <ListItemIcon>
-            <InboxIcon />
-          </ListItemIcon>
-          <ListItemText primary={props.title} />
-          {openCollapse ? <ExpandLess /> : <ExpandMore />}
-        </ListItem>
-        <Collapse in={openCollapse} timeout="auto" unmountOnExit>
-            <List>
-            {sections.map((item) => item)}
-            {/*props.childs.forEach(function(item : Tree) {
+  return (
+    <div>
+      <ListItem
+        button
+        onClick={handleOpenSettings}
+        sx={{ pl: props.depth * 2 }}
+      >
+        <ListItemIcon>
+          <InboxIcon />
+        </ListItemIcon>
+        <ListItemText primary={props.title} />
+        {openCollapse ? <ExpandLess /> : <ExpandMore />}
+      </ListItem>
+      <Collapse in={openCollapse} timeout="auto" unmountOnExit>
+        <List>
+          {sections.map((item) => item)}
+          {/*props.childs.forEach(function(item : Tree) {
               <ExpandableListItem title={item['title']} childs={item['children']}></ExpandableListItem>
             })*/}
-            </List>
-        </Collapse> 
-      </div>
-  )
+        </List>
+      </Collapse>
+    </div>
+  );
 }
 
 export default function PersistentDrawerLeft(props: { name: string }) {
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
   let ctx;
-  let sections : ReactNode[] = []
-  for (let item of outline){
-    sections.push(<ExpandableListItem title={item['title']} childs={item['children']} depth={0}></ExpandableListItem>)
+  let sections: ReactNode[] = [];
+  for (let item of outline) {
+    sections.push(
+      <ExpandableListItem
+        title={item["title"]}
+        childs={item["children"]}
+        depth={0}
+      ></ExpandableListItem>
+    );
   }
-  const {courses} = ctx= React.useContext(CourseContext);
-  console.log("These are the courses: ")
-  console.log(courses, ctx)
+  const { courses } = (ctx = React.useContext(CourseContext));
+  console.log("These are the courses: ");
+  console.log(courses, ctx);
 
   const handleDrawerOpen = () => {
     setOpen(true);
