@@ -208,7 +208,7 @@ export default function Module({
       style={{
         textAlign: "left",
         minWidth: "40rem",
-        margin: "2rem",
+        margin: "0 2rem",
         padding: "0.5rem",
         border: "1px solid white",
       }}
