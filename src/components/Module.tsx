@@ -10,13 +10,14 @@ import {
 } from "../types";
 import { CourseContext } from "./CourseContext";
 import CustomMarkdown from "./CustomMarkdown";
-import { JupyterNotebookEmbedded } from "./JupyterNotebook";
+import JupyterNotebook, { JupyterNotebookEmbedded } from "./JupyterNotebook";
 import Question from "./Question";
 import Video from "./Video";
 
 export const exampleModule: ModuleType = {
   title: "Example Module",
-  markdown: `
+  type: "markdown",
+  content: `
 # Machine Learning Tutorial
 
 Get started with ML!
@@ -251,6 +252,15 @@ export default function Module({
 }) {
   const { setPath } = useContext(CourseContext);
 
+  let parsed: any = null;
+  try {
+    if (data.type === "jupyter") {
+      parsed = JSON.parse(data.content);
+    }
+  } catch (e) {
+    parsed = null;
+  }
+
   return (
     <div
       style={{
@@ -260,7 +270,13 @@ export default function Module({
         border: "1px solid white",
       }}
     >
-      {splitMarkdownIntoChunks(data.markdown)}
+      {data.type === "markdown" ? (
+        splitMarkdownIntoChunks(data.content)
+      ) : parsed ? (
+        <JupyterNotebook notebook={parsed} />
+      ) : (
+        "Failed to parse"
+      )}
 
       <Button
         onClick={() =>

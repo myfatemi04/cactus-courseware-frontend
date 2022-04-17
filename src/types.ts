@@ -31,7 +31,8 @@ export type TreePath = string[];
 
 export interface Module {
   title: string;
-  markdown: string;
+  content: string;
+  type: "jupyter" | "markdown";
   children: Module[];
 }
 
