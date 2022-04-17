@@ -75,7 +75,7 @@ export function splitMarkdownIntoChunks(markdown: string): ReactNode[] {
       explanation: "",
     };
   }
-  
+
   function endBody() {
     inQuestion = true;
     chunks.push(
@@ -196,12 +196,12 @@ export function ModuleTree({
           color: opened ? "#000" : "",
         }}
       >
-      <ListItemText primary={module.title} />
+        <ListItemText primary={module.title} />
         {opened ? <ExpandLess /> : <ExpandMore />}
       </ListItem>
       <Divider />
       <Collapse in={opened} timeout="auto" unmountOnExit>
-        <List>
+        <List style={{ paddingTop: 0, paddingBottom: 0 }}>
           {module.modules.map((submodule, index) => {
             return (
               <div key={submodule.title}>

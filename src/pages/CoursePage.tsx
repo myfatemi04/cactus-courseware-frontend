@@ -9,11 +9,12 @@ import { Course as CourseType } from "../types";
 
 export default function CoursePage() {
   const [course, setCourse] = useState<CourseType | null>(null);
-  const { user, repo } = useParams<{ user: string; repo: string }>();
+  // const { user, repo } = useParams<{ user: string; repo: string }>();
 
   const { path, setPath } = useContext(CourseContext);
 
-  const name = `${user}/${repo}`;
+  // const name = `${user}/${repo}`;
+  const name = `myfatemi04/Math-101`;
 
   const content = course ? getCourseContentAtPath(course, path) : null;
 
