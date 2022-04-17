@@ -3,6 +3,7 @@ import {
   Dispatch,
   ReactNode,
   SetStateAction,
+  useEffect,
   useState,
 } from "react";
 import { Course } from "../types";
@@ -26,6 +27,17 @@ export const CourseContext = createContext<CourseContextType>({
 export function CourseContextProvider({ children }: { children: ReactNode }) {
   const [courses, setCourses] = useState(new Array<Course>());
   const [path, setPath] = useState<number[]>([]);
+
+  useEffect(() => {
+    const pathname = window.location.pathname;
+    if (pathname.startsWith("/courses/")) {
+      const [courseId] = pathname.substring("/courses/".length).split("/");
+      const newPathname = `/courses/${courseId}/${path.join("-")}`;
+      if (newPathname !== pathname) {
+        window.history.pushState(null, "", newPathname);
+      }
+    }
+  }, [path]);
 
   return (
     <CourseContext.Provider

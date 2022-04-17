@@ -21,6 +21,7 @@ function App() {
               <Route path="/Search" element={<MainPage />} />
               <Route path="/Upload" element={<UploadCoursePage />} />
               <Route path="/courses/:id" element={<CoursePage />} />
+              <Route path="/courses/:id/:path" element={<CoursePage />} />
             </Routes>
           </Container>
         </DrawerContextProvider>

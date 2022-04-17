@@ -9,10 +9,14 @@ import { Course as CourseType } from "../types";
 
 export default function CoursePage() {
   const [course, setCourse] = useState<CourseType | null>(null);
-  const { id } = useParams<{ id: string }>();
+  const { id, path: urlPath } = useParams<{ id: string; path: string }>();
 
   const { path, setPath } = useContext(CourseContext);
   const content = course ? getCourseContentAtPath(course, path) : null;
+
+  useEffect(() => {
+    setPath((urlPath || "").split("-").map(Number));
+  }, [setPath, urlPath]);
 
   useEffect(() => {
     // @ts-ignore
