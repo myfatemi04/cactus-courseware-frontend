@@ -1,46 +1,43 @@
-# Getting Started with Create React App
+# Cactus Courseware
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Michael Fatemi, Alvan Caleb Arulandu, Cyril Sharma, Tarushii Goel
 
-## Available Scripts
+## Inspiration
+New technologies appear every day, but they are often inaccessible to people who don’t aren’t connected to someone knowledgeable or are not in a university covering the course. Self-taught options are unstandardized and difficult to improve. We decided that open-source education was the future of online courses, and created an online platform where people could publish courses hosted on Github repositories.
 
-In the project directory, you can run:
+## What it does
+* The Cactus CourseWare Team developed a full-stack web application that allows creators, teachers, and developers to upload open-source educational materials to the public. 
+* These courses are then exposed using an accessible search for users to find courses they are interested in.
+* Courses are rendered in the application with functionality for traditional content, embeddable animations, multiple choice / multiple select questions, and community-sourced explanations
+* Curated resources are updated daily and can be retrieved from popular knowledge databases.
 
-### `npm start`
+## How we built it
+* Frontend: Typescript, React, ReMark, TailwindCSS, MaterialUI
+* Backend: Node.js, Express, Mongo.db, Mongoose ORM
+* Data Population: BeautifulSoup to scrape data from Wikipedia and generate sample tutorials.
+* Hosting: Heroku (backend), Vercel (frontend)
+* DNS: Google Domains + Google Analytics
+* External APIs: GitHub API
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## Challenges we ran into
+* Over the course of development, we were frequently rate limited by the GitHub API before learning to use PAT authorization to enable higher rate limits.
+* Integrating the backend API with the frontend interface was quite time consuming.
+* Persisting state across the React component tree as well as maintaining a Module Tree datastructure to store courses.
+* Rendering markdown documents with custom syntax / directives dynamically in React.
+* Last evening at 5:00 PM, Heroku stopped GitHub deploy support, breaking out automated deploy workflow for our backend REST API. Multiple hours were spent circumventing this with a custom build and deploy.
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+## Accomplishments that we're proud of
+* It works! After iterating upon the material UI specification, we were able to design and implement custom web design using react and Figma.
+* We’re pleased with the look of the product.
 
-### `npm test`
+## What we learned
+* How to connect a MongoDB and Express/Node backend to a React frontend.
+* The principles of artistic design
+* Tailwind will destroy your styles
+* How to interface with the github API
+* How to render markdown dynamically in react.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+## What's next for Cactus CourseWare
+* Future development would include making it easier to convert repos to the format our website expects.
+* Adding more functionality, like progress tracking, community forums, etc.
+* Encouraging course developers to upload produce content to post on our website
