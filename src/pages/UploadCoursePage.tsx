@@ -1,11 +1,12 @@
-import { CircularProgress } from "@mui/material";
+import { Button, CircularProgress } from "@mui/material";
 import { useState, useCallback, KeyboardEventHandler } from "react";
-import { publishCourse } from "../services/api";
+import { publishCourse, deleteCourse, replaceCourse } from "../services/api";
 import { FetchStatus } from "../types";
 import CheckIcon from '@mui/icons-material/Check';
 import ClearIcon from '@mui/icons-material/Clear';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import bgImg from '../assets/bg.png';
+import "../styles/Popup.scss";
 
 const Toggle = ({status}: { status: FetchStatus }) => {
   let item = null; 
@@ -27,8 +28,20 @@ const Toggle = ({status}: { status: FetchStatus }) => {
   return item;
 }
 
+const Popup = (props: {handleClose: () => void, children: React.ReactNode}) => {
+  return (
+    <div className="popup-box">
+      <div className="box">
+        <span className="close-icon" onClick={props.handleClose}>x</span>
+        {props.children}
+      </div>
+    </div>
+  );
+};
+
 export default function UploadCoursePage() {
   const [fetchStatus, setFetchStatus] = useState<FetchStatus>("idle");
+  const [popupOpen, setPopupOpen] = useState(false);
   const [urlInput, setUrlInput] = useState<string>("");
   const [errorMsg, setErrorMsg] = useState<string>("");
 
@@ -46,7 +59,10 @@ export default function UploadCoursePage() {
     if(res.ok){
       setFetchStatus('success')
     } else {
-      if(body.error === 'Course already uploaded') setErrorMsg('This course has already been added.')
+      if(body.error === 'Course already uploaded') {
+        setErrorMsg('This course has already been added.')
+        setPopupOpen(true)
+      }
       setFetchStatus('error')
     }
   }, [urlInput]);
@@ -87,8 +103,11 @@ export default function UploadCoursePage() {
           />
           <button style={{width: '3rem', height: '3rem', cursor: 'pointer'}} onClick={() => publish()}><Toggle status={fetchStatus}/></button>
           {
-            errorMsg.length > 0 ? 
-            <p style={{position: 'absolute', bottom: 0, color: '#BA5A31'}}>{errorMsg}</p> 
+            popupOpen ? 
+            <Popup handleClose={() => setPopupOpen(!popupOpen)}>
+              <p style={{marginBottom: '2rem', color: '#000000', fontSize: '1.875rem', fontWeight: 300}}> Replace your course? </p>
+              <Button variant="contained" onClick={() => {setPopupOpen(!popupOpen); replaceCourse(urlInput); setFetchStatus("success");}}>Yes</Button>
+            </Popup>
             : null
           }
         </div>
