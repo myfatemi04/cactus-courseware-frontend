@@ -1,7 +1,7 @@
 import { Button, CircularProgress } from "@mui/material";
 import { useState, useCallback, KeyboardEventHandler } from "react";
-import { publishCourse, replaceCourse } from "../services/api";
-import { FetchStatus } from "../types";
+import { findCourseFromUrl, publishCourse, replaceCourse } from "../services/api";
+import { Course, FetchStatus } from "../types";
 import CheckIcon from "@mui/icons-material/Check";
 import ClearIcon from "@mui/icons-material/Clear";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
@@ -70,6 +70,7 @@ export default function UploadCoursePage() {
   const [popupOpen, setPopupOpen] = useState(false);
   const [urlInput, setUrlInput] = useState<string>("");
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const [course, setCourse] = useState<Course>();
   const [errorMsg, setErrorMsg] = useState<string>("");
 
   const publish = useCallback(async () => {
@@ -79,20 +80,30 @@ export default function UploadCoursePage() {
       : urlInput.substring(ghUrlInd + 1);
     setUrlInput(processedUrl);
 
-    setFetchStatus("pending");
-    const res = await publishCourse(processedUrl);
-    const body = await res.json();
-    setTimeout(() => {
-      if (res.ok) {
-        setFetchStatus("success");
-      } else {
-        if (body.error === "Course already uploaded") {
-          setErrorMsg("This course has already been added.");
-          setPopupOpen(true);
+    setFetchStatus("pending");  
+    const existingCourse = await findCourseFromUrl(processedUrl);
+    if (existingCourse !== undefined) {
+      console.log('WEIRD BEHAVIOR')
+      console.log(existingCourse)
+      setPopupOpen(true);
+      setCourse(existingCourse);
+    }
+    else {
+      const res = await publishCourse(processedUrl);
+      console.log('NORMAL BEHAVIOR')
+      const body = await res.json();
+      setTimeout(() => {
+        if (res.ok) {
+          setFetchStatus("success");
+        } else {
+          if (body.error === "Course already uploaded") {
+            setErrorMsg("This course has already been added.");
+            setPopupOpen(true);
+          }
+          setFetchStatus("error");
         }
-        setFetchStatus("error");
-      }
-    }, 500);
+      }, 500);
+    }
   }, [urlInput]);
 
   const onKeyUp: KeyboardEventHandler<HTMLInputElement> = useCallback(
@@ -184,9 +195,10 @@ export default function UploadCoursePage() {
                 variant="contained"
                 onClick={() => {
                   setPopupOpen(!popupOpen);
-                  replaceCourse(urlInput).then(() => {
+                  if (course != null) {
+                    replaceCourse(course);
                     setFetchStatus("success");
-                  });
+                  }
                 }}
               >
                 Yes
