@@ -1,4 +1,4 @@
-import { Button, List } from "@mui/material";
+import { Button, List, ListItem, ListItemText } from "@mui/material";
 import { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { CourseContext } from "../components/CourseContext";
@@ -7,8 +7,8 @@ import getCourseContentAtPath from "../lib/getCourseContentAtPath";
 import { getPreviousPath, getNextPath } from "../lib/pathutil";
 import { getCourse } from "../services/api";
 import { Course as CourseType } from "../types";
-import bgImg from '../assets/bg.png'
-import logoImg from '../assets/logo.png';
+import bgImg from "../assets/bg.png";
+import logoImg from "../assets/logo.png";
 
 export default function CoursePage() {
   const [course, setCourse] = useState<CourseType | null>(null);
@@ -58,7 +58,7 @@ export default function CoursePage() {
   return (
     <div
       style={{
-        position: 'relative',
+        position: "relative",
         display: "flex",
         flexDirection: "column",
         textAlign: "left",
@@ -66,14 +66,30 @@ export default function CoursePage() {
         overflow: "auto",
       }}
     >
-      <img src={bgImg} alt='bg' style={{width: '100%', height: '100%', position: 'absolute', top: 0, left: 0, opacity: '15%', zIndex: -1}}/>
-      
+      <img
+        src={bgImg}
+        alt="bg"
+        style={{
+          width: "100%",
+          height: "100%",
+          position: "absolute",
+          top: 0,
+          left: 0,
+          opacity: "15%",
+          zIndex: -1,
+        }}
+      />
+
       <a
-        style={{ fontSize: "4rem", cursor: "pointer", width: 'fit-content' }}
+        style={{ fontSize: "4rem", cursor: "pointer", width: "fit-content" }}
         className="plain-link"
         href="/"
       >
-        <img src={logoImg} alt='cactus' style={{width: '3rem', height: '3rem'}}/>
+        <img
+          src={logoImg}
+          alt="cactus"
+          style={{ width: "3rem", height: "3rem" }}
+        />
       </a>
       {!course ? (
         <span>Loading...</span>
@@ -100,6 +116,22 @@ export default function CoursePage() {
           >
             <div style={{ width: "calc(100% / 7)" }}>
               <List style={{ paddingTop: 0, paddingBottom: 0 }}>
+                <ListItem
+                  button
+                  onClick={() => setPath([])}
+                  style={{
+                    color: path.length === 0 ? "#000" : "",
+                    backgroundColor: path.length === 0 ? "#eee" : "",
+                  }}
+                >
+                  <ListItemText
+                    style={{
+                      marginLeft: "-0.75rem",
+                    }}
+                  >
+                    Front Page
+                  </ListItemText>
+                </ListItem>
                 {course.rootModule.children.map((submodule, index) => {
                   return (
                     <div key={submodule.title}>
