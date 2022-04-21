@@ -5,6 +5,7 @@ export interface Course {
   tags: string[];
   rootModule: Module;
   thumbnail: string;
+  repoUrl: string;
   authors: string[];
 }
 

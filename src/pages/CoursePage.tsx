@@ -36,18 +36,14 @@ export default function CoursePage() {
     <div style={{ display: "flex", marginLeft: "2rem" }}>
       <Button
         onClick={() =>
-          setPath((path) => {
-            return getPreviousPath(course.rootModule, path) || path;
-          })
+          setPath((path) => getPreviousPath(course.rootModule, path) || path)
         }
       >
         Previous
       </Button>
       <Button
         onClick={() =>
-          setPath((path) => {
-            return getNextPath(course.rootModule, path) || path;
-          })
+          setPath((path) => getNextPath(course.rootModule, path) || path)
         }
       >
         Next
@@ -99,6 +95,17 @@ export default function CoursePage() {
             {/* Course title and route */}
             <h1 style={{ fontSize: "3rem" }}>{course.title}</h1>
             <em>{course.authors.join(", ")}</em>
+            <br />
+            <span>
+              View this course on Github:{" "}
+              <a
+                href={"https://github.com/" + course.repoUrl}
+                target="_blank"
+                rel="noreferrer noopener"
+              >
+                {course.repoUrl}
+              </a>
+            </span>
           </div>
           <div
             style={{
