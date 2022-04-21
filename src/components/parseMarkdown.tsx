@@ -1,6 +1,7 @@
 import { ReactNode } from "react";
 import {Question as QuestionType} from "../types";
 import CustomMarkdown from "./CustomMarkdown";
+import Desmos from "./Desmos";
 import { JupyterNotebookEmbedded } from "./JupyterNotebook";
 import Question from "./Question";
 import Video from "./Video";
@@ -89,7 +90,11 @@ export function parseMarkdown(markdown: string): ReactNode[] {
         } else if (lineStart.startsWith("jupyter:")) {
           const url = line.substring(9); // "jupyter: " is 9 characters
           chunks.push(<JupyterNotebookEmbedded url={url} />);
-        } else {
+        } else if (lineStart.startsWith("desmos:")) {
+          const url = line.substring(8); // "desmos: " is 8 characters
+          chunks.push(<Desmos link={url} />);
+        }
+        else {
           prevChunk += "\n" + line;
         }
       }
@@ -102,4 +107,4 @@ export function parseMarkdown(markdown: string): ReactNode[] {
     }
   
     return chunks;
-  }
+}
