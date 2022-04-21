@@ -124,6 +124,13 @@ export default function UploadCoursePage() {
         >
           Upload a GitHub Repo
         </h1>
+        <span>
+          <a href="/" className="plain-link" style={{ color: "white" }}>
+            Home
+          </a>
+          <br />
+          <br />
+        </span>
         <p
           style={{
             marginBottom: "2rem",
@@ -172,12 +179,14 @@ export default function UploadCoursePage() {
                 {" "}
                 Replace your course?{" "}
               </p>
+              <br />
               <Button
                 variant="contained"
                 onClick={() => {
                   setPopupOpen(!popupOpen);
-                  replaceCourse(urlInput);
-                  setFetchStatus("success");
+                  replaceCourse(urlInput).then(() => {
+                    setFetchStatus("success");
+                  });
                 }}
               >
                 Yes
