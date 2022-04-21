@@ -121,6 +121,7 @@ export default function CoursePage() {
               display: "flex",
             }}
           >
+            {/* Two columns */}
             <div style={{ width: "calc(100% / 7)" }}>
               <List style={{ paddingTop: 0, paddingBottom: 0 }}>
                 <ListItem

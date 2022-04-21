@@ -17,6 +17,7 @@
     "@types/react": "^18.0.5",
     "@types/react-dom": "^18.0.1",
     "@types/uuid": "^8.3.4",
+    "disqus-react": "^1.1.2",
     "react": "^18.0.0",
     "react-dom": "^18.0.0",
     "react-jupyter-notebook": "^0.4.0",

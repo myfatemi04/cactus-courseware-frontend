@@ -31,6 +31,7 @@ export interface Tree {
 export type TreePath = string[];
 
 export interface Module {
+  id: string;
   title: string;
   content: string;
   type: "jupyter" | "markdown";

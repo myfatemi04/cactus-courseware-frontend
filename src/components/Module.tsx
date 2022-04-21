@@ -1,5 +1,6 @@
 import { ExpandLess, ExpandMore } from "@mui/icons-material";
 import { Collapse, Divider, List, ListItem, ListItemText } from "@mui/material";
+import { DiscussionEmbed } from "disqus-react";
 import React, { ReactNode, useContext, useEffect, useState } from "react";
 import {
   Course,
@@ -13,6 +14,7 @@ import Question from "./Question";
 import Video from "./Video";
 
 export const exampleModule: ModuleType = {
+  id: "test",
   title: "Example Module",
   type: "markdown",
   content: `
@@ -306,6 +308,17 @@ export default function Module({
           {noContent}
         </>
       )}
+      <div style={{ marginTop: "5rem" }}>
+        <DiscussionEmbed
+          shortname="cactuscourseware"
+          config={{
+            url: window.location.href,
+            identifier: data.id,
+            title: data.title,
+            language: "en_US",
+          }}
+        />
+      </div>
     </div>
   );
 }
