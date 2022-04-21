@@ -69,6 +69,7 @@ export default function UploadCoursePage() {
   const [fetchStatus, setFetchStatus] = useState<FetchStatus>("idle");
   const [popupOpen, setPopupOpen] = useState(false);
   const [urlInput, setUrlInput] = useState<string>("");
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [errorMsg, setErrorMsg] = useState<string>("");
 
   const publish = useCallback(async () => {
@@ -81,16 +82,17 @@ export default function UploadCoursePage() {
     setFetchStatus("pending");
     const res = await publishCourse(processedUrl);
     const body = await res.json();
-    const timer = setTimeout(() => {}, 500);
-    if (res.ok) {
-      setFetchStatus("success");
-    } else {
-      if (body.error === "Course already uploaded") {
-        setErrorMsg("This course has already been added.");
-        setPopupOpen(true);
+    setTimeout(() => {
+      if (res.ok) {
+        setFetchStatus("success");
+      } else {
+        if (body.error === "Course already uploaded") {
+          setErrorMsg("This course has already been added.");
+          setPopupOpen(true);
+        }
+        setFetchStatus("error");
       }
-      setFetchStatus("error");
-    }
+    }, 500);
   }, [urlInput]);
 
   const onKeyUp: KeyboardEventHandler<HTMLInputElement> = useCallback(
