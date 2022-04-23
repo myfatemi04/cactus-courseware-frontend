@@ -1,6 +1,10 @@
 import { Button, CircularProgress } from "@mui/material";
 import { useState, useCallback, KeyboardEventHandler } from "react";
-import { findCourseFromUrl, publishCourse, replaceCourse } from "../services/api";
+import {
+  findCourseFromUrl,
+  publishCourse,
+  replaceCourse,
+} from "../services/api";
 import { Course, FetchStatus } from "../types";
 import CheckIcon from "@mui/icons-material/Check";
 import ClearIcon from "@mui/icons-material/Clear";
@@ -69,8 +73,8 @@ export default function UploadCoursePage() {
   const [fetchStatus, setFetchStatus] = useState<FetchStatus>("idle");
   const [popupOpen, setPopupOpen] = useState(false);
   const [urlInput, setUrlInput] = useState<string>("");
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [course, setCourse] = useState<Course>();
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [errorMsg, setErrorMsg] = useState<string>("");
 
   const publish = useCallback(async () => {
@@ -80,17 +84,16 @@ export default function UploadCoursePage() {
       : urlInput.substring(ghUrlInd + 1);
     setUrlInput(processedUrl);
 
-    setFetchStatus("pending");  
+    setFetchStatus("pending");
     const existingCourse = await findCourseFromUrl(processedUrl);
     if (existingCourse !== undefined) {
-      console.log('WEIRD BEHAVIOR')
-      console.log(existingCourse)
+      console.log("WEIRD BEHAVIOR");
+      console.log(existingCourse);
       setPopupOpen(true);
       setCourse(existingCourse);
-    }
-    else {
+    } else {
       const res = await publishCourse(processedUrl);
-      console.log('NORMAL BEHAVIOR')
+      console.log("NORMAL BEHAVIOR");
       const body = await res.json();
       setTimeout(() => {
         if (res.ok) {

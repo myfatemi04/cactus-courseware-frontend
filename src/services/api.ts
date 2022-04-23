@@ -19,9 +19,7 @@ export async function deleteCourse(id: string) {
 }
 
 export async function replaceCourse(course: Course) {
-  console.log(course.id)
-  const res = await deleteCourse(course.id);
-  console.log("res");
+  await deleteCourse(course.id);
   return await publishCourse(course.repoUrl);
 }
 
@@ -33,12 +31,12 @@ export async function getCourse(id: string) {
 
 export async function findCourseFromUrl(url: string) {
   const res = await fetch(API_BASE + "/course/url/", {
-      body: JSON.stringify({ repo: url }),
-      headers: {
-        "Content-Type": "application/json",
-      },
-      method: "POST",
-    });
+    body: JSON.stringify({ repo: url }),
+    headers: {
+      "Content-Type": "application/json",
+    },
+    method: "POST",
+  });
   const json = await res.json();
   return json.course;
 }

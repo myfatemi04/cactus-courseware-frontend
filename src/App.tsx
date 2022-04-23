@@ -1,5 +1,6 @@
 import React from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
+import AnimeJSTest from "./AnimeJSTest";
 import { CourseContextProvider } from "./components/CourseContext";
 import { DrawerContextProvider } from "./components/DrawerContext";
 import { Container } from "./Container";
@@ -19,6 +20,7 @@ function App() {
             <Container>
               <Routes>
                 <Route path="/" element={<MainPage />} />
+                <Route path="/animations" element={<AnimeJSTest />} />
                 <Route path="/search" element={<MainPage />} />
                 <Route path="/upload" element={<UploadCoursePage />} />
                 <Route path="/courses/:id" element={<CoursePage />} />
