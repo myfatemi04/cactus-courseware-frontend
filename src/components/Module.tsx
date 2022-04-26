@@ -1,10 +1,7 @@
 import { Button } from "@mui/material";
 import { DiscussionEmbed } from "disqus-react";
 import { useContext } from "react";
-import {
-  Course,
-  Module as ModuleType,
-} from "../types";
+import { Course, Module as ModuleType } from "../types";
 import { CourseContext } from "./CourseContext";
 import JupyterNotebook from "./JupyterNotebook";
 import { parseMarkdown } from "./parseMarkdown";
@@ -36,7 +33,10 @@ export default function Module({
           {data.children.map((submodule, index) => {
             return (
               <div key={submodule.title}>
-                <Button variant="text" onClick={() => setPath((path) => [...path, index])}>
+                <Button
+                  variant="text"
+                  onClick={() => setPath((path) => [...path, index])}
+                >
                   {submodule.title}
                 </Button>
               </div>
@@ -51,9 +51,7 @@ export default function Module({
     <div
       style={{
         textAlign: "left",
-        margin: "0 2rem",
         padding: "0.5rem",
-        height: "60vh",
         overflow: "auto",
       }}
     >

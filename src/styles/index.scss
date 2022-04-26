@@ -24,3 +24,18 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
+
+.course-box {
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  width: 200px;
+  height: 200px;
+  margin-right: 1rem;
+  padding: 1rem;
+  transition: background-color 0.1s ease-in-out;
+  cursor: pointer;
+}
+
+.course-box:hover {
+  background-color: #f0f0f0;
+}
