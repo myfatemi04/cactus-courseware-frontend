@@ -39,3 +39,16 @@ code {
 .course-box:hover {
   background-color: #f0f0f0;
 }
+
+.sidebar-container {
+  transition: width 0.5s cubic-bezier(0.19, 1, 0.22, 1);
+}
+
+h1,
+h2,
+h3,
+h4,
+h5 {
+  margin-block-start: 0.5em;
+  margin-block-end: 0.5em;
+}

@@ -18,7 +18,7 @@ export default function CourseFrontPage({ course }: { course: Course }) {
         flexDirection: "column",
         textAlign: "left",
         overflow: "auto",
-        padding: "1rem",
+        padding: "0 1rem",
       }}
     >
       <Header />

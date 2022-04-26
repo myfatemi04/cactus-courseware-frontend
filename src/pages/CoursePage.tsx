@@ -1,9 +1,16 @@
-import { faCode } from "@fortawesome/free-solid-svg-icons";
+import { faClose, faCode } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { useContext, useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import {
+  useContext,
+  useEffect,
+  useLayoutEffect,
+  useRef,
+  useState,
+} from "react";
+import { Link, useParams } from "react-router-dom";
 import { CourseContext } from "../components/CourseContext";
 import CourseNavigation from "../components/CourseNavigation";
+import Header from "../components/Header";
 import Module from "../components/Module";
 import ModuleSidebar from "../components/ModuleSidebar";
 import getCourseContentAtPath from "../lib/getCourseContentAtPath";
@@ -33,6 +40,28 @@ export default function CoursePage() {
     }
   }, [id]);
 
+  const [sidebarOpen, setSidebarOpen] = useState(false);
+  const sidebarRef = useRef<HTMLDivElement>(null);
+
+  useLayoutEffect(() => {
+    if (sidebarRef.current && sidebarOpen) {
+      const handleClickOutside = (event: MouseEvent) => {
+        if (
+          sidebarRef.current &&
+          !sidebarRef.current.contains(event.target as Node)
+        ) {
+          setSidebarOpen(false);
+        }
+      };
+      // Bind the event listener
+      document.addEventListener("mousedown", handleClickOutside);
+      return () => {
+        // Unbind the event listener on clean up
+        document.removeEventListener("mousedown", handleClickOutside);
+      };
+    }
+  }, [sidebarOpen]);
+
   if (path.length === 0 && course) {
     return <CourseFrontPage course={course} />;
   }
@@ -45,32 +74,38 @@ export default function CoursePage() {
         display: "flex",
         flexDirection: "column",
         textAlign: "left",
-        // padding: "2rem",
+        position: "relative",
         overflow: "auto",
       }}
     >
+      <Header />
       {!course ? (
         <span>Loading...</span>
       ) : (
         <>
+          {/* Course metadata */}
           <div
             style={{
-              textAlign: "center",
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
               color: "#222",
-              padding: "2rem",
             }}
           >
             {/* Course title and route */}
-            <h1
-              style={{
-                fontFamily: "Josefin Sans",
-                fontSize: "2rem",
-                textAlign: "center",
-                marginBottom: "0.25rem",
-              }}
-            >
-              {course.title}
-            </h1>
+            <a href={"/courses/" + course.id} className="plain-link">
+              <h1
+                style={{
+                  fontFamily: "Josefin Sans",
+                  fontSize: "2rem",
+                  textAlign: "center",
+                  marginBottom: "0.25rem",
+                  width: "fit-content",
+                }}
+              >
+                {course.title}
+              </h1>
+            </a>
             <div style={{ display: "flex", justifyContent: "center" }}>
               <span style={{ marginRight: "1rem" }}>
                 {course.authors.join(", ")}
@@ -100,26 +135,81 @@ export default function CoursePage() {
               </span>
             </div>
           </div>
+          {/* Page body */}
           <div
             style={{
-              width: "100%",
               display: "flex",
-              height: "100%",
+              position: "relative",
+              overflowY: "auto",
             }}
           >
             {/* Two columns */}
-            <div style={{ width: "calc(100% / 7)", backgroundColor: "black" }}>
-              <ModuleSidebar path={path} setPath={setPath} course={course} />
+            {/* Sidebar */}
+            <div
+              className="sidebar-container"
+              style={{
+                width: sidebarOpen ? "400px" : 0,
+                backgroundColor: "black",
+                overflow: "hidden",
+                position: "absolute",
+                height: "100%",
+                userSelect: "none",
+                WebkitUserSelect: "none",
+                bottom: 0,
+                zIndex: 2,
+              }}
+              ref={sidebarRef}
+            >
+              {/* The width gets set to something huge because it's covered by the container */}
+              <div style={{ width: "400px", padding: "2rem" }}>
+                <span
+                  style={{
+                    color: "white",
+                    marginBottom: "1rem",
+                    display: "flex",
+                    alignItems: "center",
+                    cursor: "pointer",
+                  }}
+                  onClick={() => setSidebarOpen(false)}
+                >
+                  Close
+                  <FontAwesomeIcon
+                    icon={faClose}
+                    style={{ color: "white", marginLeft: "0.5rem" }}
+                    onClick={() => setSidebarOpen(false)}
+                  />
+                </span>
+                <ModuleSidebar
+                  path={path}
+                  setPath={(path: number[]) => {
+                    setPath(path);
+                    setSidebarOpen(false);
+                  }}
+                  course={course}
+                />
+              </div>
             </div>
+            {/* Content */}
             <div
               style={{
-                width: "calc(100% * 6 / 7)",
+                width: "1200px",
+                margin: "0 auto",
                 overflow: "auto",
-                height: "100%",
-                padding: "2rem",
+                padding: "0 2rem",
               }}
             >
-              <CourseNavigation course={course} />
+              <div
+                style={{
+                  position: "sticky",
+                  top: 0,
+                  backgroundColor: "white",
+                }}
+              >
+                <CourseNavigation
+                  course={course}
+                  setSidebarOpen={setSidebarOpen}
+                />
+              </div>
               {content ? (
                 <Module data={content} course={course} />
               ) : (
