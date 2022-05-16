@@ -7,7 +7,7 @@ import {
   useRef,
   useState,
 } from "react";
-import { Link, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { CourseContext } from "../components/CourseContext";
 import CourseNavigation from "../components/CourseNavigation";
 import Header from "../components/Header";
